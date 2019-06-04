@@ -59,7 +59,7 @@ Route::group(['middleware'=>'auth'], function (){
 
 
 
-    Route::group(['prefix'=>'admin', ], function (){
+    Route::group(['prefix'=>'admin', 'middleware'=>'role:Admin'], function (){
 
         Route::get('/users',[
             'uses'=>'AdminController@getUsers',

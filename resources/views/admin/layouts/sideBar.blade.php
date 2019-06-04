@@ -44,7 +44,7 @@
                     <li><a href="#"><i class="fa fa-product-hunt"></i> Sub Menu </a></li>
                 </ul>
             </li>
-            @if(Auth::User()->hasRole('Administrator'))
+            @if(Auth::User()->hasRole('Admin'))
             <li><a href="{{route('users')}}"><i class="fa fa-users"></i> <span>Users</span></a></li>
             @endif
 
