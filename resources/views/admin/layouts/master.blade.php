@@ -30,9 +30,13 @@
 <body  class="hold-transition skin-blue sidebar-mini">
 
     <div class="wrapper">
+
         @include('admin.layouts.navBar')
         @include('admin.layouts.sideBar')
+
         @yield('content')
+
+
         @include('admin.layouts.footer')
     </div>
 
@@ -41,9 +45,8 @@
     <!-- Bootstrap 3.3.7 -->
     <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 
-    <!--jquery-- >
+    <!-- jquery -->
 
-     <script src="{{asset('bower_components/jquery/dist/jquery.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 
@@ -56,9 +59,36 @@
         $(function () {
            $(".tem").fadeOut(5000);
 
-           $("#item_table").dataTable();
+           $("#productTable").dataTable();
            $("#user_table").dataTable();
-           $("#table_sale_item").dataTable();
+
+           $("#checkAllItems").on('click', function () {
+               if(this.checked){
+                   $("input[type=checkbox]").prop("checked", true);
+               }else{
+                   $("input[type=checkbox]").prop("checked", false);
+               }
+           });
+
+
+
+
+           $("#printBarcode").on('click', function () {
+               var ckBox=$("[name='id[]']:checked").length;
+               if(ckBox > 0){
+                   $("#productTableForm").submit()
+               }else{
+                   $("#alertModal").modal("show");
+               }
+
+           })
+
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
+
+
+
         });
     </script>
 

@@ -30,6 +30,49 @@ Route::group(['middleware'=>'auth'], function (){
         return redirect()->route('dashboard');
     });
 
+    Route::group(['prefix'=>'products'], function(){
+        Route::post('/update/old/item',[
+            'uses'=>'ProductController@postUpdateOldItem',
+            'as'=>'update.old.item.buy'
+        ]);
+        Route::get('/update/old/item/{id}',[
+            'uses'=>'ProductController@getUpdateOldItem',
+            'as'=>'update.old.item'
+        ]);
+        Route::post('/update/item',[
+            'uses'=>'ProductController@postUpdateItem',
+            'as'=>'update.item'
+        ]);
+        Route::get('/get/edit/item/{id}',[
+            'uses'=>'ProductController@getEditItem',
+            'as'=>'get.edit.item'
+        ]);
+        Route::get('/show/item/{id}',[
+            'uses'=>'ProductController@getShowItem',
+            'as'=>'item.show'
+        ]);
+        Route::get('/item/{id}/remove',[
+            'uses'=>'ProductController@getRemoveItem',
+            'as'=>'item.remove'
+        ]);
+        Route::get('/print/barcode',[
+            'uses'=>'ProductController@getPrintBarcode',
+            'as'=>'print.barcode'
+        ]);
+        Route::get('/all',[
+            'uses'=>'ProductController@getProducts',
+            'as'=>'product.all'
+        ]);
+        Route::get('/new',[
+            'uses'=>'ProductController@getNewProduct',
+            'as'=>'product.new'
+        ]);
+        Route::post('/new',[
+            'uses'=>'ProductController@postNewProduct',
+            'as'=>'product.add'
+        ]);
+    });
+
 
     Route::group(['prefix'=>'user'], function (){
 

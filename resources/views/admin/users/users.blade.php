@@ -21,15 +21,22 @@
                 <li class="active">Users</li>
             </ol>
         </section>
+        <div style="border: 1px solid rgba(100, 100, 100, 0.4); margin-top: 10px "></div>
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
-            <div class="page-header">
-                <a href="{{route('user.new')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> New User</a>
+            <div>
+                <a data-toggle="tooltip" data-placement="top" title="Add New User" href="{{route('user.new')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add User</a>
+            </div>
+            <div style="border: 1px solid rgba(100, 100, 100, 0.4); margin-top: 10px; margin-bottom: 10px"></div>
+
+
+            <div>
+                @include('admin.layouts.success')
             </div>
 
 
-
+            <div class="table-responsive">
             <table class="table table-hover" id="user_table">
                 <thead>
                 <tr style="background: grey ;color:#fff; font-weight: bold">
@@ -52,11 +59,13 @@
                                {{$user->roles->first()->name}}
                         </td>
                         <td>{{date("d-M-Y", strtotime($user->created_at))}}</td>
-                        <td class="btn btn-default ">
-                            <a href="#" data-toggle="modal" data-target="#e{{$user->id}}" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                        <td>
+                            <a  href="#" data-toggle="modal" data-target="#e{{$user->id}}" class="text-primary">
+                                <span data-toggle="tooltip" data-placement="top" title="Update User Account"><i class="fa fa-edit"></i></span>
+                            </a>
 
                             <!-- Edit Modal -->
-                            <div class="modal fade" id="e{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div data-keyboard="static" data-backdrop="false" class="modal fade" id="e{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <form method="post" action="{{route('user.update')}}">
                                         <div class="modal-content">
@@ -116,9 +125,11 @@
 
 
 
-                            <a href="#" data-toggle="modal" data-target="#d{{$user->id}}" class="text-danger btn btn-danger btn-xs"><i class="fa fa-trash"></i></a>
+                            <a href="#" data-toggle="modal" data-target="#d{{$user->id}}" class="text-danger">
+                                <span data-toggle="tooltip" data-placement="top" title="Delete User Account"><i class="fa fa-trash"></i></span>
+                            </a>
                             <!-- Delete Modal -->
-                            <div class="modal fade" id="d{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div data-keyboard="static" data-backdrop="false" class="modal fade" id="d{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                 <div class="modal-dialog" role="document">
                                     <form method="post" action="{{route('user.delete')}}">
                                     <div class="modal-content">
@@ -144,13 +155,8 @@
                     </tr>
                     @endforeach
             </table>
-            @if(Session('info'))
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3 text-center">
-                        <div class="tem alert alert-success navbar-fixed-bottom"><span class="glyphicon glyphicon-ok-circle"></span> {{Session('info')}}</div>
-                    </div>
-                </div>
-            @endif
+            </div>
+
         </section>
 
     </div>

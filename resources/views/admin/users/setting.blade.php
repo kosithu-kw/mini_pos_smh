@@ -24,11 +24,10 @@
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
-            <div class="page-header">
+            <div>
+                @include('admin.layouts.success')
             </div>
             <div class="col-md-4 col-md-offset-4">
-
-
 
                 <div class="text-center">
                     <span class="fa fa-user-circle fa-5x"></span>
@@ -46,7 +45,7 @@
 
 
                 <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div data-keyboard="static" data-backdrop="false" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <form method="post" action="{{route('password.update')}}">
@@ -80,20 +79,7 @@
             </div>
 
         </section>
-        @if(Session('info'))
-            <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
-            <div class="tem alert alert-success navbar-fixed-bottom"><span class="glyphicon glyphicon-ok-circle"></span> {{Session('info')}}</div>
-            </div>
-            </div>
-        @endif
 
-        @if($errors->has('new_password'))
-            <div class="tem alert alert-danger text-center navbar-fixed-bottom"><i class="fa fa-warning"></i>{{$errors->first('new_password')}}</div>
-        @endif
-        @if($errors->has('new_password_again'))
-            <div class="tem alert alert-danger text-center navbar-fixed-bottom"><i class="fa fa-warning"></i>{{$errors->first('new_password_again')}}</div>
-        @endif
 
     </div>
 @stop
