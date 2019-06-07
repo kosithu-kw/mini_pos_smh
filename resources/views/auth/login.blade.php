@@ -28,7 +28,12 @@
     <div class="login-box">
         @if(Session('error')) <div class="alert alert-danger"><span class="glyphicon glyphicon-alert"></span> {{Session('error')}}</div> @endif
         <div class="login-logo">
-            <h1>Your Logo</h1>
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-4">
+                    <img src="{{url('ntg/logo.png')}}" class="img-responsive">
+                </div>
+            </div>
+
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">

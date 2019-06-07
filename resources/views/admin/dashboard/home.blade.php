@@ -52,7 +52,7 @@
                         <div class="icon">
                             <i class="ion ion-stats-bars"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="{{route('sales.report')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -60,7 +60,7 @@
                     <!-- small box -->
                     <div class="small-box bg-yellow">
                         <div class="inner">
-                            <h3>{{count($users)-1}}</h3>
+                            <h3>{{count($users)}}</h3>
 
                             <p>Employees</p>
                         </div>
@@ -112,7 +112,7 @@
 
                 <div class="col-sm-6">
                     <!-- BAR CHART -->
-                    <div class="box box-success">
+                    <div class="box box-warning">
                         <div class="box-header with-border">
                             <h3 class="box-title">Buying Graph</h3>
 
@@ -131,8 +131,76 @@
                     </div>
                     <!-- /.box -->
                 </div>
+                @if( (Auth::User()->hasRole('Admin')) || (Auth::User()->hasRole('Manager'))) )
+                <div class="col-sm-12">
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Users Login Status.</h3>
 
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <div class="box-body">
 
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    @foreach($users as $u)
+
+                                        <div class="panel panel-default">
+                                            <div class="panel-body" role="tab" id="headingTwo">
+                                                <div class="row">
+                                                    <div class="col-sm-1">
+                                                        <a data-toggle="collapse" href="#c{{$u->id}}" data-parent="#accordion" style="display: block; text-align: center">
+                                                            <i class="fa fa-caret-down"></i>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <i class="fa fa-id-badge"></i> Username : <span>{{$u->name}}</span>
+                                                    </div>
+                                                    <div class="col-sm-3">
+                                                        <i class="fa fa-envelope"></i> Email : <b>{{$u->email}}</b>
+                                                    </div>
+                                                    <div class="col-sm-4">
+                                                        <i class="fa fa-clock-o"></i> Role : <b>{{$u->roles->first()->name}}</b>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div id="c{{$u->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-sm-10 col-sm-offset-1">
+                                                            <table class="table table-hover table-bordered">
+                                                                <tr class="text-primary">
+                                                                    <th>Account Status</th>
+                                                                    <th>Date / Time</th>
+                                                                </tr>
+                                                                @foreach($u->userlogin as $login)
+                                                                    <tr class="text-info">
+                                                                        <td>{{$login->user_state}}</td>
+                                                                        <td>{{date('(D) d-m-Y h:i A', strtotime($login->created_at))}}</td>
+
+                                                                    </tr>
+                                                                @endforeach
+
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    @endforeach
+                                </div>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+
+                @endif
 
             </div>
 

@@ -149,7 +149,7 @@
                         <p class="text-center"><i class="fa fa-warning"></i> No sales item found.</p>
                     @endif
             </div>
-
+            </div>
 
         </section>
 
@@ -158,6 +158,3 @@
     </div>
 @stop
 
-@section('script')
-
-@stop

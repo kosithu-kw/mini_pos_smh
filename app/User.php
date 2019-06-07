@@ -29,4 +29,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    public function userlogin(){
+        return $this->hasMany('App\Userlogin')->orderBy('id', 'desc');
+    }
 }
