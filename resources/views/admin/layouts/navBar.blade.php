@@ -5,7 +5,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><img src="{{URL::to('ntg/ntg-logo.png')}}" class="img-circle" style="width: 40px"></span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img src="{{URL::to('ntg/ntg-logo.png')}}" class="img-circle" style="width: 40px"><b>NTG mini pos</b></span>
+        <span class="logo-lg"><!--<img src="{{URL::to('ntg/ntg-logo.png')}}" class="img-circle" style="width: 40px">--><b>NTG mini pos</b></span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
@@ -17,6 +17,15 @@
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
+                <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+
+                <li><a href="{{route('sale')}}"><i class="fa fa-shopping-bag"></i>  <span>Sale</span> </a></li>
+
+                <li><a href="{{route('product.all')}}"><i class="fa fa-database"></i>  <span>Products</span> </a></li>
+
+                @if( (Auth::User()->hasRole('Admin')) || (Auth::User()->hasRole('Manager'))) )
+                    <li><a href="{{route('sales.report')}}"><i class="fa fa-pie-chart"></i>  <span>Reports</span> </a></li>
+                @endif
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

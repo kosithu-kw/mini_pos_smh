@@ -21,7 +21,7 @@
                 <li class="active">Edit Item</li>
             </ol>
         </section>
-        <hr style="border: 1px solid">
+        <div style="border: 1px solid rgba(100, 100, 100, 0.1); margin-top: 10px "></div>
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">

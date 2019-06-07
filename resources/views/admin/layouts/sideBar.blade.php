@@ -30,9 +30,13 @@
 
             <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 
-
+            <li><a href="{{route('sale')}}"><i class="fa fa-shopping-bag"></i>  <span>Sale</span> </a></li>
 
             <li><a href="{{route('product.all')}}"><i class="fa fa-database"></i>  <span>Products</span> </a></li>
+
+            @if((Auth::User()->hasRole('Admin')) || (Auth::User()->hasRole('Manager')))
+            <li><a href="{{route('sales.report')}}"><i class="fa fa-pie-chart"></i>  <span>Reports</span> </a></li>
+            @endif
 
             @if(Auth::User()->hasRole('Admin'))
             <li><a href="{{route('users')}}"><i class="fa fa-users"></i> <span>Users</span></a></li>

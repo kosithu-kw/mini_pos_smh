@@ -21,14 +21,14 @@
                 <li class="active">Users</li>
             </ol>
         </section>
-        <div style="border: 1px solid rgba(100, 100, 100, 0.4); margin-top: 10px "></div>
+        <div style="border: 1px solid rgba(100, 100, 100, 0.1); margin-top: 10px "></div>
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
             <div>
-                <a data-toggle="tooltip" data-placement="top" title="Add New User" href="{{route('user.new')}}" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add User</a>
+                <a data-toggle="tooltip" data-placement="top" title="Add New User" href="{{route('user.new')}}" class="btn btn-link"><i class="fa fa-plus-circle"></i> Add User</a>
             </div>
-            <div style="border: 1px solid rgba(100, 100, 100, 0.4); margin-top: 10px; margin-bottom: 10px"></div>
+            <div style="border: 1px solid rgba(100, 100, 100, 0.1); margin-top: 10px; margin-bottom: 10px"></div>
 
 
             <div>

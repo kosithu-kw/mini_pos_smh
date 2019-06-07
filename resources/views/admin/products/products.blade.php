@@ -21,16 +21,17 @@
                 <li class="active"> Products</li>
             </ol>
         </section>
-        <div style="border: 1px solid rgba(100, 100, 100, 0.4); margin-top: 10px "></div>
+        <div style="border: 1px solid rgba(100, 100, 100, 0.1); margin-top: 10px "></div>
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
             <div>
                 @include('admin.layouts.success')
             </div>
-            <a data-toggle="tooltip" data-placement="top" title="Add New Item" class="btn btn-primary" href="{{route('product.new')}}"><i class="fa fa-plus-circle"></i> New Item </a>
-            <button data-toggle="tooltip" data-placement="top" title="Printing Barcode" id="printBarcode" type="button" class="btn btn-primary btnPrintBarcode"><i class="fa fa-barcode"></i> Print Barcode</button>
-            <div style="border: 1px solid rgba(100, 100, 100, 0.4); margin-top: 10px; margin-bottom: 10px"></div>
+            <a data-toggle="tooltip" data-placement="top" title="Add New Item" class="btn btn-link" href="{{route('product.new')}}"><i class="fa fa-plus-circle"></i> New Item </a>
+            <button data-toggle="tooltip" data-placement="top" title="Printing Barcode" id="printBarcode" type="button" class="btn btn-link btnPrintBarcode"><i class="fa fa-barcode"></i> Print Barcode</button>
+            <a data-toggle="tooltip" data-placement="top" title="Refresh Products Item" href="{{route('product.all')}}" class="btn btn-link"><i class="fa fa-refresh"></i></a>
+            <div style="border: 1px solid rgba(100, 100, 100, 0.1); margin-top: 10px; margin-bottom: 10px"></div>
 
             <div class="col-md-12">
                 <div class="table-responsive">
@@ -53,7 +54,9 @@
                                 <td>{{$pd->item_name}}</td>
                                 <td>{{$pd->buying_price}}</td>
                                 <td>{{$pd->sale_price}}</td>
-                                <td>{{$pd->quantity}}</td>
+                                <td>
+                                    <span class="@if($pd->quantity <=5) text-danger  @endif">{{$pd->quantity}}</span>
+                                </td>
                                 <td>
                                     <a href="{{route('update.old.item',['id'=>$pd->id])}}">
                                         <span data-toggle="tooltip" data-placement="top" title="Update Buying Item"><i class="fa fa-plus-circle"></i></span>

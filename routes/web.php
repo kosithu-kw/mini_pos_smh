@@ -30,7 +30,65 @@ Route::group(['middleware'=>'auth'], function (){
         return redirect()->route('dashboard');
     });
 
-    Route::group(['prefix'=>'products'], function(){
+    Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager'], function (){
+        Route::get('/report/id',[
+            'uses'=>'SaleController@getReportId',
+            'as'=>'report.id'
+        ]);
+        Route::get('/report/month',[
+            'uses'=>'SaleController@getReportMonth',
+            'as'=>'report.month'
+        ]);
+        Route::get('/report/date',[
+            'uses'=>'SaleController@getReportDate',
+            'as'=>'report.date'
+        ]);
+        Route::get('/report',[
+            'uses'=>'SaleController@getReport',
+            'as'=>'sales.report'
+        ]);
+    });
+
+    Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager|Cashier'], function (){
+        Route::get('/print/{id}',[
+            'uses'=>'SaleController@print',
+            'as'=>'print'
+        ]);
+        Route::get('/checkout',[
+            'uses'=>'SaleController@checkout',
+            'as'=>'checkout'
+        ]);
+        Route::get('/checkout/print',[
+            'uses'=>'SaleController@checkOutPrint',
+            'as'=>'checkout.print'
+        ]);
+        Route::get('/cart/cancel',[
+            'uses'=>'SaleController@cancelCart',
+            'as'=>'cart.cancel'
+        ]);
+        Route::get('/sale',[
+            'uses'=>'SaleController@getSalePage',
+            'as'=>'sale'
+        ]);
+        Route::post('/add/cart',[
+            'uses'=>'SaleController@postAddCart',
+            'as'=>'add.cart'
+        ]);
+        Route::get('/decrease/cart/{id}',[
+            'uses'=>'SaleController@decreaseCart',
+            'as'=>'decrease.cart'
+        ]);
+        Route::get('/increase/cart/{id}',[
+            'uses'=>'SaleController@increaseCart',
+            'as'=>'increase.cart'
+        ]);
+        Route::get('/remove/item/{id}',[
+            'uses'=>'SaleController@removeItem',
+            'as'=>'remove.item'
+        ]);
+    });
+
+    Route::group(['prefix'=>'products', 'middleware'=>'role:Admin|Manager|Cashier'], function(){
         Route::post('/update/old/item',[
             'uses'=>'ProductController@postUpdateOldItem',
             'as'=>'update.old.item.buy'
@@ -75,6 +133,12 @@ Route::group(['middleware'=>'auth'], function (){
 
 
     Route::group(['prefix'=>'user'], function (){
+        Route::get('/buy/month',[
+            'uses'=>'GraphController@getMonthBuy'
+        ]);
+        Route::get('/sales/month',[
+            'uses'=>'GraphController@getMonthlySale'
+        ]);
 
         Route::get('/account/setting',[
             'uses'=>'AdminController@getUserAccountSetting',

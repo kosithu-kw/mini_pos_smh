@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Product;
+use App\Sale;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\User;
@@ -12,9 +14,11 @@ use Auth;
 class AdminController extends Controller
 {
     public function getDashboard(){
-        $users=User::all();
-
-        return view ('admin.dashboard.index')->with(['users'=>$users]);
+        $today=date("Y-m-d");
+        $users=User::get();
+        $items=Product::get();
+        $sales=Sale::where('created_at', "LIKE", "%$today%")->get();
+        return view ('admin.dashboard.home')->with(['users'=>$users, 'items'=>$items, 'sales'=>$sales]);
     }
     public function getError(){
         return view ('admin.dashboard.error');

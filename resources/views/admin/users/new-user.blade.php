@@ -21,7 +21,7 @@
                 <li class="active">Add User</li>
             </ol>
         </section>
-        <div style="border: 1px solid; margin-top: 10px "></div>
+        <div style="border: 1px solid rgba(100, 100, 100, 0.1); margin-top: 10px "></div>
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">

@@ -45,7 +45,9 @@
     <!-- Bootstrap 3.3.7 -->
     <script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 
-    <!-- jquery -->
+    <!-- ChartJS -->
+    <script src="{{asset('bower_components/chart.js/Chart.js')}}"></script>
+
 
     <!-- AdminLTE App -->
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
@@ -54,42 +56,57 @@
 
     <script src="{{asset('js/action.js')}}"></script>
 
-
+    <script src="{{asset('buying_sale_graph.js')}}"></script>
     <script>
         $(function () {
-           $(".tem").fadeOut(5000);
+            $(".tem").fadeOut(5000);
 
-           $("#productTable").dataTable();
-           $("#user_table").dataTable();
+            $("#productTable").dataTable();
+            $("#user_table").dataTable();
 
-           $("#checkAllItems").on('click', function () {
-               if(this.checked){
-                   $("input[type=checkbox]").prop("checked", true);
-               }else{
-                   $("input[type=checkbox]").prop("checked", false);
-               }
-           });
-
-
+            $("#checkAllItems").on('click', function () {
+                if (this.checked) {
+                    $("input[type=checkbox]").prop("checked", true);
+                } else {
+                    $("input[type=checkbox]").prop("checked", false);
+                }
+            });
 
 
-           $("#printBarcode").on('click', function () {
-               var ckBox=$("[name='id[]']:checked").length;
-               if(ckBox > 0){
-                   $("#productTableForm").submit()
-               }else{
-                   $("#alertModal").modal("show");
-               }
+            $("#printBarcode").on('click', function () {
+                var ckBox = $("[name='id[]']:checked").length;
+                if (ckBox > 0) {
+                    $("#productTableForm").submit()
+                } else {
+                    $("#alertModal").modal("show");
+                }
 
-           })
+            })
 
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })
 
+            $("#btnCheckout").on('click', function () {
+                setTimeout(function () {
+                    window.location.replace("/sales/sale")
+                }, 1000)
+            })
+
+            $("#f_d").on('change', function () {
+                $("#fdForm").submit();
+            });
+            $("#f_m").on('change', function () {
+                $("#fmForm").submit();
+            });
+            $("#f_id").on('change', function () {
+                $("#fidForm").submit();
+            });
+
 
 
         });
+
     </script>
 
     @yield('script')
