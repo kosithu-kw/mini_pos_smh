@@ -58,6 +58,7 @@ class SaleController extends Controller
         $sale->save();
 
         foreach ($cart->items as $item){
+            $product_id=$item['item']['id'];
             $item_name=$item['item']['item_name'];
             $qty=$item['qty'];
             $sale_price=$item['item']['sale_price'];
@@ -65,11 +66,13 @@ class SaleController extends Controller
             $sale_id=$sale->id;
 
             $sale_item=new Saleitem();
+            $sale_item->product_id=$product_id;
             $sale_item->quantity=$qty;
             $sale_item->sale_id=$sale_id;
             $sale_item->amount=$amount;
             $sale_item->sale_price=$sale_price;
             $sale_item->item_name=$item_name;
+            $sale_item->user_id=Auth::User()->id;
             $sale_item->save();
         }
         Session::forget('cart');
@@ -86,6 +89,7 @@ class SaleController extends Controller
         $sale->save();
 
         foreach ($cart->items as $item){
+            $product_id=$item['item']['id'];
            $item_name=$item['item']['item_name'];
            $qty=$item['qty'];
            $sale_price=$item['item']['sale_price'];
@@ -93,11 +97,13 @@ class SaleController extends Controller
            $sale_id=$sale->id;
 
            $sale_item=new Saleitem();
+            $sale_item->product_id=$product_id;
            $sale_item->quantity=$qty;
            $sale_item->sale_id=$sale_id;
            $sale_item->amount=$amount;
            $sale_item->sale_price=$sale_price;
            $sale_item->item_name=$item_name;
+           $sale_item->user_id=Auth::User()->id;
            $sale_item->save();
         }
         Session::forget('cart');

@@ -16,6 +16,8 @@ class CreateSaleitemsTable extends Migration
         Schema::create('saleitems', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->integer('user_id');
+            $table->integer('product_id');
             $table->integer('sale_id');
             $table->string('item_name');
             $table->double('sale_price');

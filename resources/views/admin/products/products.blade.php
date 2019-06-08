@@ -132,6 +132,35 @@
                                                            </div>
                                                        </div>
                                                    </div>
+                                                   <div class="panel panel-default">
+                                                       <div class="panel-heading"><a href="#si{{$pd->id}}" data-toggle="collapse"><i class="fa fa-history"></i> Sale History</a></div>
+                                                       <div class="panel-collapse collapse" id="si{{$pd->id}}">
+                                                           <div class="table-responsive">
+                                                               <table class="table">
+                                                                   <tr>
+                                                                       <th>Process ID</th>
+                                                                       <th>Sale ID</th>
+                                                                       <th>Sale Price</th>
+                                                                       <th>Qty</th>
+                                                                       <th>Cashier</th>
+                                                                       <th>Sale Date</th>
+                                                                   </tr>
+                                                                   @foreach($pd->saleitem as $h)
+                                                                       <tr>
+                                                                           <td>{{$h->id}}</td>
+                                                                           <td>{{$h->sale_id}}</td>
+                                                                           <td>{{$h->sale_price}}</td>
+                                                                           <td>{{$h->quantity}}</td>
+                                                                           <td>{{$h->user->name}}</td>
+                                                                           <td>{{date("(D) d-m-Y h:i A", strtotime($h->created_at))}}</td>
+
+                                                                       </tr>
+                                                                   @endforeach
+                                                               </table>
+                                                           </div>
+                                                       </div>
+                                                   </div>
+
                                                </div>
                                             </div>
                                         </div>
