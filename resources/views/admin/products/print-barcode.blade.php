@@ -13,6 +13,7 @@
 <div class="container-fluid">
     <div class="row">
        @foreach($pds as $pd)
+           @for($i=0; $i<$barcode_item; $i++)
            <div class="col-sm-3">
                <div class="thumbnail" style="padding: 5px">
                     <div class="text-center" style="font-size: 11px">ID : {{$pd->id}}, Item Name : {{$pd->item_name}}</div>
@@ -20,6 +21,7 @@
                    <div class="text-center" style="font-size: 11px">Price : {{$pd->sale_price}} MMK</div>
                </div>
            </div>
+            @endfor
            @endforeach
     </div>
 </div>

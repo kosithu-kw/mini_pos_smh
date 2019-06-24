@@ -31,10 +31,10 @@
                 @include('admin.layouts.success')
             </div>
 
-            <div  style="margin-top: 50px">
+            <div>
 
-
-                <div data-keyboard="static" data-backdrop="false" id="saleModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                <!--
+                <div data-keyboard="static" data-backdrop="false" id="aleModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -57,13 +57,35 @@
                             </div>
                         </div>
                     </div>
+                </div> model close -->
+            <div class="col-sm-8">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <i class="fa fa-qrcode"></i> Scan barcode from item or enter ID or Name of product item to sale.
+
+                    </div>
+                    <div class="box-body">
+                        <form id="saleForm" method="post" action="{{route('add.cart')}}">
+                            <div class="form-group">
+
+                                <input list="pds"  autofocus type="search" name="sale_item" id="sale_item" class="form-control">
+                                <datalist id="pds">
+                                    @foreach($pds as $pd)
+                                        <option value="{{$pd->barcode}}">{{$pd->item_name}}</option>
+                                    @endforeach
+                                </datalist>
+                            </div>
+                            {{csrf_field()}}
+                        </form>
+                    </div>
                 </div>
 
+            </div>
 
             <div class="col-sm-12">
                 <div class="box box-primary">
                     <div class="box-header with-border"><i class="fa fa-shopping-cart"></i> Items on Cart</div>
-                    <div class="panel-body">
+                    <div class="box-body">
                         @if(Session::has('cart'))
                                 <table class="table">
                                     <tr style="background: gray; color: #fff">

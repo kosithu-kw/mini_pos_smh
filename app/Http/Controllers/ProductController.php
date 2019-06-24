@@ -64,9 +64,11 @@ class ProductController extends Controller
         return view('admin.products.show')->with(['pd'=>$pd,'his'=>$his]);
     }
     public function getPrintBarcode(Request $request){
+        $barcode_item=$request['barcode_item'];
+
         $ids=$request['id'];
         $pd=Product::whereIn('id', $ids)->get();
-        return view ('admin.products.print-barcode')->with(['pds'=>$pd]);
+        return view ('admin.products.print-barcode')->with(['pds'=>$pd,'barcode_item'=>$barcode_item]);
     }
     public function getProducts(){
         $pds=Product::OrderBy('id', 'desc')->with('buyinghistory')->get();

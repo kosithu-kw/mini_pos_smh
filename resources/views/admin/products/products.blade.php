@@ -36,7 +36,27 @@
             <div class="col-md-12">
                 <div class="table-responsive">
                     <form id="productTableForm" target="_blank" method="get" action="{{route('print.barcode')}}">
-                    <table class="table" id="productTable">
+
+                        <div id="printBarcodeModal" data-keyboard="static" data-backdrop="false" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                            <div class="modal-dialog modal-sm" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header"><i class="fa fa-print"></i> Printing Barcode</div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="barcode_item">Barcode Per Items</label>
+                                            <input type="number" value="1" class="form-control" required name="barcode_item" id="barcode_item">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" id="btnPrintBarcode">Print</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <table class="table" id="productTable">
                        <thead>
                             <tr style="background: gray; color:#fff">
                                 <th><input type="checkbox" id="checkAllItems"></th>

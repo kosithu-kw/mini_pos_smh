@@ -169,8 +169,9 @@ class SaleController extends Controller
 
     }
     public function postAddCart(Request $request){
-        $id=$request['sale_item'];
-        $pd=Product::whereBarcode($id)->first();
+        $bc=$request['sale_item'];
+        $pd=Product::where('barcode',$bc)->first();
+
         if(!$pd){
             return redirect()->back()->with('err', "The selected item was not found.");
         }

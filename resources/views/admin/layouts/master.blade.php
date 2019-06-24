@@ -72,11 +72,18 @@
                 }
             });
 
+            $("#btnPrintBarcode").on('click', function () {
+                $("#productTableForm").submit()
+                $("#printBarcodeModal").modal("hide");
+            })
 
             $("#printBarcode").on('click', function () {
                 var ckBox = $("[name='id[]']:checked").length;
                 if (ckBox > 0) {
-                    $("#productTableForm").submit()
+                   //
+
+                    $("#printBarcodeModal").modal("show");
+
                 } else {
                     $("#alertModal").modal("show");
                 }
@@ -110,6 +117,12 @@
             })
 
             $("#barcode").focus();
+
+            $("#sale_item").bind('paste', function () {
+                setTimeout(function () {
+                    $("#saleForm").submit();
+                }, 1000)
+            })
 
 
 
