@@ -16,7 +16,7 @@
            <div class="col-sm-3">
                <div class="thumbnail" style="padding: 5px">
                     <div class="text-center" style="font-size: 11px">ID : {{$pd->id}}, Item Name : {{$pd->item_name}}</div>
-                    <div class="text-center"><img src="data:image/png;base64,{{DNS1D::getBarcodePNG($pd->id, 'C93')}}" alt="barcode" /></div>
+                    <div class="text-center"><img src="data:image/png;base64,{{DNS1D::getBarcodePNG($pd->barcode, 'C93')}}" alt="barcode" /></div>
                    <div class="text-center" style="font-size: 11px">Price : {{$pd->sale_price}} MMK</div>
                </div>
            </div>

@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->double('buying_price');
             $table->double('sale_price');
             $table->integer('quantity');
+            $table->string('barcode');
 
 
         });

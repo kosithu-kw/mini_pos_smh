@@ -40,6 +40,7 @@
                        <thead>
                             <tr style="background: gray; color:#fff">
                                 <th><input type="checkbox" id="checkAllItems"></th>
+                                <td>Barcode</td>
                                 <th>Item Name</th>
                                 <th>Buying Price</th>
                                 <th>Sale Price</th>
@@ -51,6 +52,7 @@
                         @foreach($pds as $pd)
                             <tr>
                                 <td><input type="checkbox" name="id[]" value="{{$pd->id}}"></td>
+                                <td>{{$pd->barcode}}</td>
                                 <td>{{$pd->item_name}}</td>
                                 <td>{{$pd->buying_price}}</td>
                                 <td>{{$pd->sale_price}}</td>
@@ -85,6 +87,7 @@
                                                            <div class="table-responsive">
                                                                <table class="table">
                                                                    <tr>
+
                                                                        <th>Item Name</th>
                                                                        <th>Buying Price</th>
                                                                        <th>Sale Price</th>
@@ -142,15 +145,17 @@
                                                                        <th>Sale ID</th>
                                                                        <th>Sale Price</th>
                                                                        <th>Qty</th>
+                                                                       <th>Amount</th>
                                                                        <th>Cashier</th>
                                                                        <th>Sale Date</th>
                                                                    </tr>
                                                                    @foreach($pd->saleitem as $h)
                                                                        <tr>
                                                                            <td>{{$h->id}}</td>
-                                                                           <td>{{$h->sale_id}}</td>
+                                                                           <td><a href="{{route('report.sale.id',['id'=>$h->sale_id])}}">{{$h->sale_id}}</a></td>
                                                                            <td>{{$h->sale_price}}</td>
                                                                            <td>{{$h->quantity}}</td>
+                                                                           <td>{{$h->amount}}</td>
                                                                            <td>{{$h->user->name}}</td>
                                                                            <td>{{date("(D) d-m-Y h:i A", strtotime($h->created_at))}}</td>
 

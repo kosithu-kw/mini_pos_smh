@@ -35,6 +35,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'SaleController@getReportId',
             'as'=>'report.id'
         ]);
+        Route::get('/report/sale_id/{id}',[
+            'uses'=>'SaleController@getReportSaleId',
+            'as'=>'report.sale.id'
+        ]);
         Route::get('/report/month',[
             'uses'=>'SaleController@getReportMonth',
             'as'=>'report.month'

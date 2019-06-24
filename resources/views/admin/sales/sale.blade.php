@@ -32,30 +32,37 @@
             </div>
 
             <div  style="margin-top: 50px">
-            <div class="col-sm-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                       <i class="fa fa-qrcode"></i> Scan barcode from item or enter ID or Name of product item to sale.
-                    </div>
-                    <div class="panel-body">
-                        <form id="saleForm" method="post" action="{{route('add.cart')}}">
-                            <div class="form-group">
 
-                                <input list="pds"  autofocus type="search" name="sale_item" id="sale_item" class="form-control">
-                                <datalist id="pds">
-                                   @foreach($pds as $pd)
-                                       <option value="{{$pd->id}}">{{$pd->item_name}}</option>
-                                       @endforeach
-                                </datalist>
+
+                <div data-keyboard="static" data-backdrop="false" id="saleModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <i class="fa fa-qrcode"></i> Scan barcode from item or enter ID or Name of product item to sale.
+                                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
                             </div>
-                            {{csrf_field()}}
-                        </form>
+                            <div class="modal-body">
+                                <form id="saleForm" method="post" action="{{route('add.cart')}}">
+                                    <div class="form-group">
+
+                                        <input list="pds"  autofocus type="search" name="sale_item" id="sale_item" class="form-control">
+                                        <datalist id="pds">
+                                            @foreach($pds as $pd)
+                                                <option value="{{$pd->barcode}}">{{$pd->item_name}}</option>
+                                            @endforeach
+                                        </datalist>
+                                    </div>
+                                    {{csrf_field()}}
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-shopping-cart"></i> Items on Cart</div>
+
+
+            <div class="col-sm-12">
+                <div class="box box-primary">
+                    <div class="box-header with-border"><i class="fa fa-shopping-cart"></i> Items on Cart</div>
                     <div class="panel-body">
                         @if(Session::has('cart'))
                                 <table class="table">

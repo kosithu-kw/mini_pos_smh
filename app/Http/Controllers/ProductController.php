@@ -19,6 +19,7 @@ class ProductController extends Controller
         ]);
         $id=$request['id'];
         $pd=Product::whereId($id)->firstOrFail();
+        $pd->barcode=$request['barcode'];
         $pd->buying_price=$request['buying_price'];
         $pd->sale_price=$request['sale_price'];
         $pd->quantity=$pd->quantity + $request['quantity'];
@@ -44,6 +45,7 @@ class ProductController extends Controller
     public function postUpdateItem(Request $request){
         $id=$request['id'];
         $pd=Product::whereId($id)->firstOrFail();
+        $pd->barcode=$request['barcode'];
         $pd->item_name=$request['item_name'];
         $pd->buying_price=$request['buying_price'];
         $pd->sale_price=$request['sale_price'];
@@ -75,6 +77,7 @@ class ProductController extends Controller
     }
     public function postNewProduct(Request $request){
         $this->validate($request,[
+            'barcode'=>'required|unique:products',
            'item_name'=>'required|unique:products',
            'buying_price'=>'required',
            'sale_price'=>'required',
@@ -86,6 +89,7 @@ class ProductController extends Controller
         $p->buying_price=$request['buying_price'];
         $p->sale_price=$request['sale_price'];
         $p->quantity=$request['quantity'];
+        $p->barcode=$request['barcode'];
         $p->save();
 
         $bHis=new Buyinghistory();

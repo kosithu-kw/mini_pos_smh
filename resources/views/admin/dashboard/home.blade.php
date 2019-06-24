@@ -15,9 +15,11 @@
         <section class="content-header">
             <h1>
                 <span class="fa fa-dashboard"></span> Dashboard
+                <a data-toggle="tooltip" data-placement="top" title="Refresh Dashboard" href="{{route('dashboard')}}" class="btn btn-link"><i class="fa fa-refresh"></i></a>
+
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{route('sales.report')}}"><i class="fa fa-dashboard"></i> Admin Panel</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Admin Panel</a></li>
                 <li class="active">Dashboard</li>
             </ol>
         </section>
@@ -25,6 +27,8 @@
 
         <!-- Main content -->
         <section class="content" style=" padding-bottom: 100%;">
+
+
             <!-- Small boxes (Stat box) -->
             <div class="row">
                 <div class="col-sm-8 col-xs-6">
@@ -131,7 +135,7 @@
                     </div>
                     <!-- /.box -->
                 </div>
-                @if( (Auth::User()->hasRole('Admin')) || (Auth::User()->hasRole('Manager'))) )
+                @if( (Auth::User()->hasRole('Admin')) || (Auth::User()->hasRole('Manager')))
                 <div class="col-sm-12">
                     <div class="box box-info">
                         <div class="box-header with-border">
@@ -147,7 +151,7 @@
 
                                 <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                                     @foreach($users as $u)
-
+                                        @if($u->roles()->first()->name != "Admin")
                                         <div class="panel panel-default">
                                             <div class="panel-body" role="tab" id="headingTwo">
                                                 <div class="row">
@@ -174,7 +178,7 @@
                                                         <div class="col-sm-10 col-sm-offset-1">
                                                             <table class="table table-hover table-bordered">
                                                                 <tr class="text-primary">
-                                                                    <th>Account Status</th>
+                                                                    <th>Login / Logout</th>
                                                                     <th>Date / Time</th>
                                                                 </tr>
                                                                 @foreach($u->userlogin as $login)
@@ -191,7 +195,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        @endif
                                     @endforeach
                                 </div>
 

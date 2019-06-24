@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NTG RES-POS | Login</title>
+    <title>NTG Mini POS | Login</title>
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('plugins/iCheck/square/blue.css')}}">
     <!-- Bootstrap 3.3.7 -->
@@ -36,7 +36,7 @@
 
         </div>
         <!-- /.login-logo -->
-        <div class="login-box-body">
+        <div class="login-box-body" style="border-radius: 20px">
             <p class="login-box-msg">Sign in to start your session</p>
 
             <form role="form" method="POST" action="{{ route('login') }}">

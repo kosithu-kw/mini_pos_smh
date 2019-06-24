@@ -32,6 +32,11 @@
             <div class="col-md-6 col-md-offset-3">
                 <form method="post" action="{{route('update.item')}}">
                     <input type="hidden" name="id" value="{{$pd->id}}">
+                    <div class="form-group @if($errors->has('barcode')) has-error @endif ">
+                        <label for="barcode">Barcode</label>
+                        <input  type="text" name="barcode" id="item_name" class="form-control" value="{{$pd->barcode}}">
+                        @if($errors->has('barcode')) <span class="help-block">{{$errors->first('barcode')}}</span> @endif
+                    </div>
                     <div class="form-group @if($errors->has('item_name')) has-error @endif ">
                         <label for="item_name">Item Name</label>
                         <input  type="text" name="item_name" id="item_name" class="form-control" value="{{$pd->item_name}}">

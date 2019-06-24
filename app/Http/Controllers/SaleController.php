@@ -19,6 +19,15 @@ class SaleController extends Controller
         $sale=Sale::whereId($id)->firstOrFail();
         return view ('admin.sales.print')->with(['sale'=>$sale]);
     }
+    public function getReportSaleId($id){
+        $sales=Sale::where('id', $id)->get();
+        if(count($sales)>0){
+            $today=$sales->first()->created_at;
+            return view ('admin.sales.report')->with(['sales'=>$sales, 'sale_date'=>$today, 'sale_month'=>null]);
+        }else{
+            return view ('admin.sales.report')->with(['sales'=>$sales, 'sale_date'=>null, 'sale_month'=>null]);
+        }
+    }
     public function getReportId(Request $request){
         $id=$request['f_id'];
         $sales=Sale::where('id', $id)->get();
@@ -161,9 +170,9 @@ class SaleController extends Controller
     }
     public function postAddCart(Request $request){
         $id=$request['sale_item'];
-        $pd=Product::whereId($id)->first();
+        $pd=Product::whereBarcode($id)->first();
         if(!$pd){
-            return redirect()->back()->with('err', "The selected item is invalid.");
+            return redirect()->back()->with('err', "The selected item was not found.");
         }
        if($pd->quantity <=0){
            return redirect()->back()->with('err', "The selected item is out of stock can't make sale.");
