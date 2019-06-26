@@ -58,7 +58,7 @@
                         </div>
                     </div>
                 </div> model close -->
-            <div class="col-sm-8">
+            <div class="col-sm-6 col-sm-offset-3">
                 <div class="box box-success">
                     <div class="box-header with-border">
                         <i class="fa fa-qrcode"></i> Scan barcode from item or enter ID or Name of product item to sale.
