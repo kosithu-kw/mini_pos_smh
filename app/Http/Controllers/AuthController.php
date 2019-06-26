@@ -23,6 +23,9 @@ class AuthController extends Controller
             $u->user_id=Auth::user()->id;
             $u->user_state="login";
             $u->save();
+            if(Auth::User()->hasRole('Cashier')){
+                return redirect()->route('sale');
+            }
             return redirect()->route('dashboard');
 
         }else{

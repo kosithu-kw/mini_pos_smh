@@ -27,8 +27,9 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-
+            @if(Auth::user()->hasRole('Admin') || Auth::User()->hasRole('Manager'))
             <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            @endif
 
             <li><a href="{{route('sale')}}"><i class="fa fa-shopping-bag"></i>  <span>Sale</span> </a></li>
 
