@@ -77,7 +77,13 @@
                                 <td>{{$pd->buying_price}}</td>
                                 <td>{{$pd->sale_price}}</td>
                                 <td>
-                                    <span class="@if($pd->quantity <=5) text-danger  @endif">{{$pd->quantity}}</span>
+                                    @if($pd->quantity <=5)
+                                        <div data-toggle="tooltip" data-placement="top" title="Low quantity on stock." style="color: #fff; text-align: center; line-height:25px; width: 25px;height: 25px; border-radius: 25px; background: red">
+                                        {{$pd->quantity}}
+                                    </div>
+                                    @else
+                                    <span>{{$pd->quantity}}</span>
+                                    @endif
                                 </td>
                                 <td>
                                     <a href="{{route('update.old.item',['id'=>$pd->id])}}">
