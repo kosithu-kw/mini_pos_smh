@@ -71,6 +71,7 @@ class SaleController extends Controller
             $item_name=$item['item']['item_name'];
             $qty=$item['qty'];
             $sale_price=$item['item']['sale_price'];
+            $buying_price=$item['item']['buying_price'];
             $amount=$item['amount'];
             $sale_id=$sale->id;
 
@@ -81,6 +82,7 @@ class SaleController extends Controller
             $sale_item->amount=$amount;
             $sale_item->sale_price=$sale_price;
             $sale_item->item_name=$item_name;
+            $sale_item->buying_price=$buying_price;
             $sale_item->user_id=Auth::User()->id;
             $sale_item->save();
         }
@@ -102,6 +104,7 @@ class SaleController extends Controller
            $item_name=$item['item']['item_name'];
            $qty=$item['qty'];
            $sale_price=$item['item']['sale_price'];
+           $buying_price=$item['item']['buying_price'];
            $amount=$item['amount'];
            $sale_id=$sale->id;
 
@@ -112,6 +115,7 @@ class SaleController extends Controller
            $sale_item->amount=$amount;
            $sale_item->sale_price=$sale_price;
            $sale_item->item_name=$item_name;
+           $sale_item->buying_price=$buying_price;
            $sale_item->user_id=Auth::User()->id;
            $sale_item->save();
         }

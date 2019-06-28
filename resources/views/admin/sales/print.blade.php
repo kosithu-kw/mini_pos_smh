@@ -6,25 +6,63 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Print</title>
-    <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bst/css/bootstrap.css')}}">
+    <style>
+        @font-face {
+            font-family: zg;
+            src: url("bst/zg.ttf");
+
+        }
+        body{
+            font-family: zg;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="col-sm-8 offset-sm-2">
             <div class="text-center">
-                <h2>Mini Store</h2>
-                <div>Ph: 022828278727</div>
+                <div>Mini Store</div>
                 <div>Mawlamyine.</div>
             </div>
-            <div style="margin-bottom: 20px; margin-top: 20px;">
-            <div>Sale ID : {{$sale->id}}</div>
-            <div>Cashier : {{$sale->user->name}}</div>
-            <div>Date Time : {{date("(D) d-m-Y / h:i A", strtotime($sale->created_at))}}</div>
+            <div class="my-3" style="font-size: 13px">
+                <div class="row">
+                    <div class="col-sm-2">
+                        SALE ID
+                    </div>
+                    <div class="col-sm-10" style="font-weight: bold;">
+                        : {{$sale->id}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        CASHIER
+                    </div>
+                    <div class="col-sm-10">
+                        : {{$sale->user->name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                       PRN ON
+                    </div>
+                    <div class="col-sm-10">
+                        : {{date("d/m Y / h:i A")}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">
+                        DATE
+                    </div>
+                    <div class="col-sm-10">
+                        : {{date("d/m Y / h:i A", strtotime($sale->created_at))}}
+                    </div>
+                </div>
             </div>
-            <table class="table table-hover table-bordered">
-                <tr>
+            <table class="table table-hover table-borderless" style="font-size: 13px">
+                <tr style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
                     <th>Item Name</th>
                     <th>Price</th>
                     <th>Qty</th>
@@ -38,21 +76,24 @@
                         <td>{{$item->amount}}</td>
                     </tr>
                 @endforeach
+                <tfoot style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+
                 <tr>
-                    <td class="text-right" colspan="3">Total</td>
+                    <td class="text-right" colspan="3">Sub Total</td>
                     <td>{{$sale->totalAmount}}</td>
                 </tr>
                 <tr>
-                    <td class="text-right" colspan="3">Commercial Tax</td>
+                    <td class="text-right" colspan="3">Commercial Tax (5%)</td>
                     <td>{{$sale->totalAmount * 0.05}}</td>
                 </tr>
                 <tr>
-                    <td class="text-right" colspan="3">Grand Total</td>
+                    <td class="text-right" colspan="3">Net Total</td>
                     <td>{{$sale->totalAmount * 0.05 + $sale->totalAmount}}</td>
                 </tr>
+                </tfoot>
             </table>
 
-            <h5 style="margin-top: 50px;" class="text-center">၀ယ္ယူအားေပးမႈအတြက္ အထူးေက်းဇူးတင္ရွိပါသည္။</h5>
+            <div class="mt-5 text-center" style="font-size: 13px">၀ယ္ယူအားေပးမႈအတြက္ အထူးေက်းဇူးတင္ရွိပါသည္။</div>
         </div>
     </div>
 </div>

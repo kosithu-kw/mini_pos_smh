@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NTG Mini POS | Login</title>
+    <title>NTG Mini Store POS | Login</title>
     <!-- iCheck -->
     <link rel="stylesheet" href="{{asset('plugins/iCheck/square/blue.css')}}">
     <!-- Bootstrap 3.3.7 -->
@@ -32,6 +32,9 @@
                 <div class="col-xs-4 col-xs-offset-4">
                     <img src="{{url('ntg/logo.png')}}" class="img-responsive">
                 </div>
+                <h4 class="col-sm-12">
+                    Mini Store POS
+                </h4>
             </div>
 
         </div>

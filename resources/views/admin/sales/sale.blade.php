@@ -88,7 +88,7 @@
                     <div class="box-body">
                         @if(Session::has('cart'))
                                 <table class="table">
-                                    <tr style="background: gray; color: #fff">
+                                    <tr style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
                                         <th>Item Name</th>
                                         <th>Price</th>
                                         <th>Qty</th>
@@ -110,32 +110,35 @@
 
                                         </tr>
                                         @endforeach
+                                    <tfoot style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+
 
                                     <tr>
-                                        <td colspan="3" class="text-right">Total</td>
+                                        <td colspan="3" class="text-right">Sub Total</td>
                                         <td>{{$carts->totalAmount}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-right">Commercial Tax</td>
+                                        <td colspan="3" class="text-right">Commercial Tax (5%)</td>
                                         <td>{{$carts->totalAmount * 0.05}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-right">Grand Total</td>
+                                        <td colspan="3" class="text-right">Net Total</td>
                                         <td>{{$carts->totalAmount * 0.05 + $carts->totalAmount}}</td>
                                     </tr>
+                                    </tfoot>
                                 </table>
 
 
-                            <div class="row">
+                            <div class="row" style="margin-top: 20px">
                                 <div class="col-sm-8">
-                                    <a data-toggle="tooltip" data-placement="top" title="Cancel sale session." href="{{route('cart.cancel')}}" class="btn btn-danger"><i class="fa fa-times-circle"></i></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Cancel sale session." href="{{route('cart.cancel')}}" class="text-danger"><i class="fa fa-times-circle"></i></a>
                                 </div>
                                <div class="col-sm-4">
                                    <div class="col-sm-6">
-                                       <a data-toggle="tooltip" data-placement="top" title="Checkout Sale"  href="{{route('checkout')}}" class="btn btn-primary pull-right"><i class="fa fa-check-circle"></i></a>
+                                       <a data-toggle="tooltip" data-placement="top" title="Checkout Sale"  href="{{route('checkout')}}" class="btn btn-link pull-right"><i class="fa fa-check-circle"></i></a>
                                    </div>
                                    <div class="col-sm-6">
-                                       <a id="btnCheckout" data-toggle="tooltip" data-placement="top" title="Checkout sale and print" target="_blank" href="{{route('checkout.print')}}" class="btn btn-primary pull-right"><i class="fa fa-check-circle"></i> <i class="fa fa-print"></i></a>
+                                       <a id="btnCheckout" data-toggle="tooltip" data-placement="top" title="Checkout sale and print" target="_blank" href="{{route('checkout.print')}}" class="btn btn-link pull-right"> <i class="fa fa-print"></i></a>
                                    </div>
                                </div>
                             </div>

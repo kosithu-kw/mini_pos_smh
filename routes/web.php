@@ -30,7 +30,7 @@ Route::group(['middleware'=>'auth'], function (){
         return redirect()->route('dashboard');
     });
 
-    Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager'], function (){
+    Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager|Cashier'], function (){
         Route::get('/report/id',[
             'uses'=>'SaleController@getReportId',
             'as'=>'report.id'

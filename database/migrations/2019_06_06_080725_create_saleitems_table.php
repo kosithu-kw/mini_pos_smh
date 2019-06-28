@@ -23,6 +23,7 @@ class CreateSaleitemsTable extends Migration
             $table->double('sale_price');
             $table->integer('quantity');
             $table->double('amount');
+            $table->double('buying_price');
         });
     }
 

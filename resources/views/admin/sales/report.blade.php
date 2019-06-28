@@ -14,7 +14,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                <span class="fa fa-pie-chart"></span> Report Sales                     <a data-toggle="tooltip" data-placement="top" title="Refresh Reports" href="{{route('sales.report')}}" class="btn btn-link"><i class="fa fa-refresh"></i></a>
+                <span class="fa fa-pie-chart"></span> Report Sales  <a data-toggle="tooltip" data-placement="top" title="Refresh Reports" href="{{route('sales.report')}}" class="btn btn-link"><i class="fa fa-refresh"></i></a>
 
             </h1>
             <ol class="breadcrumb">
@@ -49,27 +49,52 @@
                     </form>
                 </div>
                 <div class="col-sm-6">
-                    <?php $myTotal=0;
+                    @php
+                    $myTotal=0;
+                    $totalBuying=0;
                     foreach ($sales as $s){
                         $myTotal+=$s->totalAmount;
+                        $subBuying=0;
+                        foreach ($s->saleitem as $si){
+                              $subBuying += $si->buying_price * $si->quantity;
+                        }
+                        $totalBuying += $subBuying;
+
                     }
-                    ?>
+                    @endphp
                     <table class="table table-bordered" style="margin:0; padding: 0;">
                         <tr style="font-size: 11px">
                             <th>Date / Month</th>
-                            <th>Total</th>
+                            <th>Sub Total</th>
                             <th>Com Tax (5%)</th>
-                            <th>Grand Total</th>
+                            <th>Net Total</th>
                         </tr>
                         <tr>
                             <td>
                                 @if($sale_date !=null){{date('(D) d-m-Y', strtotime($sale_date))}}@endif
                                     @if($sale_month !=null){{date('(M) m-Y', strtotime($sale_month))}}@endif
+                                <small class="badge">Sale</small>
                             </td>
                             <td><span class="badge">{{$myTotal}}</span></td>
                             <td> <span class="badge">{{$myTotal * 0.05}}</span></td>
                             <td><span class="badge">{{$myTotal * 0.05 + $myTotal}}</span></td>
                         </tr>
+                        @if(Auth::user()->hasRole('Admin') || Auth::User()->hasRole('Manager'))
+                        <tr>
+                            <td>
+                                @if($sale_date !=null){{date('(D) d-m-Y', strtotime($sale_date))}}@endif
+                                @if($sale_month !=null){{date('(M) m-Y', strtotime($sale_month))}}@endif
+                                <small class="badge">Buying</small>
+                            </td>
+                            <td><span class="badge">{{$totalBuying}}</span></td>
+                            <td> <span class="badge">{{$totalBuying * 0.05}}</span></td>
+                            <td><span class="badge">{{$totalBuying * 0.05 + $totalBuying}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>Total Profit</td>
+                            <td><span class="badge">{{$myTotal - $totalBuying}}</span></td>
+                        </tr>
+                            @endif
                     </table>
 
 
@@ -98,7 +123,7 @@
                                         <i class="fa fa-user-circle"></i> Cashier : <b>{{$s->user->name}}</b>
                                     </div>
                                     <div class="col-sm-4">
-                                        <i class="fa fa-clock-o"></i> Date : <b>{{date('D (d)-m-Y / h:i A', strtotime($s->created_at))}}</b>
+                                        <i class="fa fa-clock-o"></i> Date : <b>{{date('d/m Y  h:i A', strtotime($s->created_at))}}</b>
                                     </div>
                                     <div class="col-sm-1">
                                         <a style="display: block; text-align: center" target="_blank" data-toggle="tooltip" data-placement="top" title="Print this item."  href="{{route('print',['id'=>$s->id])}}"><i class="fa fa-print"></i></a>
@@ -109,8 +134,8 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-sm-10 col-sm-offset-1">
-                                            <table class="table table-hover table-bordered">
-                                                <tr class="text-primary">
+                                            <table class="table table-hover">
+                                                <tr class="text-primary" style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
                                                     <th>Item Name</th>
                                                     <th>Price</th>
                                                     <th>Qty</th>
@@ -124,18 +149,21 @@
                                                         <td>{{$item->amount}}</td>
                                                     </tr>
                                                 @endforeach
+                                                <tfoot style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+
                                                 <tr class="text-primary">
-                                                    <td class="text-right" colspan="3">Total</td>
+                                                    <td class="text-right" colspan="3">Sub Total</td>
                                                     <td>{{$s->totalAmount}}</td>
                                                 </tr>
                                                 <tr class="text-primary">
-                                                    <td class="text-right" colspan="3">Commercial Tax</td>
+                                                    <td class="text-right" colspan="3">Commercial Tax (5%)</td>
                                                     <td>{{$s->totalAmount * 0.05}}</td>
                                                 </tr>
                                                 <tr class="text-primary">
-                                                    <td class="text-right" colspan="3">Grand Total</td>
+                                                    <td class="text-right" colspan="3">Net Total</td>
                                                     <td>{{$s->totalAmount * 0.05 + $s->totalAmount}}</td>
                                                 </tr>
+                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>
