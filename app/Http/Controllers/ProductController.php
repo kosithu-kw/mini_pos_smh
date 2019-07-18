@@ -79,7 +79,7 @@ class ProductController extends Controller
     }
     public function postNewProduct(Request $request){
         $this->validate($request,[
-            'barcode'=>'required|unique:products',
+            //'barcode'=>'required|unique:products',
            'item_name'=>'required|unique:products',
            'buying_price'=>'required',
            'sale_price'=>'required',
@@ -91,7 +91,11 @@ class ProductController extends Controller
         $p->buying_price=$request['buying_price'];
         $p->sale_price=$request['sale_price'];
         $p->quantity=$request['quantity'];
-        $p->barcode=$request['barcode'];
+        if($request['barcode']){
+            $p->barcode=$request['barcode'];
+        }else{
+            $p->barcode=rand(0, 9999999);
+        }
         $p->save();
 
         $bHis=new Buyinghistory();
