@@ -21,7 +21,18 @@
     <!-- Data table-->
     <link rel="stylesheet" href="{{asset('datatable/app.css')}}">
 
+    <style>
+        @font-face {
+            font-family: myZg;
+            src: url("../../bst/zg.ttf");
 
+        }
+        @font-face {
+            font-family: myDis;
+            src: url("../bst/dis.otf");
+        }
+
+    </style>
 
     <!-- Google Font -->
 
@@ -29,7 +40,7 @@
     @yield('style')
 
 </head>
-<body  class="hold-transition skin-blue sidebar-mini">
+<body  class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 
     <div class="wrapper">
 
@@ -61,10 +72,15 @@
     <script src="{{asset('buying_sale_graph.js')}}"></script>
     <script>
         $(function () {
-            $(".tem").fadeOut(5000);
+            setTimeout(function () {
+                $(".tem").fadeOut();
+            }, 2000)
 
             $("#productTable").dataTable();
+
+
             $("#user_table").dataTable();
+            $('div.dataTables_filter input').focus();
 
             $("#checkAllItems").on('click', function () {
                 if (this.checked) {

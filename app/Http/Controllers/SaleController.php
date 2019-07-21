@@ -198,4 +198,30 @@ class SaleController extends Controller
 
 
     }
+    public function postAddCart2(Request $request){
+        $bc=$request['sale_item2'];
+        $pd=Product::where('item_name',$bc)->first();
+
+        if(!$pd){
+            return redirect()->back()->with('err', "The selected item was not found.");
+        }
+        if($pd->quantity <=0){
+            return redirect()->back()->with('err', "The selected item is out of stock can't make sale.");
+        }
+
+        $oldCart=Session::has('cart') ? Session::get('cart') : null;
+        $cart=new Cart($oldCart);
+        $cart->add($pd, $pd->id);
+        Session::put('cart', $cart);
+        $pd->decrement('quantity');
+        $pd->update();
+
+        if($pd->quantity <=2){
+            return redirect()->back()->with('warning', "The selected item is less than 3 qty on stock.");
+        }else{
+            return redirect()->back()->with('info', 'The selected item have been add to cart.');
+        }
+
+
+    }
 }

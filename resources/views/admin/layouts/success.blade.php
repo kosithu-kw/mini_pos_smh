@@ -1,7 +1,7 @@
 
 
 
-<div class="row" style="position: fixed; top:110px; right:20px;  font-size: 12px">
+<div class="row navbar-fixed-top" >
     <div class="col-sm-12">
 
         @if(Session('info'))

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Buyinghistory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Product;
 use Auth;
@@ -84,7 +85,7 @@ class ProductController extends Controller
            'buying_price'=>'required',
            'sale_price'=>'required',
            'quantity'=>'required',
-            'buying_date'=>'required'
+           // 'buying_date'=>'required'
         ]);
         $p=new Product();
         $p->item_name=$request['item_name'];
@@ -98,13 +99,21 @@ class ProductController extends Controller
         }
         $p->save();
 
+
+
         $bHis=new Buyinghistory();
         $bHis->item_name=$request['item_name'];
         $bHis->buying_price=$request['buying_price'];
         $bHis->sale_price=$request['sale_price'];
         $bHis->quantity=$request['quantity'];
         $bHis->user_id=Auth::User()->id;
-        $bHis->buying_date=$request['buying_date'];
+
+        if($request['buying_date']){
+            $bHis->buying_date=$request['buying_date'];
+        }else{
+            $bHis->buying_date=Carbon::now();
+        }
+
         $bHis->product_id=$p->id;
         $bHis->save();
 

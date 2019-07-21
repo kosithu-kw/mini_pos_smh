@@ -135,7 +135,7 @@
                                     <div class="row">
                                         <div class="col-sm-10 col-sm-offset-1">
                                             <table class="table table-hover">
-                                                <tr class="text-primary" style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+                                                <tr class="text-primary" style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
                                                     <th>Item Name</th>
                                                     <th>Price</th>
                                                     <th>Qty</th>
@@ -149,7 +149,7 @@
                                                         <td>{{$item->amount}}</td>
                                                     </tr>
                                                 @endforeach
-                                                <tfoot style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+                                                <tfoot style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
 
                                                 <tr class="text-primary">
                                                     <td class="text-right" colspan="3">Sub Total</td>

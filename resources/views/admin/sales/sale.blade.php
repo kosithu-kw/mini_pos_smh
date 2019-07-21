@@ -33,35 +33,11 @@
 
             <div>
 
-                <!--
-                <div data-keyboard="static" data-backdrop="false" id="aleModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <i class="fa fa-qrcode"></i> Scan barcode from item or enter ID or Name of product item to sale.
-                                <button type="button" class="close" data-dismiss="modal"><i class="fa fa-times-circle"></i></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="saleForm" method="post" action="{{route('add.cart')}}">
-                                    <div class="form-group">
 
-                                        <input list="pds"  autofocus type="search" name="sale_item" id="sale_item" class="form-control">
-                                        <datalist id="pds">
-                                            @foreach($pds as $pd)
-                                                <option value="{{$pd->barcode}}">{{$pd->item_name}}</option>
-                                            @endforeach
-                                        </datalist>
-                                    </div>
-                                    {{csrf_field()}}
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div> model close -->
-            <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-md-6 hidden-xs hidden-sm">
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <i class="fa fa-qrcode"></i> Scan barcode from item or enter ID or Name of product item to sale.
+                        <i class="fa fa-qrcode"></i> Scan barcode from item to sale.
 
                     </div>
                     <div class="box-body">
@@ -82,13 +58,44 @@
 
             </div>
 
+                <div class="col-md-6">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <i class="fa fa-product-hunt"></i> Enter item name to sale.
+
+                        </div>
+                        <div class="box-body">
+                            <form id="saleForm2" method="post" action="{{route('add.cart2')}}">
+
+                                        <div class="form-group">
+                                            <div class="input-group">
+
+                                            <input list="pds2" required type="search" name="sale_item2" id="sale_item2" class="form-control">
+                                            <datalist id="pds2">
+                                                @foreach($pds as $pd)
+                                                    <option value="{{$pd->item_name}}">{{$pd->item_name}}</option>
+                                                @endforeach
+                                            </datalist>
+                                                <span class="input-group-btn">
+                                                    <button type="submit" class="btn btn-primary">Add Sale</button>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                {{csrf_field()}}
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
             <div class="col-sm-12">
                 <div class="box box-primary">
                     <div class="box-header with-border"><i class="fa fa-shopping-cart"></i> Items on Cart</div>
                     <div class="box-body">
                         @if(Session::has('cart'))
                                 <table class="table">
-                                    <tr style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+                                    <tr style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
                                         <th>Item Name</th>
                                         <th>Price</th>
                                         <th>Qty</th>
@@ -110,7 +117,7 @@
 
                                         </tr>
                                         @endforeach
-                                    <tfoot style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+                                    <tfoot style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
 
 
                                     <tr>

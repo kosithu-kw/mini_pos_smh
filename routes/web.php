@@ -78,6 +78,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'SaleController@postAddCart',
             'as'=>'add.cart'
         ]);
+        Route::post('/add/cart2',[
+            'uses'=>'SaleController@postAddCart2',
+            'as'=>'add.cart2'
+        ]);
         Route::get('/decrease/cart/{id}',[
             'uses'=>'SaleController@decreaseCart',
             'as'=>'decrease.cart'

@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Print</title>
     <link rel="stylesheet" href="{{asset('bst/css/bootstrap.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
     <style>
         @font-face {
             font-family: zg;
@@ -16,6 +17,14 @@
         body{
             font-family: zg;
         }
+        @font-face {
+            font-family: lit;
+            src: url("../../bst/lit.otf");
+        }
+        #client-logo{
+            font-family: lit;
+
+        }
     </style>
 </head>
 <body>
@@ -24,8 +33,9 @@
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
             <div class="text-center">
-                <div>Mini Store</div>
-                <div>Mawlamyine.</div>
+                <div id="client-logo">LAND MARK</div>
+                <div style="font-size: 13px">No. 62-A, Main Road, Nan Khal Quarter, Thaton, Front AYA BANK</div>
+                <div style="font-size: 13px;"><i class="fa fa-phone"></i> 09409405770, 09796000056</div>
             </div>
             <div class="my-3" style="font-size: 13px">
                 <div class="row">
@@ -62,7 +72,7 @@
                 </div>
             </div>
             <table class="table table-hover table-borderless" style="font-size: 13px">
-                <tr style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+                <tr style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.2);">
                     <th>Item Name</th>
                     <th>Price</th>
                     <th>Qty</th>
@@ -76,7 +86,7 @@
                         <td>{{$item->amount}}</td>
                     </tr>
                 @endforeach
-                <tfoot style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.5);">
+                <tfoot style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
 
                 <tr>
                     <td class="text-right" colspan="3">Sub Total</td>

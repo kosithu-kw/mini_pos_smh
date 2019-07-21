@@ -18,7 +18,22 @@
     <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.css')}}">
 
 
+    <style>
+        @font-face {
+            font-family: myZg;
+            src: url("../../bst/zg.ttf");
 
+        }
+        @font-face {
+            font-family: lit;
+            src: url("../../bst/lit.otf");
+        }
+        #client-logo{
+            font-family: lit;
+            color: orange;
+            text-shadow: 2px 2px 2px #000;
+        }
+    </style>
 
 </head>
 
@@ -32,10 +47,11 @@
                 <div class="col-xs-4 col-xs-offset-4">
                     <img src="{{url('ntg/logo.png')}}" class="img-responsive">
                 </div>
-                <h4 class="col-sm-12">
-                    Mini Store POS
-                </h4>
+
             </div>
+            <h4>
+                Mini Store POS
+            </h4>
 
         </div>
         <!-- /.login-logo -->
@@ -78,15 +94,17 @@
                 </div>
             </form>
 
-            <div class="social-auth-links text-center">
-                <h2>Your Client Logo</h2>
-            </div>
+
 
 
         </div>
         <!-- /.login-box-body -->
+            <div class="social-auth-links text-center">
+                <h3 id="client-logo">LAND MARK</h3>
+            </div>
     </div>
     <!-- /.login-box -->
+
 </div>
 
 

@@ -77,7 +77,7 @@
                 <!-- ./col -->
                 <div class="col-sm-8 col-xs-6">
                     <!-- small box -->
-                    <div class="small-box bg-red">
+                    <div class="small-box bg-blue-gradient">
                         <div class="inner">
                             <h3>{{count($items)}} <sup style="font-size: 20px">items </sup></h3>
 
