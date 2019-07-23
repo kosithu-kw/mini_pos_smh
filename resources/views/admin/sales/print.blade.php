@@ -74,32 +74,33 @@
             <table class="table table-hover table-borderless" style="font-size: 13px">
                 <tr style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.2);">
                     <th>Item Name</th>
-                    <th>Price</th>
+                    <th>Price (Ks)</th>
                     <th>Qty</th>
-                    <th>Amount</th>
+                    <th>Amount (Ks)</th>
                 </tr>
                 @foreach($sale->saleitem as $item)
                     <tr>
                         <td>{{$item->item_name}}</td>
-                        <td>Ks {{$item->sale_price}}</td>
+                        <td> {{$item->sale_price}}</td>
                         <td>{{$item->quantity}}</td>
-                        <td>Ks {{$item->amount}}</td>
+                        <td> {{$item->amount}}</td>
                     </tr>
                 @endforeach
                 <tfoot style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
 
                 <tr>
-                    <td class="text-right" colspan="3">Sub Total</td>
-                    <td>Ks {{$sale->totalAmount}}</td>
+                    <td class="text-right" colspan="3">Total (Ks) : </td>
+                    <td>{{$sale->totalAmount}}</td>
                 </tr>
                 <tr>
-                    <td class="text-right" colspan="3">Commercial Tax </td>
-                    <td>Ks {{$sale->totalAmount * 0.05}}</td>
+                    <td colspan="3" class="text-right">Paid By: Cash (Ks)</td>
+                    <td>{{$sale->paid_cash}}</td>
                 </tr>
                 <tr>
-                    <td class="text-right" colspan="3">Net Total</td>
-                    <td>Ks {{$sale->totalAmount * 0.05 + $sale->totalAmount}}</td>
+                    <td colspan="3" class="text-right">Changed (Ks) : </td>
+                    <td> {{$sale->paid_cash - $sale->totalAmount}}</td>
                 </tr>
+
                 </tfoot>
             </table>
 

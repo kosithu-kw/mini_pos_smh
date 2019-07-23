@@ -97,9 +97,9 @@
                                 <table class="table">
                                     <tr style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
                                         <th>Item Name</th>
-                                        <th>Price</th>
+                                        <th>Price (Ks)</th>
                                         <th>Qty</th>
-                                        <th>Amount</th>
+                                        <th>Amount (Ks)</th>
 
                                     </tr>
                                     @foreach($carts->items as $item)
@@ -107,13 +107,13 @@
                                             <td>
                                                 <a href="{{route('remove.item',['id'=>$item['item']['id']])}}" class="text-danger"><i class="fa fa-times-circle"></i></a>
                                                 {{$item['item']['item_name']}}</td>
-                                            <td>Ks {{$item['item']['sale_price']}}</td>
+                                            <td> {{$item['item']['sale_price']}}</td>
                                             <td>
                                                 <a href="{{route('decrease.cart',['id'=>$item['item']['id']])}}"><i class="fa fa-minus-circle"></i></a>
                                                 {{$item['qty']}}
                                                 <a href="{{route('increase.cart',['id'=>$item['item']['id']])}}"><i class="fa fa-plus-circle"></i></a>
                                             </td>
-                                            <td> Ks {{$item['amount']}}</td>
+                                            <td> {{$item['amount']}}</td>
 
                                         </tr>
                                         @endforeach
@@ -121,17 +121,27 @@
 
 
                                     <tr>
-                                        <td colspan="3" class="text-right">Sub Total</td>
-                                        <td>Ks {{$carts->totalAmount}}</td>
+                                        <td colspan="3" class="text-right">Total (Ks) :</td>
+                                        <td> {{$carts->totalAmount}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-right">Commercial Tax </td>
-                                        <td>Ks {{$carts->totalAmount * 0.05}}</td>
+                                        <td colspan="3" class="text-right"> Cash (Ks) :</td>
+                                        <td><form method="post" action="{{route('paid.cash')}}">
+                                                <div class="input-group">
+                                                    <input @if(Session::has('paid_cash')) value="{{Session::get('paid_cash')}}" @endif required name="paid_cash" type="number" class="form-control">
+                                                    <span class="input-group-btn">
+                                                        <button type="submit" class="btn btn-primary">Paid</button>
+                                                    </span>
+                                                </div>
+                                                @csrf
+                                            </form>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-right">Net Total</td>
-                                        <td>Ks {{$carts->totalAmount * 0.05 + $carts->totalAmount}}</td>
+                                        <td class="text-right" colspan="3">Changed (Ks) :</td>
+                                        <td> @if(Session::has('paid_cash')) {{Session::get('paid_cash') - $carts->totalAmount }} @endif</td>
                                     </tr>
+
                                     </tfoot>
                                 </table>
 

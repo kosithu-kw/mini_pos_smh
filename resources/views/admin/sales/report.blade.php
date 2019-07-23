@@ -30,25 +30,25 @@
                 @include('admin.layouts.success')
             </div>
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <form id="fidForm" method="get" action="{{route('report.id')}}">
                         <label for="f_id" style="font-size: 11px"><i class="fa fa-id-badge"></i> Filter Sale ID</label>
                         <input required type="number" name="f_id" class="form-control" id="f_id">
                     </form>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                   <form id="fdForm" method="get" action="{{route('report.date')}}">
                       <label for="f_d" style="font-size: 11px"><i class="fa fa-calendar"></i> Filter By Date</label>
                       <input type="date" name="f_d" class="form-control" id="f_d">
                   </form>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <form id="fmForm" method="get" action="{{route('report.month')}}">
                         <label for="f_m" style="font-size: 11px"><i class="fa fa-calendar"></i> Filter By Month</label>
                         <input type="month" name="f_m" class="form-control" id="f_m">
                     </form>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                     @php
                     $myTotal=0;
                     $totalBuying=0;
@@ -65,9 +65,8 @@
                     <table class="table table-bordered" style="margin:0; padding: 0;">
                         <tr style="font-size: 11px">
                             <th>Date / Month</th>
-                            <th>Sub Total</th>
-                            <th>Com Tax (5%)</th>
-                            <th>Net Total</th>
+                            <th>Total</th>
+
                         </tr>
                         <tr>
                             <td>
@@ -76,8 +75,7 @@
                                 <small class="badge">Sale</small>
                             </td>
                             <td><span class="badge">{{$myTotal}}</span></td>
-                            <td> <span class="badge">{{$myTotal * 0.05}}</span></td>
-                            <td><span class="badge">{{$myTotal * 0.05 + $myTotal}}</span></td>
+
                         </tr>
                         @if(Auth::user()->hasRole('Admin') || Auth::User()->hasRole('Manager'))
                         <tr>
@@ -87,8 +85,7 @@
                                 <small class="badge">Buying</small>
                             </td>
                             <td><span class="badge">{{$totalBuying}}</span></td>
-                            <td> <span class="badge">{{$totalBuying * 0.05}}</span></td>
-                            <td><span class="badge">{{$totalBuying * 0.05 + $totalBuying}}</span></td>
+
                         </tr>
                         <tr>
                             <td>Total Profit</td>
@@ -137,9 +134,9 @@
                                             <table class="table table-hover">
                                                 <tr class="text-primary" style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
                                                     <th>Item Name</th>
-                                                    <th>Price</th>
+                                                    <th>Price (Ks)</th>
                                                     <th>Qty</th>
-                                                    <th>Amount</th>
+                                                    <th>Amount (Ks)</th>
                                                 </tr>
                                                 @foreach($s->saleitem as $item)
                                                     <tr class="text-info">
@@ -152,17 +149,18 @@
                                                 <tfoot style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
 
                                                 <tr class="text-primary">
-                                                    <td class="text-right" colspan="3">Sub Total</td>
+                                                    <td class="text-right" colspan="3">Total (Ks) :</td>
                                                     <td>{{$s->totalAmount}}</td>
                                                 </tr>
                                                 <tr class="text-primary">
-                                                    <td class="text-right" colspan="3">Commercial Tax (5%)</td>
-                                                    <td>{{$s->totalAmount * 0.05}}</td>
+                                                    <td colspan="3" class="text-right">Paid By: Cash (Ks)</td>
+                                                    <td>{{$s->paid_cash}}</td>
                                                 </tr>
                                                 <tr class="text-primary">
-                                                    <td class="text-right" colspan="3">Net Total</td>
-                                                    <td>{{$s->totalAmount * 0.05 + $s->totalAmount}}</td>
+                                                    <td colspan="3" class="text-right">Changed (Ks) : </td>
+                                                    <td> {{$s->paid_cash - $s->totalAmount}}</td>
                                                 </tr>
+
                                                 </tfoot>
                                             </table>
                                         </div>

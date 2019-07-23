@@ -64,6 +64,9 @@ class SaleController extends Controller
         $sale->user_id=Auth::User()->id;
         $sale->totalQty=$totalQty;
         $sale->totalAmount=$totalAmount;
+        if(Session::has('paid_cash')){
+            $sale->paid_cash=Session::get('paid_cash');
+        }
         $sale->save();
 
         foreach ($cart->items as $item){
@@ -87,6 +90,7 @@ class SaleController extends Controller
             $sale_item->save();
         }
         Session::forget('cart');
+        Session::forget('paid_cash');
         return redirect()->back()->with('info', "This session have been completed sale.");
     }
     public function checkOutPrint(){
@@ -97,6 +101,9 @@ class SaleController extends Controller
         $sale->user_id=Auth::User()->id;
         $sale->totalQty=$totalQty;
         $sale->totalAmount=$totalAmount;
+        if(Session::has('paid_cash')){
+            $sale->paid_cash=Session::get('paid_cash');
+        }
         $sale->save();
 
         foreach ($cart->items as $item){
@@ -120,6 +127,7 @@ class SaleController extends Controller
            $sale_item->save();
         }
         Session::forget('cart');
+        Session::forget('paid_cash');
         return redirect()->route('print',['id'=>$sale->id])->with('info', "This session have been completed sale.");
 
 
@@ -128,12 +136,19 @@ class SaleController extends Controller
         $oldCart=Session::get('cart');
         $cart=new Cart($oldCart);
         $cart->clearCart();
+        Session::forget('paid_cash');
         return redirect()->back()->with('info', "The sale session have been cancelled.");
     }
     public function getSalePage(){
         $pds=Product::get();
         $carts=Session::has('cart') ? Session::get('cart') : [];
         return view ('admin.sales.sale')->with(['pds'=>$pds, 'carts'=>$carts]);
+    }
+    public function postPaidCash(Request $request){
+        $paid_cash=$request['paid_cash'];
+        Session::put('paid_cash', $paid_cash);
+       return redirect()->back();
+
     }
     public function removeItem($id){
         $oldCart=Session::get('cart');
