@@ -50,7 +50,7 @@
                     <div class="col-sm-2">
                         CASHIER
                     </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-10" style="font-weight: bold;">
                         : {{$sale->user->name}}
                     </div>
                 </div>
@@ -81,24 +81,24 @@
                 @foreach($sale->saleitem as $item)
                     <tr>
                         <td>{{$item->item_name}}</td>
-                        <td>{{$item->sale_price}}</td>
+                        <td>Ks {{$item->sale_price}}</td>
                         <td>{{$item->quantity}}</td>
-                        <td>{{$item->amount}}</td>
+                        <td>Ks {{$item->amount}}</td>
                     </tr>
                 @endforeach
                 <tfoot style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
 
                 <tr>
                     <td class="text-right" colspan="3">Sub Total</td>
-                    <td>{{$sale->totalAmount}}</td>
+                    <td>Ks {{$sale->totalAmount}}</td>
                 </tr>
                 <tr>
-                    <td class="text-right" colspan="3">Commercial Tax (5%)</td>
-                    <td>{{$sale->totalAmount * 0.05}}</td>
+                    <td class="text-right" colspan="3">Commercial Tax </td>
+                    <td>Ks {{$sale->totalAmount * 0.05}}</td>
                 </tr>
                 <tr>
                     <td class="text-right" colspan="3">Net Total</td>
-                    <td>{{$sale->totalAmount * 0.05 + $sale->totalAmount}}</td>
+                    <td>Ks {{$sale->totalAmount * 0.05 + $sale->totalAmount}}</td>
                 </tr>
                 </tfoot>
             </table>

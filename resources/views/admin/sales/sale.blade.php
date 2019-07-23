@@ -107,13 +107,13 @@
                                             <td>
                                                 <a href="{{route('remove.item',['id'=>$item['item']['id']])}}" class="text-danger"><i class="fa fa-times-circle"></i></a>
                                                 {{$item['item']['item_name']}}</td>
-                                            <td>{{$item['item']['sale_price']}}</td>
+                                            <td>Ks {{$item['item']['sale_price']}}</td>
                                             <td>
                                                 <a href="{{route('decrease.cart',['id'=>$item['item']['id']])}}"><i class="fa fa-minus-circle"></i></a>
                                                 {{$item['qty']}}
                                                 <a href="{{route('increase.cart',['id'=>$item['item']['id']])}}"><i class="fa fa-plus-circle"></i></a>
                                             </td>
-                                            <td>{{$item['amount']}}</td>
+                                            <td> Ks {{$item['amount']}}</td>
 
                                         </tr>
                                         @endforeach
@@ -122,15 +122,15 @@
 
                                     <tr>
                                         <td colspan="3" class="text-right">Sub Total</td>
-                                        <td>{{$carts->totalAmount}}</td>
+                                        <td>Ks {{$carts->totalAmount}}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" class="text-right">Commercial Tax (5%)</td>
-                                        <td>{{$carts->totalAmount * 0.05}}</td>
+                                        <td colspan="3" class="text-right">Commercial Tax </td>
+                                        <td>Ks {{$carts->totalAmount * 0.05}}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3" class="text-right">Net Total</td>
-                                        <td>{{$carts->totalAmount * 0.05 + $carts->totalAmount}}</td>
+                                        <td>Ks {{$carts->totalAmount * 0.05 + $carts->totalAmount}}</td>
                                     </tr>
                                     </tfoot>
                                 </table>
