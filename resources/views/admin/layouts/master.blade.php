@@ -70,8 +70,12 @@
     <script src="{{asset('js/action.js')}}"></script>
 
     <script src="{{asset('buying_sale_graph.js')}}"></script>
+
+    <script src="{{asset('js/printThis.js')}}"></script>
+
     <script>
         $(function () {
+
             setTimeout(function () {
                 $(".tem").fadeOut();
             }, 2000)

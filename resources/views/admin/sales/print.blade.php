@@ -11,7 +11,7 @@
     <style>
         @font-face {
             font-family: zg;
-            src: url("bst/zg.ttf");
+            src: url("../../bst/zg.ttf");
 
         }
         body{
@@ -31,7 +31,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 offset-sm-2">
+        <div class="col-sm-8 offset-sm-2" id="myPrint">
             <div class="text-center">
                 <div id="client-logo">LAND MARK</div>
                 <div style="font-size: 13px">No. 62-A, Main Road, Nan Khal Quarter, Thaton, Front AYA BANK</div>
@@ -107,8 +107,23 @@
             <div class="mt-5 text-center" style="font-size: 13px">၀ယ္ယူအားေပးမႈအတြက္ အထူးေက်းဇူးတင္ရွိပါသည္။</div>
         </div>
     </div>
+    <div class="row mt-5">
+        <div class="col-2 offset-5">
+            <button type="button" class="btn btn-primary btn-block" id="btnPrint"><i class="fa fa-print"></i> Print</button>
+
+        </div>
+    </div>
 </div>
 
+<script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{asset('js/printThis.js')}}"></script>
+<script>
+    $(function () {
+        $("#btnPrint").on('click', function () {
+            $("#myPrint").printThis();
+        })
+    })
+</script>
 
 </body>
 </html>
