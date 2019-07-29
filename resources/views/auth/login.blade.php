@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.css')}}">
+    <link href="{{asset('ntg/logo.ico')}}" rel="icon">
 
 
     <style>
@@ -45,7 +46,7 @@
         <div class="login-logo">
             <div class="row">
                 <div class="col-xs-4 col-xs-offset-4">
-                    <img src="{{url('ntg/logo.png')}}" class="img-responsive">
+                    <img src="{{url('ntg/logo_round.ico')}}" class="img-responsive">
                 </div>
 
             </div>
