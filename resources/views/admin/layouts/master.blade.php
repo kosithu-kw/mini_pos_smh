@@ -78,7 +78,7 @@
 
             setTimeout(function () {
                 $(".tem").fadeOut();
-            }, 2000)
+            }, 1000)
 
             $("#productTable").dataTable();
 
@@ -145,6 +145,9 @@
                     $("#saleForm").submit();
                 }, 1000)
             })
+
+
+
 
 
 

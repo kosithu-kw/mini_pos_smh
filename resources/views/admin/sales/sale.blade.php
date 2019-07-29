@@ -128,7 +128,7 @@
                                         <td colspan="3" class="text-right"> Cash (Ks) :</td>
                                         <td><form method="post" action="{{route('paid.cash')}}">
                                                 <div class="input-group">
-                                                    <input @if(Session::has('paid_cash')) value="{{Session::get('paid_cash')}}" @endif required name="paid_cash" type="number" class="form-control">
+                                                    <input required @if(Session::has('paid_cash')) value="{{Session::get('paid_cash')}}" @endif  name="paid_cash" type="number" class="form-control">
                                                     <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-primary">Paid</button>
                                                     </span>
@@ -150,14 +150,16 @@
                                 <div class="col-sm-8">
                                     <a data-toggle="tooltip" data-placement="top" title="Cancel sale session." href="{{route('cart.cancel')}}" class="text-danger"><i class="fa fa-times-circle"></i></a>
                                 </div>
-                               <div class="col-sm-4">
-                                   <div class="col-sm-6">
-                                       <a data-toggle="tooltip" data-placement="top" title="Checkout Sale"  href="{{route('checkout')}}" class="btn btn-link pull-right"><i class="fa fa-check-circle"></i></a>
-                                   </div>
-                                   <div class="col-sm-6">
-                                       <a id="btnCheckout" data-toggle="tooltip" data-placement="top" title="Checkout sale and print" target="_blank" href="{{route('checkout.print')}}" class="btn btn-link pull-right"> <i class="fa fa-print"></i></a>
-                                   </div>
-                               </div>
+                              @if(Session::has('paid_cash'))
+                                    <div class="col-sm-4">
+                                        <div class="col-sm-6">
+                                            <a data-toggle="tooltip" data-placement="top" title="Checkout Sale"  href="{{route('checkout')}}" class="btn btn-link pull-right"><i class="fa fa-check-circle"></i></a>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a id="btnCheckout" data-toggle="tooltip" data-placement="top" title="Checkout sale and print" target="_blank" href="{{route('checkout.print')}}" class="btn btn-link pull-right"> <i class="fa fa-print"></i></a>
+                                        </div>
+                                    </div>
+                                  @endif
                             </div>
 
 
