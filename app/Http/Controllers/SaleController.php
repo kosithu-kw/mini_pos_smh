@@ -147,6 +147,9 @@ class SaleController extends Controller
     }
     public function postPaidCash(Request $request){
         $paid_cash=$request['paid_cash'];
+        if(!$paid_cash){
+            $paid_cash=0;
+        }
         Session::put('paid_cash', $paid_cash);
        return redirect()->back();
 

@@ -26,22 +26,16 @@
             font-family: lit;
 
         }
-        button[type=button]{
-            width: 150px;
-            height: 40px;
-            background: #0c5460;
-            color: #fff;
-            text-align: center;
-            border-radius: 10px;
-
-        }
-        button[type=button]:hover{
-            background: #0d6aad;
-        }
         .container {
+            width: 400px;
             text-align: center;
-            margin-top: 50px;
+            margin: 50px auto;
         }
+        .container a{
+            text-decoration:  none;
+            padding: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -125,14 +119,18 @@
 </div><!--End Invoice-->
 </div>
 
-<div class="container">
-    <div class="row mt-5">
-        <div class="col-2 offset-5">
-            <button type="button" class="btn btn-primary btn-block" id="btnPrint"><i class="fa fa-print"></i> Print</button>
 
-        </div>
-    </div>
-</div>
+
+            <div class="container">
+                <a href="#!"  id="btnPrint"> Print <i class="fa fa-print"></i></a>
+
+                <a href="{{route('sale')}}" class="btnGoSale">Sale <i class="fa fa-shopping-cart"></i></a>
+
+
+                <a href="{{route('sales.report')}}" class="btnGoReport"> Report <i class="fa fa-area-chart"></i></a>
+
+            </div>
+
 
 <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{asset('js/printThis.js')}}"></script>

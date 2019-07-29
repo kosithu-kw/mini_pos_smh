@@ -123,7 +123,7 @@
                                         <i class="fa fa-clock-o"></i> Date : <b>{{date('d/m Y  h:i A', strtotime($s->created_at))}}</b>
                                     </div>
                                     <div class="col-sm-1">
-                                        <a style="display: block; text-align: center" target="_blank" data-toggle="tooltip" data-placement="top" title="Print this item."  href="{{route('print',['id'=>$s->id])}}"><i class="fa fa-print"></i></a>
+                                        <a style="display: block; text-align: center" data-toggle="tooltip" data-placement="top" title="Print this item."  href="{{route('print',['id'=>$s->id])}}"><i class="fa fa-print"></i></a>
                                     </div>
                                 </div>
                             </div>
