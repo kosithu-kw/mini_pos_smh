@@ -16,7 +16,7 @@ class ProductController extends Controller
             'buying_price'=>'required',
             'sale_price'=>'required',
             'quantity'=>'required',
-            'buying_date'=>'required'
+           // 'buying_date'=>'required'
         ]);
         $id=$request['id'];
         $pd=Product::whereId($id)->firstOrFail();

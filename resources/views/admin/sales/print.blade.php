@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Print</title>
-    <link rel="stylesheet" href="{{asset('bst/css/bootstrap.css')}}">
+   <!-- <link rel="stylesheet" href="{{asset('bst/css/bootstrap.css')}}"> -->
+    <link href="{{asset('css/print.css')}}" rel="stylesheet"></link>
     <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
     <style>
         @font-face {
@@ -21,92 +22,110 @@
             font-family: lit;
             src: url("../../bst/lit.otf");
         }
-        #client-logo{
+        #top .info h2{
             font-family: lit;
 
+        }
+        button[type=button]{
+            width: 150px;
+            height: 40px;
+            background: #0c5460;
+            color: #fff;
+            text-align: center;
+            border-radius: 10px;
+
+        }
+        button[type=button]:hover{
+            background: #0d6aad;
+        }
+        .container {
+            text-align: center;
+            margin-top: 50px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-8 offset-sm-2" id="myPrint">
-            <div class="text-center">
-                <div id="client-logo">LAND MARK</div>
-                <div style="font-size: 13px">No. 62-A, Main Road, Nan Khal Quarter, Thaton, Front AYA BANK</div>
-                <div style="font-size: 13px;"><i class="fa fa-phone"></i> 09409405770, 09796000056</div>
-            </div>
-            <div class="my-3" style="font-size: 13px">
-                <div class="row">
-                    <div class="col-sm-2">
-                        SALE ID
-                    </div>
-                    <div class="col-sm-10" style="font-weight: bold;">
-                        : {{$sale->id}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2">
-                        CASHIER
-                    </div>
-                    <div class="col-sm-10" style="font-weight: bold;">
-                        : {{$sale->user->name}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2">
-                       PRN ON
-                    </div>
-                    <div class="col-sm-10">
-                        : {{date("d/m Y / h:i A")}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-2">
-                        DATE
-                    </div>
-                    <div class="col-sm-10">
-                        : {{date("d/m Y / h:i A", strtotime($sale->created_at))}}
-                    </div>
-                </div>
-            </div>
-            <table class="table table-hover table-borderless" style="font-size: 13px">
-                <tr style="border-top: dashed rgba(100,100,100,0.5); border-bottom: dashed rgba(100,100,100,0.2);">
-                    <th>Item Name</th>
-                    <th>Price (Ks)</th>
-                    <th>Qty</th>
-                    <th>Amount (Ks)</th>
+
+
+<div>
+    <div id="invoice-POS">
+
+    <center id="top">
+        <div class="info">
+            <h2>LAND MARK</h2>
+        </div><!--End Info-->
+    </center><!--End InvoiceTop-->
+
+    <div id="mid">
+        <div class="info1">
+            <p>No. 62-A, Main Road, Nan Khal Quarter, Thaton, Front AYA BANK</p>
+            <p>
+                <i class="fa fa-phone"></i> 09409405770 ,09796000056
+
+            </p>
+        </div>
+
+        <div class="info">
+            <p>
+                Sale ID : {{$sale->id}} <br>
+                Cashier : {{$sale->user->name}} <br>
+                PRN ON : {{date("d/m Y / h:i A")}}
+            </p>
+        </div>
+    </div><!--End Invoice Mid-->
+
+    <div id="bot">
+
+        <div id="table">
+            <table>
+                <tr class="tabletitle" >
+                    <td><h2>Item</h2></td>
+                    <td ><h2>Price (Ks)</h2></td>
+                    <td ><h2>Qty</h2></td>
+                    <td ><h2>Amount (Ks)</h2></td>
                 </tr>
                 @foreach($sale->saleitem as $item)
-                    <tr>
-                        <td>{{$item->item_name}}</td>
-                        <td> {{$item->sale_price}}</td>
-                        <td>{{$item->quantity}}</td>
-                        <td> {{$item->amount}}</td>
-                    </tr>
+                <tr class="service">
+                    <td ><p class="itemtext">{{$item->item_name}}</p></td>
+                    <td ><p class="itemtext">{{$item->sale_price}}</p></td>
+                    <td ><p class="itemtext">{{$item->quantity}}</p></td>
+                    <td ><p class="itemtext">{{$item->amount}}</p></td>
+                </tr>
                 @endforeach
-                <tfoot style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
 
-                <tr>
-                    <td class="text-right" colspan="3">Total (Ks) : </td>
-                    <td>{{$sale->totalAmount}}</td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text-right">Paid By: Cash (Ks)</td>
-                    <td>{{$sale->paid_cash}}</td>
-                </tr>
-                <tr>
-                    <td colspan="3" class="text-right">Changed (Ks) : </td>
-                    <td> {{$sale->paid_cash - $sale->totalAmount}}</td>
+
+
+                <tr class="tabletitle" >
+                    <td></td>
+                    <td colspan="2"><h2>Total (Ks) :</h2></td>
+                    <td ><h2>{{$sale->totalAmount}}</h2></td>
                 </tr>
 
-                </tfoot>
+                <tr class="tabletitle" >
+                    <td></td>
+                    <td  colspan="2"><h2>Paid By : Cash (Ks)</h2></td>
+                    <td ><h2>{{$sale->paid_cash}}</h2></td>
+                </tr>
+                <tr class="tabletitle" >
+                    <td></td>
+                    <td colspan="2"><h2>Changed (Ks) : </h2></td>
+                    <td ><h2>{{$sale->paid_cash - $sale->totalAmount}}</h2></td>
+                </tr>
+
             </table>
+        </div><!--End Table-->
 
-            <div class="mt-5 text-center" style="font-size: 13px">၀ယ္ယူအားေပးမႈအတြက္ အထူးေက်းဇူးတင္ရွိပါသည္။</div>
+        <div id="legalcopy">
+            <p class="legal"><strong>Thank You.</strong>
+            </p>
         </div>
-    </div>
+
+    </div><!--End InvoiceBot-->
+</div><!--End Invoice-->
+</div>
+
+<div class="container">
     <div class="row mt-5">
         <div class="col-2 offset-5">
             <button type="button" class="btn btn-primary btn-block" id="btnPrint"><i class="fa fa-print"></i> Print</button>
@@ -120,7 +139,7 @@
 <script>
     $(function () {
         $("#btnPrint").on('click', function () {
-            $("#myPrint").printThis();
+            $("#invoice-POS").printThis();
         })
     })
 </script>

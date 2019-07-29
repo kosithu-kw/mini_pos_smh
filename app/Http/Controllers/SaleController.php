@@ -94,6 +94,7 @@ class SaleController extends Controller
         return redirect()->back()->with('info', "This session have been completed sale.");
     }
     public function checkOutPrint(){
+
         $cart=Session::get('cart');
         $totalQty=$cart->totalQty;
         $totalAmount=$cart->totalAmount;
