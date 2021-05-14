@@ -101,7 +101,8 @@
         </div>
         <!-- /.login-box-body -->
             <div class="social-auth-links text-center">
-                <h3 id="client-logo">LAND MARK</h3>
+                <h3 id="client-logo">ေရႊမ်က္မွန္ (၂)</h3>
+                <h5>အိမ္ေဆာက္ပစၥည္းႏွင့္သံထည္ပစၥည္းအမ်ိဳးမ်ိဳး</h5>
             </div>
     </div>
     <!-- /.login-box -->
