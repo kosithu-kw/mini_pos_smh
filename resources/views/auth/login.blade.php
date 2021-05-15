@@ -33,6 +33,11 @@
             font-family: lit;
             color: orange;
             text-shadow: 2px 2px 2px #000;
+            font-size: 50px;
+            margin-bottom: 40px;
+        }
+        .customer-logo{
+            padding-top: 50px;
         }
     </style>
 
@@ -41,71 +46,86 @@
 
 <body class="hold-transition login-page">
 <div class="container">
-    <div class="login-box">
-        @if(Session('error')) <div class="alert alert-danger"><span class="glyphicon glyphicon-alert"></span> {{Session('error')}}</div> @endif
-        <div class="login-logo">
-            <div class="row">
-                <div class="col-xs-4 col-xs-offset-4">
-                    <img src="{{url('ntg/logo_round.ico')}}" class="img-responsive">
-                </div>
-
-            </div>
-            <h4>
-                Mini Store POS
-            </h4>
-
-        </div>
-        <!-- /.login-logo -->
-        <div class="login-box-body" style="border-radius: 20px">
-            <p class="login-box-msg">Sign in to start your session</p>
-
-            <form role="form" method="POST" action="{{ route('login') }}">
-                {{ csrf_field() }}
-                <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }} has-feedback">
-                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Username" required >
-                    @if ($errors->has('name'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('name') }}</strong>
-                    </span>
-                    @endif
-                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                </div>
-                <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }} has-feedback">
-                    <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span>
-                    @endif
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <div class="row">
-                    <div class="col-xs-8">
-                        <div class="checkbox icheck">
-                            <label>
-                                <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                            </label>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-                    </div>
-                    <!-- /.col -->
-                </div>
-            </form>
-
-
-
-
-        </div>
-        <!-- /.login-box-body -->
+  
+    <div class="row">
+        <div class="col-sm-6 customer-logo">
             <div class="social-auth-links text-center">
                 <h3 id="client-logo">ေရႊမ်က္မွန္ (၂)</h3>
-                <h5>အိမ္ေဆာက္ပစၥည္းႏွင့္သံထည္ပစၥည္းအမ်ိဳးမ်ိဳး</h5>
+                <h4 class="text-primary" style="margin-bottom: 20px; font-size: 20px;">အိမ္ေဆာက္ပစၥည္းႏွင့္သံထည္ပစၥည္းအမ်ိဳးမ်ိဳး</h4>
+                <h5 style="margin-bottom: 20px;">ကားမႈတ္ေဆးအမ်ိဳးမ်ိဳး၊ အုတ္၊ သဲ၊ ေက်ာက္၊ ဘိလပ္ေျမ ေရာင္း၀ယ္ေရး</h5>
+                <h5 style="margin-block: 30px">လယ္ယာသုံး စက္ပစၥည္းအမ်ိဳးမ်ိဳးေရာင္း၀ယ္ေရး</h5>
+                <h4 style="color: rgb(255, 123, 0); margin-bottom: 30px;">(ဦးကာ၀ွက္ +  ေဒၚရႈတင္) သား ကိုသန္းေအး + မ၀ါ၀ါခိုင္</h4>
+                <h5 style="margin-bottom: 20px">အမွတ္(၁၃/၁၅)၊ ရန္ကုန္-ေမာ္လၿမိဳင္ကားလမ္းမ(မင္းလမ္း)၊ လိပ္အင္းရပ္ကြက္၊ သထုံၿမိဳ႕။</h5>
+
+                <h4>09405886881, 09674066674, 09791833357</h4>
+                
             </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="login-box">
+                @if(Session('error')) <div class="alert alert-danger"><span class="glyphicon glyphicon-alert"></span> {{Session('error')}}</div> @endif
+                <div class="login-logo">
+                    <div class="row">
+                        <div class="col-xs-4 col-xs-offset-4">
+                            <img src="{{url('ntg/logo_round.ico')}}" class="img-responsive">
+                        </div>
+        
+                    </div>
+                    <h4>
+                        Mini Store POS
+                    </h4>
+        
+                </div>
+                <!-- /.login-logo -->
+                <div class="login-box-body" style="border-radius: 20px">
+                    <p class="login-box-msg">Sign in to start your session</p>
+        
+                    <form role="form" method="POST" action="{{ route('login') }}">
+                        {{ csrf_field() }}
+                        <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }} has-feedback">
+                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Username" required >
+                            @if ($errors->has('name'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                            @endif
+                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                        </div>
+                        <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }} has-feedback">
+                            <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
+                            @if ($errors->has('password'))
+                                <span class="help-block">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                            @endif
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-8">
+                                <div class="checkbox icheck">
+                                    <label>
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-xs-4">
+                                <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </form>
+        
+        
+        
+        
+                </div>
+                <!-- /.login-box-body -->
+                    
+            </div>
+            <!-- /.login-box -->
+        </div>
     </div>
-    <!-- /.login-box -->
 
 </div>
 
