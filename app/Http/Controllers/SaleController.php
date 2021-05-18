@@ -14,6 +14,15 @@ use Auth;
 
 class SaleController extends Controller
 {
+    public function postSaleTo(Request $request){
+        $sale_to=$request['sale_to'];
+        Session::put('ready_sale', $sale_to);
+        return redirect()->back();
+    }
+    public function CancelSaleTo(){
+        Session::forget("ready_sale");
+        return redirect()->back();
+    }
 
     public function print($id){
         $sale=Sale::whereId($id)->firstOrFail();
@@ -63,6 +72,7 @@ class SaleController extends Controller
         $sale=new Sale();
         $sale->user_id=Auth::User()->id;
         $sale->totalQty=$totalQty;
+        $sale->sale_type=Session::get("ready_sale");
         $sale->totalAmount=$totalAmount;
         if(Session::has('paid_cash')){
             $sale->paid_cash=Session::get('paid_cash');
@@ -101,6 +111,8 @@ class SaleController extends Controller
         $sale=new Sale();
         $sale->user_id=Auth::User()->id;
         $sale->totalQty=$totalQty;
+        $sale->sale_type=Session::get("ready_sale");
+
         $sale->totalAmount=$totalAmount;
         if(Session::has('paid_cash')){
             $sale->paid_cash=Session::get('paid_cash');

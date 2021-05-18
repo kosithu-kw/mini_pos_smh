@@ -15,6 +15,8 @@ class ProductController extends Controller
             'item_name'=>'required|exists:products',
             'buying_price'=>'required',
             'sale_price'=>'required',
+            'sale_price_1'=>'required',
+            'sale_price_2'=>'required',
             'quantity'=>'required',
            // 'buying_date'=>'required'
         ]);
@@ -23,6 +25,8 @@ class ProductController extends Controller
         $pd->barcode=$request['barcode'];
         $pd->buying_price=$request['buying_price'];
         $pd->sale_price=$request['sale_price'];
+        $pd->sale_price_1=$request['sale_price_1'];
+        $pd->sale_price_2=$request['sale_price_2'];
         $pd->quantity=$pd->quantity + $request['quantity'];
         $pd->save();
 
@@ -30,6 +34,8 @@ class ProductController extends Controller
         $bHis->item_name=$request['item_name'];
         $bHis->buying_price=$request['buying_price'];
         $bHis->sale_price=$request['sale_price'];
+        $bHis->sale_price_1=$request['sale_price_1'];
+        $bHis->sale_price_2=$request['sale_price_2'];
         $bHis->quantity=$request['quantity'];
         $bHis->user_id=Auth::User()->id;
         $bHis->buying_date=$request['buying_date'];
@@ -50,6 +56,8 @@ class ProductController extends Controller
         $pd->item_name=$request['item_name'];
         $pd->buying_price=$request['buying_price'];
         $pd->sale_price=$request['sale_price'];
+        $pd->sale_price_1=$request['sale_price_1'];
+        $pd->sale_price_2=$request['sale_price_2'];
         $pd->quantity=$request['quantity'];
         $pd->update();
         return redirect()->route('product.all')->with('info', "The selected item have been updated.");
@@ -84,6 +92,8 @@ class ProductController extends Controller
            'item_name'=>'required|unique:products',
            'buying_price'=>'required',
            'sale_price'=>'required',
+           'sale_price_1'=>"required",
+           'sale_price_2'=>"required",
            'quantity'=>'required',
            // 'buying_date'=>'required'
         ]);
@@ -91,6 +101,8 @@ class ProductController extends Controller
         $p->item_name=$request['item_name'];
         $p->buying_price=$request['buying_price'];
         $p->sale_price=$request['sale_price'];
+        $p->sale_price_1=$request['sale_price_1'];
+        $p->sale_price_2=$request['sale_price_2'];
         $p->quantity=$request['quantity'];
         if($request['barcode']){
             $p->barcode=$request['barcode'];
@@ -105,6 +117,8 @@ class ProductController extends Controller
         $bHis->item_name=$request['item_name'];
         $bHis->buying_price=$request['buying_price'];
         $bHis->sale_price=$request['sale_price'];
+        $bHis->sale_price_1=$request['sale_price_1'];
+        $bHis->sale_price_2=$request['sale_price_2'];
         $bHis->quantity=$request['quantity'];
         $bHis->user_id=Auth::User()->id;
 

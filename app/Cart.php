@@ -18,33 +18,63 @@ class Cart
         }
     }
     public function add($item, $id){
-        $storeItem=['qty'=>0, 'amount'=>$item->sale_price, 'item'=>$item];
+
+        $sp=Session::get("ready_sale");
+        if($sp=="normal"){
+            $salePrice=$item->sale_price;
+        }elseif($sp=="level_1"){
+            $salePrice=$item->sale_price_1;
+        }else{
+            $salePrice=$item->sale_price_2;
+        }
+        
+        $storeItem=['qty'=>0, 'amount'=>$salePrice, 'item'=>$item];
         if($this->items){
             if(array_key_exists($id, $this->items)){
                 $storeItem=$this->items[$id];
             }
         }
+       
+
         $storeItem['qty']++;
-        $storeItem['price']=$item->sale_price;
-        $storeItem['amount'] =$item->sale_price * $storeItem['qty'];
+        $storeItem['price']=$salePrice;
+        $storeItem['amount'] =$salePrice * $storeItem['qty'];
         $this->items[$id]=$storeItem;
         $this->totalQty++;
-        $this->totalAmount += $item->sale_price;
+        $this->totalAmount += $salePrice;
     }
     public function decreaseOne($id){
+
+        $sp=Session::get("ready_sale");
+        if($sp=="normal"){
+            $salePrice=$this->items[$id]['item']['sale_price'];
+        }elseif($sp=="level_1"){
+            $salePrice=$this->items[$id]['item']['sale_price_1'];;
+        }else{
+            $salePrice=$this->items[$id]['item']['sale_price_2'];
+        }
+
         $this->items[$id]['qty']--;
-        $this->items[$id]['amount'] -= $this->items[$id]['item']['sale_price'];
+        $this->items[$id]['amount'] -= $salePrice;
         $this->totalQty--;
-        $this->totalAmount -=$this->items[$id]['item']['sale_price'];
+        $this->totalAmount -=$salePrice;
         if($this->items[$id]['qty'] <= 0){
             unset($this->items[$id]);
         }
     }
     public function increaseOne($id){
+        $sp=Session::get("ready_sale");
+        if($sp=="normal"){
+            $salePrice=$this->items[$id]['item']['sale_price'];
+        }elseif($sp=="level_1"){
+            $salePrice=$this->items[$id]['item']['sale_price_1'];;
+        }else{
+            $salePrice=$this->items[$id]['item']['sale_price_2'];
+        }
         $this->items[$id]['qty']++;
-        $this->items[$id]['amount'] += $this->items[$id]['item']['sale_price'];
+        $this->items[$id]['amount'] += $salePrice;
         $this->totalQty++;
-        $this->totalAmount +=$this->items[$id]['item']['sale_price'];
+        $this->totalAmount +=$salePrice;
     }
     public function remove($id){
         $itemQty=$this->items[$id]['qty'];

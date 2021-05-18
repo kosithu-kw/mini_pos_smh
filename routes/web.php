@@ -51,6 +51,14 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'SaleController@getReport',
             'as'=>'sales.report'
         ]);
+        Route::post('/sale-to',[
+            'uses'=>'SaleController@postSaleTo',
+            'as'=>'sale_to'
+        ]);
+        Route::get('/cancel_sale_to',[
+            'uses'=>'SaleController@CancelSaleTo',
+            'as'=>'cancel_sale_to'
+        ]);
     });
 
     Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager|Cashier'], function (){

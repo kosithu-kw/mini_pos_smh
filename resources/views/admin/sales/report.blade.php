@@ -113,13 +113,24 @@
                                             <i class="fa fa-caret-down"></i>
                                         </a>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <i class="fa fa-id-badge"></i> Sale ID : <span class="badge">{{$s->id}}</span>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <i class="fa fa-user-circle"></i> Cashier : <b>{{$s->user->name}}</b>
                                     </div>
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-3">
+                                        <i class="fa fa-user"></i> Customer : <b>
+                                            @if($s->sale_type=="normal")
+                                                Normal
+                                            @elseif($s->sale_type=="level_1")
+                                                Level 1
+                                            @else
+                                                level 2
+                                            @endif
+                                        </b>
+                                    </div>
+                                    <div class="col-sm-3">
                                         <i class="fa fa-clock-o"></i> Date : <b>{{date('d/m Y  h:i A', strtotime($s->created_at))}}</b>
                                     </div>
                                     <div class="col-sm-1">

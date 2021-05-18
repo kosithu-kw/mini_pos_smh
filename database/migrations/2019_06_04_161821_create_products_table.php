@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('item_name');
             $table->double('buying_price');
             $table->double('sale_price');
+            $table->double('sale_price_1');
+            $table->double('sale_price_2');
             $table->integer('quantity');
             $table->string('barcode');
 

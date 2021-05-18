@@ -48,9 +48,19 @@
                         @if($errors->has('buying_price')) <span class="help-block">{{$errors->first('buying_price')}}</span> @endif
                     </div>
                     <div class="form-group @if($errors->has('sale_price')) has-error @endif ">
-                        <label for="sale_price">Sale Price</label>
+                        <label for="sale_price">Sale Price (Normal)</label>
                         <input type="number" name="sale_price" id="sale_price" class="form-control" value="{{old('sale_price')}}">
                         @if($errors->has('sale_price')) <span class="help-block">{{$errors->first('sale_price')}}</span> @endif
+                    </div>
+                    <div class="form-group @if($errors->has('sale_price_1')) has-error @endif ">
+                        <label for="sale_price_1">Sale Price (Level 1)</label>
+                        <input type="number" name="sale_price_1" id="sale_price_1" class="form-control" value="{{old('sale_price_1')}}">
+                        @if($errors->has('sale_price_1')) <span class="help-block">{{$errors->first('sale_price_1')}}</span> @endif
+                    </div>
+                    <div class="form-group @if($errors->has('sale_price_2')) has-error @endif ">
+                        <label for="sale_price_2">Sale Price (Level 2)</label>
+                        <input type="number" name="sale_price_2" id="sale_price_2" class="form-control" value="{{old('sale_price_2')}}">
+                        @if($errors->has('sale_price_2')) <span class="help-block">{{$errors->first('sale_price_2')}}</span> @endif
                     </div>
                     <div class="form-group @if($errors->has('quantity')) has-error @endif ">
                         <label for="quantity">Quantity</label>

@@ -63,7 +63,9 @@
                                 <td>Barcode</td>
                                 <th>Item Name</th>
                                 <th>Buying Price</th>
-                                <th>Sale Price</th>
+                                <th>Sale Price(Normal)</th>
+                                <th>Sale Price(Level 1)</th>
+                                <th>Sale Price(Level 2)</th>
                                 <th>Available Qty</th>
                                 <th>Actions</th>
                             </tr>
@@ -76,6 +78,8 @@
                                 <td>{{$pd->item_name}}</td>
                                 <td>{{$pd->buying_price}}</td>
                                 <td>{{$pd->sale_price}}</td>
+                                <td>{{$pd->sale_price_1}}</td>
+                                <td>{{$pd->sale_price_2}}</td>
                                 <td>
                                     @if($pd->quantity <=5)
                                         <div data-toggle="tooltip" data-placement="top" title="Low quantity on stock." style="color: #fff; text-align: center; line-height:25px; width: 25px;height: 25px; border-radius: 25px; background: red">
@@ -116,7 +120,9 @@
 
                                                                        <th>Item Name</th>
                                                                        <th>Buying Price</th>
-                                                                       <th>Sale Price</th>
+                                                                       <th>Sale Price (Normal)</th>
+                                                                       <th>Sale Price (Level 1)</th>
+                                                                       <th>Sale Price (Level 2)</th>
                                                                        <th>Available Qty</th>
 
                                                                    </tr>
@@ -124,6 +130,8 @@
                                                                        <td>{{$pd->item_name}}</td>
                                                                        <td>{{$pd->buying_price}}</td>
                                                                        <td>{{$pd->sale_price}}</td>
+                                                                       <td>{{$pd->sale_price_1}}</td>
+                                                                       <td>{{$pd->sale_price_2}}</td>
                                                                        <td>{{$pd->quantity}}</td>
 
                                                                    </tr>
@@ -140,7 +148,9 @@
                                                                    <tr>
                                                                        <th>Process ID</th>
                                                                        <th>Buying Price</th>
-                                                                       <th>Sale Price</th>
+                                                                       <th>Sale Price (Normal)</th>
+                                                                       <th>Sale Price (Level 1)</th>
+                                                                       <th>Sale Price (Level 2)</th>
                                                                        <th>Qty</th>
                                                                        <th>Data Input</th>
                                                                        <th>Input Date</th>
@@ -151,6 +161,8 @@
                                                                            <td>{{$h->id}}</td>
                                                                            <td>{{$h->buying_price}}</td>
                                                                            <td>{{$h->sale_price}}</td>
+                                                                           <td>{{$h->sale_price_1}}</td>
+                                                                           <td>{{$h->sale_price_2}}</td>
                                                                            <td>{{$h->quantity}}</td>
                                                                            <td>{{$h->user->name}}</td>
                                                                            <td>{{date("(D) d-m-Y h:i A", strtotime($h->created_at))}}</td>

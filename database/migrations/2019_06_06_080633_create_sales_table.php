@@ -19,6 +19,7 @@ class CreateSalesTable extends Migration
             $table->integer('user_id');
             $table->double('totalAmount');
             $table->integer('totalQty');
+            $table->string('sale_type');
             $table->double('paid_cash')->nullable();
         });
     }

@@ -32,6 +32,41 @@
             </div>
 
             <div>
+                @if(Session::has('ready_sale'))
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="alert alert-info">
+                                Customer : <b>@if(Session::get('ready_sale')=="normal") Normal @elseif(Session::get('ready_sale')=="level_1") Level 1 @else Level 2 @endif</b>
+                                <a href="{{route("cancel_sale_to")}}" class="pull-right"><i class="fa fa-times"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                  <div class="row">                
+                      <div class="col-md-4 col-md-offset-4">
+                           <form method="post" action={{route("sale_to")}}>
+                            @csrf
+                                <div class="form-group">
+                                    <label>Customer</label>
+                                    <select name="sale_to" class="form-control">
+                                        <option value="normal">Normal</option>    
+                                        <option value="level_1">Level 1</option>
+                                        <option value="level_2">Level 2</option>
+                                    </select>    
+                                </div>   
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Start Sale</button>
+                                </div>
+                            
+                            </form> 
+                      </div>
+                </div> 
+                @endif
+            </div>
+          
+
+            @if(Session::has("ready_sale"))
+            <div>              
 
 
             <div class="col-md-6 hidden-xs hidden-sm">
@@ -168,6 +203,7 @@
                         @endif
                     </div>
                 </div>
+                @endif
             </div>
             </div>
         </section>
