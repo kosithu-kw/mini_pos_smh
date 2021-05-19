@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2021 at 01:27 AM
+-- Generation Time: May 19, 2021 at 12:55 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -35,6 +35,8 @@ CREATE TABLE `buyinghistories` (
   `item_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `buying_price` double NOT NULL,
   `sale_price` double NOT NULL,
+  `sale_price_1` double NOT NULL,
+  `sale_price_2` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -45,14 +47,69 @@ CREATE TABLE `buyinghistories` (
 -- Dumping data for table `buyinghistories`
 --
 
-INSERT INTO `buyinghistories` (`id`, `created_at`, `updated_at`, `item_name`, `buying_price`, `sale_price`, `quantity`, `user_id`, `product_id`, `buying_date`) VALUES
-(1, '2019-07-28 06:00:24', '2019-07-28 06:00:24', 'Yum Yum', 100, 200, 60, 1, 1, '2019-07-28'),
-(2, '2019-07-28 06:01:47', '2019-07-28 06:01:47', 'Yum Yum', 100, 200, 1, 1, 1, NULL),
-(3, '2019-07-29 00:16:34', '2019-07-29 00:16:34', 'Sprite', 300, 500, 20, 1, 2, '2019-07-29'),
-(4, '2019-07-29 00:16:46', '2019-07-29 00:16:46', 'Coac Cola', 300, 500, 40, 1, 3, '2019-07-29'),
-(5, '2019-08-24 00:17:18', '2019-08-24 00:17:18', 'Coac Cola', 300, 500, 100, 1, 3, NULL),
-(6, '2019-11-26 20:00:10', '2019-11-26 20:00:10', 'life water', 150, 300, 2000, 1, 4, '2019-11-27'),
-(7, '2021-05-14 07:34:15', '2021-05-14 07:34:15', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 100, 1, 5, '2021-05-14');
+INSERT INTO `buyinghistories` (`id`, `created_at`, `updated_at`, `item_name`, `buying_price`, `sale_price`, `sale_price_1`, `sale_price_2`, `quantity`, `user_id`, `product_id`, `buying_date`) VALUES
+(1, '2019-07-28 06:00:24', '2019-07-28 06:00:24', 'Yum Yum', 100, 200, 0, 0, 60, 1, 1, '2019-07-28'),
+(2, '2019-07-28 06:01:47', '2019-07-28 06:01:47', 'Yum Yum', 100, 200, 0, 0, 1, 1, 1, NULL),
+(3, '2019-07-29 00:16:34', '2019-07-29 00:16:34', 'Sprite', 300, 500, 0, 0, 20, 1, 2, '2019-07-29'),
+(4, '2019-07-29 00:16:46', '2019-07-29 00:16:46', 'Coac Cola', 300, 500, 0, 0, 40, 1, 3, '2019-07-29'),
+(5, '2019-08-24 00:17:18', '2019-08-24 00:17:18', 'Coac Cola', 300, 500, 0, 0, 100, 1, 3, NULL),
+(6, '2019-11-26 20:00:10', '2019-11-26 20:00:10', 'life water', 150, 300, 0, 0, 2000, 1, 4, '2019-11-27'),
+(7, '2021-05-14 07:34:15', '2021-05-14 07:34:15', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 0, 0, 100, 1, 5, '2021-05-14'),
+(8, '2021-05-16 04:50:15', '2021-05-16 04:50:15', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 0, 0, 50, 1, 5, '2021-05-16'),
+(9, '2021-05-18 10:06:42', '2021-05-18 10:06:42', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 7000, 6000, 10, 1, 5, NULL),
+(10, '2021-05-18 10:18:21', '2021-05-18 10:18:21', 'test', 4000, 6000, 4500, 5000, 20, 1, 8, '2021-05-18'),
+(11, '2021-05-19 09:29:51', '2021-05-19 09:29:51', 'Test', 1000, 1500, 1200, 1300, 100, 6, 9, '2021-05-19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `credits`
+--
+
+CREATE TABLE `credits` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `customer_id` int(11) NOT NULL,
+  `sale_id` int(11) NOT NULL,
+  `amount` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `credits`
+--
+
+INSERT INTO `credits` (`id`, `created_at`, `updated_at`, `customer_id`, `sale_id`, `amount`) VALUES
+(1, '2021-05-19 06:11:19', '2021-05-19 06:11:19', 4, 28, 13000),
+(2, '2021-05-19 07:12:49', '2021-05-19 07:12:49', 0, 30, 7500),
+(3, '2021-05-19 07:13:57', '2021-05-19 07:13:57', 4, 31, 6000),
+(4, '2021-05-19 07:19:43', '2021-05-19 07:19:43', 4, 32, 6500),
+(5, '2021-05-19 07:52:08', '2021-05-19 07:52:08', 3, 33, 20000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `created_at`, `updated_at`, `name`, `phone`, `address`) VALUES
+(0, '2021-05-19 05:45:37', '2021-05-19 05:46:21', 'Customer', '0000000000', 'Normal'),
+(3, '2021-05-19 04:49:55', '2021-05-19 05:08:37', 'U Aung', '3938373733', 'သထုံ၊ မင္းလမ္း၊ လမ္းမႀကီး'),
+(4, '2021-05-19 04:50:46', '2021-05-19 04:50:46', 'U Maung', '09383737376', 'Thaton, Bin Hlaing'),
+(6, '2021-05-19 09:41:06', '2021-05-19 09:41:06', 'Tt', '09970588085', 'Tt');
 
 -- --------------------------------------------------------
 
@@ -78,7 +135,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (9, '2019_06_05_122056_create_buyinghistories_table', 2),
 (14, '2019_06_07_235531_create_userlogins_table', 4),
 (17, '2019_06_06_080633_create_sales_table', 5),
-(19, '2019_06_06_080725_create_saleitems_table', 6);
+(19, '2019_06_06_080725_create_saleitems_table', 6),
+(21, '2021_05_19_103344_create_customers_table', 7),
+(22, '2021_05_19_122927_create_credits_table', 8);
 
 -- --------------------------------------------------------
 
@@ -152,6 +211,8 @@ CREATE TABLE `products` (
   `item_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `buying_price` double NOT NULL,
   `sale_price` double NOT NULL,
+  `sale_price_1` double NOT NULL,
+  `sale_price_2` double NOT NULL,
   `quantity` int(11) NOT NULL,
   `barcode` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -160,8 +221,11 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `created_at`, `updated_at`, `item_name`, `buying_price`, `sale_price`, `quantity`, `barcode`) VALUES
-(5, '2021-05-14 07:34:15', '2021-05-14 07:35:24', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 99, '6780625');
+INSERT INTO `products` (`id`, `created_at`, `updated_at`, `item_name`, `buying_price`, `sale_price`, `sale_price_1`, `sale_price_2`, `quantity`, `barcode`) VALUES
+(5, '2021-05-14 07:34:15', '2021-05-19 09:41:57', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 6500, 6000, 150, '6780625'),
+(7, '2021-05-18 10:17:04', '2021-05-19 07:51:54', 'Hollo Pipe 1', 3000, 5000, 3500, 4000, 95, '7463376'),
+(8, '2021-05-18 10:18:21', '2021-05-19 05:10:15', 'ေၾကြျပား', 4000, 6000, 4500, 5000, 20, '4425901'),
+(9, '2021-05-19 09:29:51', '2021-05-19 09:30:21', 'Test', 1000, 1500, 1200, 1300, 99, '9780433');
 
 -- --------------------------------------------------------
 
@@ -246,7 +310,21 @@ INSERT INTO `saleitems` (`id`, `created_at`, `updated_at`, `user_id`, `product_i
 (22, '2019-11-26 20:01:55', '2019-11-26 20:01:55', 1, 4, 19, 'life water', 300, 2, 600, 150),
 (23, '2020-05-13 22:46:50', '2020-05-13 22:46:50', 1, 4, 20, 'life water', 300, 1, 300, 150),
 (24, '2020-05-13 22:46:50', '2020-05-13 22:46:50', 1, 2, 20, 'Sprite', 500, 1, 500, 300),
-(25, '2021-05-14 07:35:44', '2021-05-14 07:35:44', 1, 5, 21, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 7500, 5000);
+(25, '2021-05-14 07:35:44', '2021-05-14 07:35:44', 1, 5, 21, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 7500, 5000),
+(26, '2021-05-16 04:47:59', '2021-05-16 04:47:59', 1, 5, 22, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 7500, 5000),
+(27, '2021-05-18 12:53:54', '2021-05-18 12:53:54', 1, 5, 23, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 6000, 5000),
+(28, '2021-05-18 13:06:39', '2021-05-18 13:06:39', 1, 5, 24, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 6000, 5000),
+(29, '2021-05-18 13:18:43', '2021-05-18 13:18:43', 1, 5, 25, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 6500, 5000),
+(30, '2021-05-19 05:56:15', '2021-05-19 05:56:15', 7, 5, 26, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 6000, 5000),
+(31, '2021-05-19 06:07:55', '2021-05-19 06:07:55', 7, 5, 27, 'ဘိလပ္ေျမ (SCG)', 7500, 5, 30000, 5000),
+(32, '2021-05-19 06:11:19', '2021-05-19 06:11:19', 7, 5, 28, 'ဘိလပ္ေျမ (SCG)', 7500, 2, 13000, 5000),
+(33, '2021-05-19 06:30:42', '2021-05-19 06:30:42', 7, 5, 29, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 7500, 5000),
+(34, '2021-05-19 07:12:49', '2021-05-19 07:12:49', 7, 5, 30, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 7500, 5000),
+(35, '2021-05-19 07:13:57', '2021-05-19 07:13:57', 7, 5, 31, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 6000, 5000),
+(36, '2021-05-19 07:19:43', '2021-05-19 07:19:43', 7, 5, 32, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 6500, 5000),
+(37, '2021-05-19 07:52:08', '2021-05-19 07:52:08', 7, 7, 33, 'Hollo Pipe 1', 5000, 5, 20000, 3000),
+(38, '2021-05-19 09:30:47', '2021-05-19 09:30:47', 6, 9, 34, 'Test', 1500, 1, 1300, 1000),
+(39, '2021-05-19 09:42:29', '2021-05-19 09:42:29', 7, 5, 35, 'ဘိလပ္ေျမ (SCG)', 7500, 3, 18000, 5000);
 
 -- --------------------------------------------------------
 
@@ -261,35 +339,51 @@ CREATE TABLE `sales` (
   `user_id` int(11) NOT NULL,
   `totalAmount` double NOT NULL,
   `totalQty` int(11) NOT NULL,
-  `paid_cash` double DEFAULT NULL
+  `sale_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `paid_cash` double DEFAULT NULL,
+  `customer_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `sales`
 --
 
-INSERT INTO `sales` (`id`, `created_at`, `updated_at`, `user_id`, `totalAmount`, `totalQty`, `paid_cash`) VALUES
-(1, '2019-07-28 06:04:06', '2019-07-28 06:04:06', 1, 200, 1, NULL),
-(2, '2019-07-28 22:49:26', '2019-07-28 22:49:26', 1, 400, 2, 500),
-(3, '2019-07-29 00:17:09', '2019-07-29 00:17:09', 1, 1200, 3, 2000),
-(4, '2019-07-29 00:48:31', '2019-07-29 00:48:31', 1, 700, 2, 1000),
-(5, '2019-07-29 01:19:25', '2019-07-29 01:19:25', 1, 600, 3, 1000),
-(6, '2019-07-29 01:48:30', '2019-07-29 01:48:30', 1, 200, 1, 0),
-(7, '2019-07-29 01:51:16', '2019-07-29 01:51:16', 1, 500, 1, 0),
-(8, '2019-07-29 01:54:24', '2019-07-29 01:54:24', 1, 200, 1, 0),
-(9, '2019-07-29 02:11:42', '2019-07-29 02:11:42', 1, 500, 1, 500),
-(10, '2019-07-29 02:12:05', '2019-07-29 02:12:05', 1, 500, 1, 1000),
-(11, '2019-07-29 02:16:19', '2019-07-29 02:16:19', 1, 500, 1, 1000),
-(12, '2019-07-29 02:41:25', '2019-07-29 02:41:25', 1, 200, 1, 500),
-(13, '2019-07-29 02:56:54', '2019-07-29 02:56:54', 1, 200, 1, 1000),
-(14, '2019-07-29 02:57:05', '2019-07-29 02:57:05', 1, 200, 1, 1000),
-(15, '2019-07-29 02:59:29', '2019-07-29 02:59:29', 1, 500, 1, 1000),
-(16, '2019-07-30 04:43:01', '2019-07-30 04:43:01', 1, 200, 1, 500),
-(17, '2019-08-01 02:31:12', '2019-08-01 02:31:12', 1, 200, 1, 200),
-(18, '2019-08-24 00:16:37', '2019-08-24 00:16:37', 1, 1000, 2, 0),
-(19, '2019-11-26 20:01:55', '2019-11-26 20:01:55', 1, 600, 2, 1000),
-(20, '2020-05-13 22:46:50', '2020-05-13 22:46:50', 1, 800, 2, 1000),
-(21, '2021-05-14 07:35:44', '2021-05-14 07:35:44', 1, 7500, 1, 10000);
+INSERT INTO `sales` (`id`, `created_at`, `updated_at`, `user_id`, `totalAmount`, `totalQty`, `sale_type`, `paid_cash`, `customer_id`) VALUES
+(1, '2019-07-28 06:04:06', '2019-07-28 06:04:06', 1, 200, 1, '', NULL, 0),
+(2, '2019-07-28 22:49:26', '2019-07-28 22:49:26', 1, 400, 2, '', 500, 0),
+(3, '2019-07-29 00:17:09', '2019-07-29 00:17:09', 1, 1200, 3, '', 2000, 0),
+(4, '2019-07-29 00:48:31', '2019-07-29 00:48:31', 1, 700, 2, '', 1000, 0),
+(5, '2019-07-29 01:19:25', '2019-07-29 01:19:25', 1, 600, 3, '', 1000, 0),
+(6, '2019-07-29 01:48:30', '2019-07-29 01:48:30', 1, 200, 1, '', 0, 0),
+(7, '2019-07-29 01:51:16', '2019-07-29 01:51:16', 1, 500, 1, '', 0, 0),
+(8, '2019-07-29 01:54:24', '2019-07-29 01:54:24', 1, 200, 1, '', 0, 0),
+(9, '2019-07-29 02:11:42', '2019-07-29 02:11:42', 1, 500, 1, '', 500, 0),
+(10, '2019-07-29 02:12:05', '2019-07-29 02:12:05', 1, 500, 1, '', 1000, 0),
+(11, '2019-07-29 02:16:19', '2019-07-29 02:16:19', 1, 500, 1, '', 1000, 0),
+(12, '2019-07-29 02:41:25', '2019-07-29 02:41:25', 1, 200, 1, '', 500, 0),
+(13, '2019-07-29 02:56:54', '2019-07-29 02:56:54', 1, 200, 1, '', 1000, 0),
+(14, '2019-07-29 02:57:05', '2019-07-29 02:57:05', 1, 200, 1, '', 1000, 0),
+(15, '2019-07-29 02:59:29', '2019-07-29 02:59:29', 1, 500, 1, '', 1000, 0),
+(16, '2019-07-30 04:43:01', '2019-07-30 04:43:01', 1, 200, 1, '', 500, 0),
+(17, '2019-08-01 02:31:12', '2019-08-01 02:31:12', 1, 200, 1, '', 200, 0),
+(18, '2019-08-24 00:16:37', '2019-08-24 00:16:37', 1, 1000, 2, '', 0, 0),
+(19, '2019-11-26 20:01:55', '2019-11-26 20:01:55', 1, 600, 2, '', 1000, 0),
+(20, '2020-05-13 22:46:50', '2020-05-13 22:46:50', 1, 800, 2, '', 1000, 0),
+(21, '2021-05-14 07:35:44', '2021-05-14 07:35:44', 1, 7500, 1, '', 10000, 0),
+(22, '2021-05-16 04:47:59', '2021-05-16 04:47:59', 1, 7500, 1, '', 10000, 0),
+(23, '2021-05-18 12:53:54', '2021-05-18 12:53:54', 1, 6000, 1, '', 6000, 0),
+(24, '2021-05-18 13:06:39', '2021-05-18 13:06:39', 1, 6000, 1, 'level_2', 10000, 0),
+(25, '2021-05-18 13:18:43', '2021-05-18 13:18:43', 1, 6500, 1, 'level_1', 6500, 0),
+(26, '2021-05-19 05:56:15', '2021-05-19 05:56:15', 7, 6000, 1, 'level_2', 6000, 4),
+(27, '2021-05-19 06:07:55', '2021-05-19 06:07:55', 7, 30000, 5, 'level_2', 0, 4),
+(28, '2021-05-19 06:11:19', '2021-05-19 06:11:19', 7, 13000, 2, 'level_1', 0, 4),
+(29, '2021-05-19 06:30:42', '2021-05-19 06:30:42', 7, 7500, 1, 'normal', 10000, 0),
+(30, '2021-05-19 07:12:49', '2021-05-19 07:12:49', 7, 7500, 1, 'normal', 0, 0),
+(31, '2021-05-19 07:13:57', '2021-05-19 07:13:57', 7, 6000, 1, 'level_2', 0, 4),
+(32, '2021-05-19 07:19:43', '2021-05-19 07:19:43', 7, 6500, 1, 'level_1', 0, 4),
+(33, '2021-05-19 07:52:08', '2021-05-19 07:52:08', 7, 20000, 5, 'level_2', 0, 3),
+(34, '2021-05-19 09:30:47', '2021-05-19 09:30:47', 6, 1300, 1, 'level_2', 1500, 0),
+(35, '2021-05-19 09:42:29', '2021-05-19 09:42:29', 7, 18000, 3, 'level_2', 20000, 6);
 
 -- --------------------------------------------------------
 
@@ -348,7 +442,20 @@ INSERT INTO `userlogins` (`id`, `created_at`, `updated_at`, `user_id`, `user_sta
 (36, '2021-05-14 07:42:34', '2021-05-14 07:42:34', 7, 'logout'),
 (37, '2021-05-14 07:42:40', '2021-05-14 07:42:40', 1, 'login'),
 (38, '2021-05-15 14:18:37', '2021-05-15 14:18:37', 7, 'login'),
-(39, '2021-05-15 14:19:16', '2021-05-15 14:19:16', 7, 'logout');
+(39, '2021-05-15 14:19:16', '2021-05-15 14:19:16', 7, 'logout'),
+(40, '2021-05-16 04:45:07', '2021-05-16 04:45:07', 1, 'login'),
+(41, '2021-05-18 09:54:57', '2021-05-18 09:54:57', 1, 'login'),
+(42, '2021-05-18 13:23:45', '2021-05-18 13:23:45', 1, 'login'),
+(43, '2021-05-19 03:41:15', '2021-05-19 03:41:15', 1, 'login'),
+(44, '2021-05-19 03:49:15', '2021-05-19 03:49:15', 1, 'logout'),
+(45, '2021-05-19 03:49:30', '2021-05-19 03:49:30', 7, 'login'),
+(46, '2021-05-19 09:28:19', '2021-05-19 09:28:19', 7, 'logout'),
+(47, '2021-05-19 09:28:46', '2021-05-19 09:28:46', 6, 'login'),
+(48, '2021-05-19 09:33:15', '2021-05-19 09:33:15', 6, 'logout'),
+(49, '2021-05-19 09:38:05', '2021-05-19 09:38:05', 1, 'login'),
+(50, '2021-05-19 09:38:29', '2021-05-19 09:38:29', 1, 'logout'),
+(51, '2021-05-19 09:40:03', '2021-05-19 09:40:03', 7, 'login'),
+(52, '2021-05-19 09:49:21', '2021-05-19 09:49:21', 1, 'login');
 
 -- --------------------------------------------------------
 
@@ -372,9 +479,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `full_name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'POS Admin', 'khinewin123@gmail.com', '$2y$10$kTOI1OQ6sW6tUgfpAtpjP.beJPEY3QRIv2ey84lzu8x3u1X7fbQtO', 'KX5Ds4QL6QoRxT7Br4Xv2LjmO2nepNgvdQn1dYYgd9UQ68AqO3lMVKHiLM6j', '2019-06-03 23:56:46', '2019-06-03 23:56:46'),
-(6, 'manager', 'SMH Manager', 'manager@smh.com', '$2y$10$9xHkxKETyyCOzeymAvBtVObQefXL.qw5J62rQC451.6f2BOGGz0VS', NULL, '2021-05-14 07:41:43', '2021-05-14 07:41:43'),
-(7, 'cashier', 'SMH Cashier', 'cashier@smh.com', '$2y$10$km.47KRYDXaUYlKdm8O75ui45t4KqnTBOGoZur9PL7ww6ZYfpRlQm', 'GgJtJrZYgiTLk8TC5c6Qh52CQqrjF7XKSzwC7DJYQEykuc4pI8ew6p6oUMLt', '2021-05-14 07:42:07', '2021-05-14 07:42:07');
+(1, 'admin', 'POS Admin', 'khinewin123@gmail.com', '$2y$10$kTOI1OQ6sW6tUgfpAtpjP.beJPEY3QRIv2ey84lzu8x3u1X7fbQtO', 'KNxQH4sw1SnGO0srEZNQMhwo6PPWP4vRde9e9Yr6HEnydG10rS3vEjsV2dGb', '2019-06-03 23:56:46', '2019-06-03 23:56:46'),
+(6, 'manager', 'SMH Manager', 'manager@smh.com', '$2y$10$9xHkxKETyyCOzeymAvBtVObQefXL.qw5J62rQC451.6f2BOGGz0VS', 'odCSNHxCq16G6F88ACMGERz3ahdhpqckycYh6RSC9Mfrv7q6iZhWjm7pK0oK', '2021-05-14 07:41:43', '2021-05-14 07:41:43'),
+(7, 'cashier', 'SMH Cashier', 'cashier@smh.com', '$2y$10$km.47KRYDXaUYlKdm8O75ui45t4KqnTBOGoZur9PL7ww6ZYfpRlQm', 'uqnp7575NbAhoDkcDCmx2wXchnVagY1S6UgIduxOEBtUGx1URZDxjmWrUZ1p', '2021-05-14 07:42:07', '2021-05-14 07:42:07');
 
 --
 -- Indexes for dumped tables
@@ -384,6 +491,18 @@ INSERT INTO `users` (`id`, `name`, `full_name`, `email`, `password`, `remember_t
 -- Indexes for table `buyinghistories`
 --
 ALTER TABLE `buyinghistories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `credits`
+--
+ALTER TABLE `credits`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -471,13 +590,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `buyinghistories`
 --
 ALTER TABLE `buyinghistories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `credits`
+--
+ALTER TABLE `credits`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -489,7 +620,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -501,19 +632,19 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `saleitems`
 --
 ALTER TABLE `saleitems`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `userlogins`
 --
 ALTER TABLE `userlogins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `users`
