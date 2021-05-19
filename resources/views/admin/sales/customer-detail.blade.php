@@ -68,6 +68,42 @@
                 <div class="col-sm-8">
                     <div class="panel panel-default">
                         <div class="panel-body">
+                            <table class="table">
+                                <tr class="bg-warning">
+                                    <td>Total Credit (Ks)</td>
+                                    <td>
+                                        {{$c->credits->sum('amount')}}
+                                    </td>
+                                </tr>
+                                <tr class="bg-success">
+                                    <td>Total Paid (Ks)</td>
+                                    <td>{{$c->cashs->sum('amount')}}</td>
+                                </tr>
+                                <tr class="bg-danger">
+                                    <td>Credit (Ks)</td>
+                                    <td>
+                                        @if(($c->cashs->sum('amount')) - ($c->credits->sum('amount')) < 0)
+                                            @php echo abs($c->cashs->sum('amount') - $c->credits->sum('amount')) @endphp
+                                            @else
+                                            0
+                                        @endif
+                                    </td>
+                                </tr>
+                                <tr class="bg-info">
+                                    <td>Prepaid (Ks)</td>
+                                    <td>
+                                    @if(($c->cashs->sum('amount')) - ($c->credits->sum('amount')) > 0)
+                                            @php echo $c->cashs->sum('amount') - $c->credits->sum('amount') @endphp
+                                            @else
+                                            0
+                                        @endif
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <h4>Credit history</h4>
@@ -116,7 +152,7 @@
                                                 </tr>
                                             @endforeach
                                             <tr>
-                                                <td colspan="3" class="text-right">Total</td>
+                                                <td colspan="2" class="text-right">Total</td>
                                                 <td>{{$totalPaid}}</td>
                                             </tr>
                                         </table>
