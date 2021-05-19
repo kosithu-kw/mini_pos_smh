@@ -83,6 +83,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'SaleController@postChangeCustomer',
             'as'=>'change.customer'
         ]);
+        Route::post('/cash/paid',[
+            'uses'=>'CustomersController@postCashPaid',
+            'as'=>'cash.paid'
+        ]);
     });
 
     Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager|Cashier'], function (){

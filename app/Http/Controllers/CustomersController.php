@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Customer;
+use App\Cash;
+use Auth;
 
 class CustomersController extends Controller
 {
+    public function postCashPaid(Request $request){
+        $cash=$request['amount'];
+        $c=new Cash();
+        $c->user_id=Auth::User()->id;
+        $c->amount=$cash;
+        $c->customer_id=$request['customer_id'];
+        $c->save();
+        return redirect()->back()->with("info","The selected customer has been paid.");
+
+    }
     public function getCustomers(){
         $cus=Customer::get();
         return view ("admin.sales.customers")->with(['cus'=>$cus]);

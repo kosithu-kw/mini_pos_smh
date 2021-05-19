@@ -10,4 +10,7 @@ class Customer extends Model
     public function credits(){
         return $this->HasMany('App\Credit');
     }
+    public function cashs(){
+        return $this->HasMany('App\Cash');
+    }
 }

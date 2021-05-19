@@ -49,6 +49,19 @@
                                     Member Since : {{date("d (D) m/Y", strtotime($c->created_at))}}
                                 </li>
                             </ul>
+
+                            <hr>
+                            <form action="{{route('cash.paid')}}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                <input type="hidden" name="customer_id" value="{{$c->id}}">
+                                    <label for="amount">Enter amount of paid</label>
+                                    <input type="number" name="amount" id="amount" required class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Paid</button>
+                                </div>
+                            </form>
                        </div>
                    </div>
                 </div>
@@ -86,6 +99,28 @@
                                 </div>
                                 <div class="col-sm-6">
                                     <h4>Paid history</h4>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Date</th>
+                                                <th>Amount (Ks)</td>
+                                            </tr>
+                                            @php $totalPaid=0; @endphp
+                                            @foreach($c->cashs as $cash)
+                                                @php $totalPaid += $cash->amount @endphp
+                                                <tr>
+                                                    <td>{{$cash->id}}</td>
+                                                    <td>{{date("d-m-Y", strtotime($cash->created_at))}}</td>
+                                                    <td>{{$cash->amount}}</td>
+                                                </tr>
+                                            @endforeach
+                                            <tr>
+                                                <td colspan="3" class="text-right">Total</td>
+                                                <td>{{$totalPaid}}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
