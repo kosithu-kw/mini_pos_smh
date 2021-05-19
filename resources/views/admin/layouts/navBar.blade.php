@@ -22,6 +22,7 @@
                 @endif
 
                 <li><a href="{{route('sale')}}"><i class="fa fa-shopping-bag"></i>  <span>Sale</span> </a></li>
+                <li><a href="{{route('customers')}}"><i class="fa fa-users"></i>  <span>Customers</span> </a></li>
 
                 <li><a href="{{route('product.all')}}"><i class="fa fa-database"></i>  <span>Products</span> </a></li>
 

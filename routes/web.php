@@ -51,6 +51,38 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'SaleController@getReport',
             'as'=>'sales.report'
         ]);
+        Route::post('/sale-to',[
+            'uses'=>'SaleController@postSaleTo',
+            'as'=>'sale_to'
+        ]);
+        Route::get('/cancel_sale_to',[
+            'uses'=>'SaleController@CancelSaleTo',
+            'as'=>'cancel_sale_to'
+        ]);
+        Route::get('/customers',[
+            'uses'=>'CustomersController@getCustomers',
+            'as'=>'customers'
+        ]);
+        Route::get('/customer/{id}/detail',[
+            'uses'=>'CustomersController@getCustomerDetail',
+            'as'=>'customer.detail'
+        ]);
+        Route::post('/customer/add',[
+            'uses'=>'CustomersController@postAddCustomer',
+            'as'=>'customer.add'
+        ]);
+        Route::get('/customer/{id}/delete',[
+            'uses'=>'CustomersController@getDeleteCustomer',
+            'as'=>'customer.delete'
+        ]);
+        Route::post('/customer/update',[
+            'uses'=>'CustomersController@postUpdateCustomer',
+            'as'=>'customer.update'
+        ]);
+        Route::post('/customer/change',[
+            'uses'=>'SaleController@postChangeCustomer',
+            'as'=>'change.customer'
+        ]);
     });
 
     Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager|Cashier'], function (){
