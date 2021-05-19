@@ -75,7 +75,7 @@
                     </div>
                 </div>
                 <!-- ./col -->
-                <div class="col-sm-8 col-xs-6">
+                <div class="col-sm-4 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-blue-gradient">
                         <div class="inner">
@@ -87,6 +87,22 @@
                             <i class="fa fa-database"></i>
                         </div>
                         <a href="{{route('product.all')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <!-- ./col -->
+                <div class="col-sm-4 col-xs-6">
+                    <!-- small box -->
+                    <div class="small-box bg-aqua">
+                        <div class="inner">
+                            <h3>{{count($cus)}}</h3>
+
+                            <p>Customers</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <a href="{{route('customers')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->

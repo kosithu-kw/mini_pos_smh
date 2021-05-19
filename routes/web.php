@@ -59,6 +59,22 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'SaleController@CancelSaleTo',
             'as'=>'cancel_sale_to'
         ]);
+        Route::get('/customers',[
+            'uses'=>'CustomersController@getCustomers',
+            'as'=>'customers'
+        ]);
+        Route::post('/customer/add',[
+            'uses'=>'CustomersController@postAddCustomer',
+            'as'=>'customer.add'
+        ]);
+        Route::get('/customer/{id}/delete',[
+            'uses'=>'CustomersController@getDeleteCustomer',
+            'as'=>'customer.delete'
+        ]);
+        Route::post('/customer/update',[
+            'uses'=>'CustomersController@postUpdateCustomer',
+            'as'=>'customer.update'
+        ]);
     });
 
     Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager|Cashier'], function (){
