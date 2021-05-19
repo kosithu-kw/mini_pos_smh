@@ -79,9 +79,10 @@
 
             setTimeout(function () {
                 $(".tem").fadeOut();
-            }, 1000)
+            }, 2000)
 
             $("#productTable").dataTable();
+            $("#customers").dataTable();
 
 
             $("#user_table").dataTable();
