@@ -63,6 +63,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'CustomersController@getCustomers',
             'as'=>'customers'
         ]);
+        Route::get('/customer/{id}/detail',[
+            'uses'=>'CustomersController@getCustomerDetail',
+            'as'=>'customer.detail'
+        ]);
         Route::post('/customer/add',[
             'uses'=>'CustomersController@postAddCustomer',
             'as'=>'customer.add'
@@ -74,6 +78,10 @@ Route::group(['middleware'=>'auth'], function (){
         Route::post('/customer/update',[
             'uses'=>'CustomersController@postUpdateCustomer',
             'as'=>'customer.update'
+        ]);
+        Route::post('/customer/change',[
+            'uses'=>'SaleController@postChangeCustomer',
+            'as'=>'change.customer'
         ]);
     });
 

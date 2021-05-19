@@ -174,7 +174,54 @@
                                     </tr>
                                     <tr>
                                         <td class="text-right" colspan="3">Changed (Ks) :</td>
-                                        <td> @if(Session::has('paid_cash')) {{Session::get('paid_cash') - $carts->totalAmount }} @endif</td>
+                                        <td>
+                                             @if(Session::has('paid_cash')) 
+                                                @if((Session::get('paid_cash') - $carts->totalAmount) > 0)
+                                                    {{Session::get('paid_cash') - $carts->totalAmount }}
+                                                @endif
+                                            
+                                             @endif
+                                            </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="text-right" colspan="3">Credit (Ks) :</td>
+                                        <td>
+                                             @if(Session::has('paid_cash'))
+                                                @if((Session::get('paid_cash') - $carts->totalAmount) < 0)
+                                                    @php echo abs(Session::get('paid_cash') - $carts->totalAmount) @endphp
+                                                @endif
+                                             @endif
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right" colspan="3">Customer :</td>
+                                        <td>
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    @if(Session::has('customer')) {{Session::get('customer')}} @endif
+
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <form method="post" action="{{route("change.customer")}}">
+                                                        <div class="input-group">
+                                                            <input list="cus"  name="customer" type="text" class="form-control">
+                                                            <datalist id="cus">
+                                                                @foreach($cus as $c)
+                                                                    <option>{{$c->name}}</option>
+                                                                @endforeach
+                                                            </datalist>
+                                                            <span class="input-group-btn">
+                                                                <button type="submit" class="btn btn-primary">Add</button>
+                                                            </span>
+                                                        </div>
+                                                        @csrf
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        
+                                            
+                                        </td>
                                     </tr>
 
                                     </tfoot>
@@ -185,7 +232,7 @@
                                 <div class="col-sm-8">
                                     <a data-toggle="tooltip" data-placement="top" title="Cancel sale session." href="{{route('cart.cancel')}}" class="text-danger"><i class="fa fa-times-circle"></i></a>
                                 </div>
-                              @if(Session::has('paid_cash'))
+                              @if(Session::has('paid_cash') && Session::has('customer'))
                                     <div class="col-sm-4">
                                         <div class="col-sm-6">
                                             <a data-toggle="tooltip" data-placement="top" title="Checkout Sale"  href="{{route('checkout')}}" class="btn btn-link pull-right"><i class="fa fa-check-circle"></i></a>

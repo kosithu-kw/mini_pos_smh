@@ -128,6 +128,7 @@
                                             @else
                                                 level 2
                                             @endif
+                                            ( {{$s->customer->name}})
                                         </b>
                                     </div>
                                     <div class="col-sm-3">
@@ -169,7 +170,20 @@
                                                 </tr>
                                                 <tr class="text-primary">
                                                     <td colspan="3" class="text-right">Changed (Ks) : </td>
-                                                    <td> {{$s->paid_cash - $s->totalAmount}}</td>
+                                                    <td> 
+                                                        @if(($s->paid_cash - $s->totalAmount)> 0)
+                                                            {{$s->paid_cash - $s->totalAmount}}
+                                                        @endif
+                                                        
+                                                    </td>
+                                                </tr>
+                                                <tr class="text-primary">
+                                                    <td colspan="3" class="text-right">Credit (Ks) : </td>
+                                                    <td>
+                                                        @if(($s->paid_cash - $s->totalAmount) < 0)
+                                                            @php echo abs($s->paid_cash - $s->totalAmount) @endphp
+                                                         @endif
+                                                    </td>
                                                 </tr>
 
                                                 </tfoot>

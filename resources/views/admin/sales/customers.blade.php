@@ -15,7 +15,7 @@
         <section class="content-header">
             <h1>
                 <span class="fa fa-users"></span> Customers
-                <a data-toggle="tooltip" data-placement="top" title="Refresh Sales" href="{{route('customers')}}" class="btn btn-link"><i class="fa fa-refresh"></i></a>
+                <a data-toggle="tooltip" data-placement="top" title="Refresh Customers" href="{{route('customers')}}" class="btn btn-link"><i class="fa fa-refresh"></i></a>
 
             </h1>
             <ol class="breadcrumb">
@@ -45,7 +45,7 @@
                         <tbody>
                             @foreach($cus as $c)
                                <tr>
-                                   <td>{{$c->name}}</td>
+                                   <td><a href="{{route('customer.detail',['id'=>$c->id])}}">{{$c->name}}</a></td>
                                    <td>{{$c->phone}}</td>
                                    <td>{{$c->address}}</td>
                                     <td>

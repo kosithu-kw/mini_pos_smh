@@ -9,6 +9,8 @@ use App\Saleitem;
 use DateTime;
 use Illuminate\Http\Request;
 use App\Cart;
+use App\Credit;
+use App\Customer;
 use Illuminate\Support\Facades\Session;
 use Auth;
 
@@ -77,7 +79,32 @@ class SaleController extends Controller
         if(Session::has('paid_cash')){
             $sale->paid_cash=Session::get('paid_cash');
         }
+        if(Session::has('customer')){
+            $name=Session::get('customer');
+            $c=Customer::where('name', $name)->first();
+            $sale->customer_id=$c->id;
+        }
         $sale->save();
+
+        $credit=Session::get("paid_cash") - $totalAmount;
+        if($credit < 0){
+
+            if(Session::has('customer')){
+                $name=Session::get('customer');
+                $c=Customer::where('name', $name)->first();
+                $cus_id=$c->id;
+                $sale_id=$sale->id;
+                $totalCredit=abs($credit);
+
+                $cre=new Credit();
+                $cre->customer_id=$cus_id;
+                $cre->sale_id=$sale_id;
+                $cre->amount=$totalCredit;
+                $cre->save();
+            }
+
+        }
+
 
         foreach ($cart->items as $item){
             $product_id=$item['item']['id'];
@@ -101,6 +128,7 @@ class SaleController extends Controller
         }
         Session::forget('cart');
         Session::forget('paid_cash');
+        Session::forget('customer');
         return redirect()->back()->with('info', "This session have been completed sale.");
     }
     public function checkOutPrint(){
@@ -116,6 +144,11 @@ class SaleController extends Controller
         $sale->totalAmount=$totalAmount;
         if(Session::has('paid_cash')){
             $sale->paid_cash=Session::get('paid_cash');
+        }
+        if(Session::has('customer')){
+            $name=Session::get('customer');
+            $c=Customer::where('name', $name)->first();
+            $sale->customer_id=$c->id;
         }
         $sale->save();
 
@@ -141,6 +174,8 @@ class SaleController extends Controller
         }
         Session::forget('cart');
         Session::forget('paid_cash');
+        Session::forget('customer');
+
         return redirect()->route('print',['id'=>$sale->id])->with('info', "This session have been completed sale.");
 
 
@@ -154,8 +189,14 @@ class SaleController extends Controller
     }
     public function getSalePage(){
         $pds=Product::get();
+        $cus=Customer::get();
         $carts=Session::has('cart') ? Session::get('cart') : [];
-        return view ('admin.sales.sale')->with(['pds'=>$pds, 'carts'=>$carts]);
+        return view ('admin.sales.sale')->with(['pds'=>$pds, 'carts'=>$carts, 'cus'=>$cus]);
+    }
+    public function postChangeCustomer(Request $request){
+        $c=$request['customer'];
+        Session::put("customer", $c);
+        return redirect()->back();
     }
     public function postPaidCash(Request $request){
         $paid_cash=$request['paid_cash'];

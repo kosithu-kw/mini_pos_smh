@@ -39,4 +39,8 @@ class CustomersController extends Controller
         $c->update();
         return redirect()->back()->with('info', 'The selected customer has been updated.');
     }
+    public function getCustomerDetail($id){
+        $c=Customer::where('id', $id)->first();
+        return view ("admin.sales.customer-detail")->with(['c'=>$c]);
+    }
 }
