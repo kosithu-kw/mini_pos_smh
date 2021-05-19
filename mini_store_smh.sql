@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 19, 2021 at 12:55 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.0
+-- Host: localhost
+-- Generation Time: May 19, 2021 at 02:01 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 7.4.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mini_pos_smh`
+-- Database: `mini_store_pos`
 --
 
 -- --------------------------------------------------------
@@ -58,7 +57,32 @@ INSERT INTO `buyinghistories` (`id`, `created_at`, `updated_at`, `item_name`, `b
 (8, '2021-05-16 04:50:15', '2021-05-16 04:50:15', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 0, 0, 50, 1, 5, '2021-05-16'),
 (9, '2021-05-18 10:06:42', '2021-05-18 10:06:42', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 7000, 6000, 10, 1, 5, NULL),
 (10, '2021-05-18 10:18:21', '2021-05-18 10:18:21', 'test', 4000, 6000, 4500, 5000, 20, 1, 8, '2021-05-18'),
-(11, '2021-05-19 09:29:51', '2021-05-19 09:29:51', 'Test', 1000, 1500, 1200, 1300, 100, 6, 9, '2021-05-19');
+(11, '2021-05-19 09:29:51', '2021-05-19 09:29:51', 'Test', 1000, 1500, 1200, 1300, 100, 6, 9, '2021-05-19'),
+(12, '2021-05-19 11:06:18', '2021-05-19 11:06:18', 'test2', 3000, 3500, 3200, 3300, 100, 1, 10, '2021-05-19');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cashes`
+--
+
+CREATE TABLE `cashes` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `amount` double NOT NULL,
+  `customer_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `cashes`
+--
+
+INSERT INTO `cashes` (`id`, `created_at`, `updated_at`, `user_id`, `amount`, `customer_id`) VALUES
+(1, '2021-05-19 11:37:53', '2021-05-19 11:37:53', 1, 5000, 6),
+(2, '2021-05-19 11:55:18', '2021-05-19 11:55:18', 1, 25500, 4),
+(3, '2021-05-19 11:58:10', '2021-05-19 11:58:10', 1, 10000, 6);
 
 -- --------------------------------------------------------
 
@@ -84,7 +108,8 @@ INSERT INTO `credits` (`id`, `created_at`, `updated_at`, `customer_id`, `sale_id
 (2, '2021-05-19 07:12:49', '2021-05-19 07:12:49', 0, 30, 7500),
 (3, '2021-05-19 07:13:57', '2021-05-19 07:13:57', 4, 31, 6000),
 (4, '2021-05-19 07:19:43', '2021-05-19 07:19:43', 4, 32, 6500),
-(5, '2021-05-19 07:52:08', '2021-05-19 07:52:08', 3, 33, 20000);
+(5, '2021-05-19 07:52:08', '2021-05-19 07:52:08', 3, 33, 20000),
+(6, '2021-05-19 11:06:45', '2021-05-19 11:06:45', 6, 36, 9300);
 
 -- --------------------------------------------------------
 
@@ -137,7 +162,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2019_06_06_080633_create_sales_table', 5),
 (19, '2019_06_06_080725_create_saleitems_table', 6),
 (21, '2021_05_19_103344_create_customers_table', 7),
-(22, '2021_05_19_122927_create_credits_table', 8);
+(22, '2021_05_19_122927_create_credits_table', 8),
+(23, '2021_05_19_180127_create_cashes_table', 9);
 
 -- --------------------------------------------------------
 
@@ -222,10 +248,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `created_at`, `updated_at`, `item_name`, `buying_price`, `sale_price`, `sale_price_1`, `sale_price_2`, `quantity`, `barcode`) VALUES
-(5, '2021-05-14 07:34:15', '2021-05-19 09:41:57', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 6500, 6000, 150, '6780625'),
-(7, '2021-05-18 10:17:04', '2021-05-19 07:51:54', 'Hollo Pipe 1', 3000, 5000, 3500, 4000, 95, '7463376'),
+(5, '2021-05-14 07:34:15', '2021-05-19 11:06:29', 'ဘိလပ္ေျမ (SCG)', 5000, 7500, 6500, 6000, 149, '6780625'),
+(7, '2021-05-18 10:17:04', '2021-05-19 12:00:12', 'Hollo Pipe 1', 3000, 5000, 3500, 4000, 94, '7463376'),
 (8, '2021-05-18 10:18:21', '2021-05-19 05:10:15', 'ေၾကြျပား', 4000, 6000, 4500, 5000, 20, '4425901'),
-(9, '2021-05-19 09:29:51', '2021-05-19 09:30:21', 'Test', 1000, 1500, 1200, 1300, 99, '9780433');
+(9, '2021-05-19 09:29:51', '2021-05-19 09:30:21', 'Test', 1000, 1500, 1200, 1300, 99, '9780433'),
+(10, '2021-05-19 11:06:18', '2021-05-19 11:06:32', 'test2', 3000, 3500, 3200, 3300, 99, '8396130');
 
 -- --------------------------------------------------------
 
@@ -324,7 +351,10 @@ INSERT INTO `saleitems` (`id`, `created_at`, `updated_at`, `user_id`, `product_i
 (36, '2021-05-19 07:19:43', '2021-05-19 07:19:43', 7, 5, 32, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 6500, 5000),
 (37, '2021-05-19 07:52:08', '2021-05-19 07:52:08', 7, 7, 33, 'Hollo Pipe 1', 5000, 5, 20000, 3000),
 (38, '2021-05-19 09:30:47', '2021-05-19 09:30:47', 6, 9, 34, 'Test', 1500, 1, 1300, 1000),
-(39, '2021-05-19 09:42:29', '2021-05-19 09:42:29', 7, 5, 35, 'ဘိလပ္ေျမ (SCG)', 7500, 3, 18000, 5000);
+(39, '2021-05-19 09:42:29', '2021-05-19 09:42:29', 7, 5, 35, 'ဘိလပ္ေျမ (SCG)', 7500, 3, 18000, 5000),
+(40, '2021-05-19 11:06:45', '2021-05-19 11:06:45', 1, 5, 36, 'ဘိလပ္ေျမ (SCG)', 7500, 1, 6000, 5000),
+(41, '2021-05-19 11:06:45', '2021-05-19 11:06:45', 1, 10, 36, 'test2', 3500, 1, 3300, 3000),
+(42, '2021-05-19 12:00:43', '2021-05-19 12:00:43', 1, 7, 37, 'Hollo Pipe 1', 5000, 1, 5000, 3000);
 
 -- --------------------------------------------------------
 
@@ -383,7 +413,9 @@ INSERT INTO `sales` (`id`, `created_at`, `updated_at`, `user_id`, `totalAmount`,
 (32, '2021-05-19 07:19:43', '2021-05-19 07:19:43', 7, 6500, 1, 'level_1', 0, 4),
 (33, '2021-05-19 07:52:08', '2021-05-19 07:52:08', 7, 20000, 5, 'level_2', 0, 3),
 (34, '2021-05-19 09:30:47', '2021-05-19 09:30:47', 6, 1300, 1, 'level_2', 1500, 0),
-(35, '2021-05-19 09:42:29', '2021-05-19 09:42:29', 7, 18000, 3, 'level_2', 20000, 6);
+(35, '2021-05-19 09:42:29', '2021-05-19 09:42:29', 7, 18000, 3, 'level_2', 20000, 6),
+(36, '2021-05-19 11:06:45', '2021-05-19 11:06:45', 1, 9300, 2, 'level_2', 0, 6),
+(37, '2021-05-19 12:00:43', '2021-05-19 12:00:43', 1, 5000, 1, 'normal', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -494,6 +526,12 @@ ALTER TABLE `buyinghistories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cashes`
+--
+ALTER TABLE `cashes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `credits`
 --
 ALTER TABLE `credits`
@@ -590,13 +628,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `buyinghistories`
 --
 ALTER TABLE `buyinghistories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `cashes`
+--
+ALTER TABLE `cashes`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `credits`
 --
 ALTER TABLE `credits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `customers`
@@ -608,7 +652,7 @@ ALTER TABLE `customers`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -620,7 +664,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -632,13 +676,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `saleitems`
 --
 ALTER TABLE `saleitems`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `userlogins`
