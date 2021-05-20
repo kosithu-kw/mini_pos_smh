@@ -94,7 +94,7 @@
                 <tr class="tabletitle" >
                     <td></td>
                     <td colspan="2">Changed (Ks) : </td>
-                    <td >{{$sale->paid_cash - $sale->totalAmount}}</td>
+                    <td >@php echo abs($sale->paid_cash - $sale->totalAmount) @endphp</td>
                 </tr>
 
             </table>
