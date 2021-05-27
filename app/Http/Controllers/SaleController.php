@@ -153,7 +153,9 @@ class SaleController extends Controller
         if(Session::has('paid_cash')){
             $sale->paid_cash=Session::get('paid_cash');
         }
-        if(Session::has('customer')){
+
+
+       if(Session::has('customer')){
             $name=Session::get('customer');
             $c=Customer::where('name', $name)->first();
             $sale->customer_id=$c->id;
@@ -177,6 +179,10 @@ class SaleController extends Controller
             }
 
         }
+
+      
+
+
 
         foreach ($cart->items as $item){
             $product_id=$item['item']['id'];
