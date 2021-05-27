@@ -142,7 +142,17 @@
                                             <td>
                                                 <a href="{{route('remove.item',['id'=>$item['item']['id']])}}" class="text-danger"><i class="fa fa-times-circle"></i></a>
                                                 {{$item['item']['item_name']}}</td>
-                                            <td> {{$item['item']['sale_price']}}</td>
+                                            <td> 
+                                            @if(Session::get('ready_sale')=="normal")
+                                                {{$item['item']['sale_price']}}
+                                            @elseif(Session::get('ready_sale')=="level_1")
+                                                {{$item['item']['sale_price_1']}}
+
+                                            @else 
+                                                {{$item['item']['sale_price_2']}}
+                                            @endif
+                                    
+                                            </td>
                                             <td>
                                                 <a href="{{route('decrease.cart',['id'=>$item['item']['id']])}}"><i class="fa fa-minus-circle"></i></a>
                                                 {{$item['qty']}}

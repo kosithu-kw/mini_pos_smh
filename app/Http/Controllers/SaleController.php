@@ -23,6 +23,7 @@ class SaleController extends Controller
     }
     public function CancelSaleTo(){
         Session::forget("ready_sale");
+        Session::forget('cart');
         return redirect()->back();
     }
 
@@ -191,6 +192,12 @@ class SaleController extends Controller
         $pds=Product::get();
         $cus=Customer::get();
         $carts=Session::has('cart') ? Session::get('cart') : [];
+        if(!Session::has('customer')){
+            Session::put('customer', "...");
+        }
+        if(!Session::has('cash_paid')){
+            Session::put('paid_cash', 0);
+        }
         return view ('admin.sales.sale')->with(['pds'=>$pds, 'carts'=>$carts, 'cus'=>$cus]);
     }
     public function postChangeCustomer(Request $request){
