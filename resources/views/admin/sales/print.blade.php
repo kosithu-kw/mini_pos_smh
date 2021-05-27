@@ -98,7 +98,12 @@
                 @foreach($sale->saleitem as $item)
                 <tr>
                     <td ><p>{{$item->item_name}}</p></td>
-                    <td ><p>{{$item->sale_price}}</p></td>
+                    <td ><p>
+
+                    
+                        {{$item->sale_price}}
+                    
+                    </p></td>
                     <td ><p>{{$item->quantity}}</p></td>
                     <td ><p>{{$item->amount}}</p></td>
                 </tr>

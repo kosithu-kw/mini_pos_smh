@@ -111,7 +111,14 @@ class SaleController extends Controller
             $product_id=$item['item']['id'];
             $item_name=$item['item']['item_name'];
             $qty=$item['qty'];
-            $sale_price=$item['item']['sale_price'];
+            if(Session::get('ready_sale')=="normal")
+                { 
+                   $sale_price=$item['item']['sale_price']; 
+                } elseif(Session::get('ready_sale')=="level_1") {
+                    $sale_price= $item['item']['sale_price_1']; 
+                } else {
+                    $sale_price= $item['item']['sale_price_2'];
+                } ;
             $buying_price=$item['item']['buying_price'];
             $amount=$item['amount'];
             $sale_id=$sale->id;
@@ -157,7 +164,14 @@ class SaleController extends Controller
             $product_id=$item['item']['id'];
            $item_name=$item['item']['item_name'];
            $qty=$item['qty'];
-           $sale_price=$item['item']['sale_price'];
+           if(Session::get('ready_sale')=="normal")
+                { 
+                   $sale_price=$item['item']['sale_price']; 
+                } elseif(Session::get('ready_sale')=="level_1") {
+                    $sale_price= $item['item']['sale_price_1']; 
+                } else {
+                    $sale_price= $item['item']['sale_price_2'];
+                } ;
            $buying_price=$item['item']['buying_price'];
            $amount=$item['amount'];
            $sale_id=$sale->id;
@@ -195,7 +209,7 @@ class SaleController extends Controller
         if(!Session::has('customer')){
             Session::put('customer', "...");
         }
-        if(!Session::has('cash_paid')){
+        if(!Session::has('paid_cash')){
             Session::put('paid_cash', 0);
         }
         return view ('admin.sales.sale')->with(['pds'=>$pds, 'carts'=>$carts, 'cus'=>$cus]);
