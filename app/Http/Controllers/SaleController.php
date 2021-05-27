@@ -159,6 +159,24 @@ class SaleController extends Controller
             $sale->customer_id=$c->id;
         }
         $sale->save();
+        $credit=Session::get("paid_cash") - $totalAmount;
+        if($credit < 0){
+
+            if(Session::has('customer')){
+                $name=Session::get('customer');
+                $c=Customer::where('name', $name)->first();
+                $cus_id=$c->id;
+                $sale_id=$sale->id;
+                $totalCredit=abs($credit);
+
+                $cre=new Credit();
+                $cre->customer_id=$cus_id;
+                $cre->sale_id=$sale_id;
+                $cre->amount=$totalCredit;
+                $cre->save();
+            }
+
+        }
 
         foreach ($cart->items as $item){
             $product_id=$item['item']['id'];
