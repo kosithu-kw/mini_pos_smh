@@ -135,6 +135,10 @@ class ProductController extends Controller
     }
     public function getRemoveItem($id){
         $pd=Product::whereId($id)->first();
+        $sale_item=$pd->saleitem->count('id');
+        if($sale_item > 0){
+            return redirect()->back()->with('warning', "The selected item could not delete.");
+        }
         $pd->delete();
         return redirect()->back()->with('info', 'The selected item have been deleted.');
     }

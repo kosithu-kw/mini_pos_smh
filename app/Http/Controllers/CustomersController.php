@@ -41,6 +41,10 @@ class CustomersController extends Controller
     }
     public function getDeleteCustomer($id){
         $c=Customer::where('id', $id)->first();
+        $credit=$c->credits->sum('credit_amount');
+        if($credit > 0){
+            return redirect()->back()->with('warning', "The selected customer has credit and cannot delete.");
+        }
         $c->delete();
         return redirect()->back()->with('info', 'The selected customer has been deleted.');
     }

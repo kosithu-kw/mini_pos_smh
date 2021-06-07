@@ -202,9 +202,11 @@
                                                 <tr class="text-primary">
                                                     <td colspan="3" class="text-right">စုစုေပါင္းက်န္ေငြ  : </td>
                                                     <td>
+                                                        @if(($s->totalAmount + $oldCredit) - ($s->paid_cash + $s->discount)>0)
                                                         {{
                                                             ($s->totalAmount + $oldCredit) - ($s->paid_cash + $s->discount)
                                                         }}
+                                                        @endif
                                                     </td>
                                                 </tr>
 
