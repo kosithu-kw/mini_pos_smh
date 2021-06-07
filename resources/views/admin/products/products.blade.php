@@ -58,29 +58,29 @@
 
                         <table class="table" id="productTable">
                        <thead>
-                            <tr style="background: gray; color:#fff">
+                            <tr>
                                 <th><input type="checkbox" id="checkAllItems"></th>
-                                <td>Barcode</td>
-                                <th>Item Name</th>
-                                <th>Buying Price</th>
-                                <th>Sale Price(Normal)</th>
-                                <th>Sale Price(Level 1)</th>
-                                <th>Sale Price(Level 2)</th>
-                                <th>Available Qty</th>
-                                <th>Actions</th>
+                                <td class="bg-info">Barcode</td>
+                                <th class="bg-success">Item Name</th>
+                                <th class="bg-warning">Buying Price</th>
+                                <th class="bg-info">Sale Price(Normal)</th>
+                                <th class="bg-success">Sale Price(Level 1)</th>
+                                <th class="bg-warning">Sale Price(Level 2)</th>
+                                <th class="bg-info">Available Qty</th>
+                                <th class="bg-success">Actions</th>
                             </tr>
 
                        </thead>
                         @foreach($pds as $pd)
                             <tr>
                                 <td><input type="checkbox" name="id[]" value="{{$pd->id}}"></td>
-                                <td>{{$pd->barcode}}</td>
-                                <td>{{$pd->item_name}}</td>
-                                <td>{{$pd->buying_price}}</td>
-                                <td>{{$pd->sale_price}}</td>
-                                <td>{{$pd->sale_price_1}}</td>
-                                <td>{{$pd->sale_price_2}}</td>
-                                <td>
+                                <td class="bg-info">{{$pd->barcode}}</td>
+                                <td class="bg-success">{{$pd->item_name}}</td>
+                                <td class="bg-warning">{{$pd->buying_price}}</td>
+                                <td class="bg-info">{{$pd->sale_price}}</td>
+                                <td class="bg-success">{{$pd->sale_price_1}}</td>
+                                <td class="bg-warning">{{$pd->sale_price_2}}</td>
+                                <td class="bg-info">
                                     @if($pd->quantity <=5)
                                         <div data-toggle="tooltip" data-placement="top" title="Low quantity on stock." style="color: #fff; text-align: center; line-height:25px; width: 25px;height: 25px; border-radius: 25px; background: red">
                                         {{$pd->quantity}}
@@ -89,7 +89,7 @@
                                     <span>{{$pd->quantity}}</span>
                                     @endif
                                 </td>
-                                <td>
+                                <td class="bg-success">
                                     <a href="{{route('update.old.item',['id'=>$pd->id])}}">
                                         <span data-toggle="tooltip" data-placement="top" title="Update Buying Item"><i class="fa fa-plus-circle"></i></span>
                                     </a>
@@ -148,9 +148,9 @@
                                                                    <tr>
                                                                        <th>Process ID</th>
                                                                        <th>Buying Price</th>
-                                                                       <th>Sale Price (Normal)</th>
-                                                                       <th>Sale Price (Level 1)</th>
-                                                                       <th>Sale Price (Level 2)</th>
+                                                                       <th>Sale Price (N)</th>
+                                                                       <th>Sale Price (L1)</th>
+                                                                       <th>Sale Price (L2)</th>
                                                                        <th>Qty</th>
                                                                        <th>Data Input</th>
                                                                        <th>Input Date</th>

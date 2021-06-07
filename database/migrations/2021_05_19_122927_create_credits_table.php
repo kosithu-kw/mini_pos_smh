@@ -18,7 +18,10 @@ class CreateCreditsTable extends Migration
             $table->timestamps();
             $table->integer("customer_id");
             $table->integer("sale_id");
-            $table->double("amount");
+            $table->string('paid_cash');
+            $table->string('discount');
+            $table->string('total_amount');
+            $table->string("credit_amount");
         });
     }
 

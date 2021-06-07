@@ -51,7 +51,7 @@
                             </ul>
 
                             <hr>
-                            <form action="{{route('cash.paid')}}" method="post">
+                            <form action="{{route('cash.paid')}}" method="post" class="hide">
                                 @csrf
                                 <div class="form-group">
                                 <input type="hidden" name="customer_id" value="{{$c->id}}">
@@ -62,6 +62,8 @@
                                     <button type="submit" class="btn btn-primary btn-block">Paid</button>
                                 </div>
                             </form>
+
+                            <a href="{{route('customers')}}" class="btn btn-default  btn-block">  Back</a>
                        </div>
                    </div>
                 </div>
@@ -70,94 +72,76 @@
                         <div class="panel-body">
                             <table class="table">
                                 <tr class="bg-warning">
-                                    <td>Total Credit (Ks)</td>
+                                    <td>Total Amount (Ks)</td>
                                     <td>
-                                        {{$c->credits->sum('amount')}}
+                                        {{$c->credits->sum('total_amount')}}
                                     </td>
                                 </tr>
                                 <tr class="bg-success">
-                                    <td>Total Paid (Ks)</td>
-                                    <td>{{$c->cashs->sum('amount')}}</td>
+                                    <td>Paid (Ks)</td>
+                                    <td>{{$c->credits->sum('paid_cash')}}</td>
+                                </tr>
+                                <tr class="bg-success">
+                                    <td>Discount (Ks)</td>
+                                    <td>{{$c->credits->sum('discount')}}</td>
                                 </tr>
                                 <tr class="bg-danger">
                                     <td>Credit (Ks)</td>
                                     <td>
-                                        @if(($c->cashs->sum('amount')) - ($c->credits->sum('amount')) < 0)
-                                            @php echo abs($c->cashs->sum('amount') - $c->credits->sum('amount')) @endphp
+                                        @php
+                                            $total_amount=$credits->sum('total_amount');
+                                            $credit_amount=$credits->sum('credit_amount');
+                                            $paid_cash=$credits->sum('paid_cash');
+                                            $discount=$credits->sum('discount');
+                                        @endphp
+                                        @if(($total_amount)-($paid_cash + $discount) > 0)
+                                                @php echo ($total_amount)-($paid_cash + $discount) @endphp
                                             @else
                                             0
                                         @endif
                                     </td>
                                 </tr>
-                                <tr class="bg-info">
-                                    <td>Prepaid (Ks)</td>
-                                    <td>
-                                    @if(($c->cashs->sum('amount')) - ($c->credits->sum('amount')) > 0)
-                                            @php echo $c->cashs->sum('amount') - $c->credits->sum('amount') @endphp
-                                            @else
-                                            0
-                                        @endif
-                                    </td>
-                                </tr>
+                                
                             </table>
                         </div>
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <h4>Credit history</h4>
                                     <div class="table-responsive">
-                                        <table class="table">
+                                        <table class="table" id="credit_table">
+                                            <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Sale ID</th>
                                                 <th>Date</th>
-                                                <th>Amount (Ks)</td>
+                                                <th>Total Amount</th>
+                                                <th>Paid</td>
+                                                <th>Discount</th>
+                                                <th>Credit</th>
                                             </tr>
+                                        </thead>
                                             @php $total=0; @endphp
-                                            @foreach($c->credits as $credit)
+                                            @foreach($credits as $credit)
                                                 @php $total += $credit->amount @endphp
                                                 <tr>
                                                     <td>{{$credit->id}}</td>
                                                     <td><a href="{{route('report.sale.id',['id'=>$credit->sale_id])}}">{{$credit->sale_id}}</a></td>
                                                     <td>{{date("d-m-Y", strtotime($credit->created_at))}}</td>
-                                                    <td>{{$credit->amount}}</td>
+                                                    <td>{{$credit->total_amount}}</td>
+                                                    <td>{{$credit->paid_cash}}</td>
+                                                    <td>{{$credit->discount}}</td>
+                                                    <td>{{$credit->credit_amount}}</td>
                                                 </tr>
                                             @endforeach
-                                            <tr>
-                                                <td colspan="3" class="text-right">Total</td>
-                                                <td>{{$total}}</td>
-                                            </tr>
+                                            
                                         </table>
                                     </div>
 
                                 </div>
-                                <div class="col-sm-6">
-                                    <h4>Paid history</h4>
-                                    <div class="table-responsive">
-                                        <table class="table">
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Date</th>
-                                                <th>Amount (Ks)</td>
-                                            </tr>
-                                            @php $totalPaid=0; @endphp
-                                            @foreach($c->cashs as $cash)
-                                                @php $totalPaid += $cash->amount @endphp
-                                                <tr>
-                                                    <td>{{$cash->id}}</td>
-                                                    <td>{{date("d-m-Y", strtotime($cash->created_at))}}</td>
-                                                    <td>{{$cash->amount}}</td>
-                                                </tr>
-                                            @endforeach
-                                            <tr>
-                                                <td colspan="2" class="text-right">Total</td>
-                                                <td>{{$totalPaid}}</td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

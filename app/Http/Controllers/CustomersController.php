@@ -9,6 +9,7 @@ use Auth;
 
 class CustomersController extends Controller
 {
+    /*
     public function postCashPaid(Request $request){
         $cash=$request['amount'];
         $c=new Cash();
@@ -19,6 +20,7 @@ class CustomersController extends Controller
         return redirect()->back()->with("info","The selected customer has been paid.");
 
     }
+    */
     public function getCustomers(){
         $cus=Customer::get();
         return view ("admin.sales.customers")->with(['cus'=>$cus]);
@@ -53,6 +55,7 @@ class CustomersController extends Controller
     }
     public function getCustomerDetail($id){
         $c=Customer::where('id', $id)->first();
-        return view ("admin.sales.customer-detail")->with(['c'=>$c]);
+        $credits=$c->credits;
+        return view ("admin.sales.customer-detail")->with(['c'=>$c, 'credits'=>$credits]);
     }
 }

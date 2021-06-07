@@ -140,49 +140,71 @@
                                 </div>
                             </div>
                             <div id="c{{$s->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body">
+                                <div class="panel-body bg-warning">
                                     <div class="row">
                                         <div class="col-sm-10 col-sm-offset-1">
                                             <table class="table table-hover">
                                                 <tr class="text-primary" style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
-                                                    <th>Item Name</th>
-                                                    <th>Price (Ks)</th>
-                                                    <th>Qty</th>
-                                                    <th>Amount (Ks)</th>
+                                                    <th>အမ်ိဳးအမည္</th>
+                                                    <th>အေရအတြက္</th>
+                                                    <th>ႏွဳန္း</th>
+                                                    <th>က်သင့္ေငြ</th>
                                                 </tr>
                                                 @foreach($s->saleitem as $item)
                                                     <tr class="text-info">
                                                         <td>{{$item->item_name}}</td>
-                                                        <td>{{$item->sale_price}}</td>
                                                         <td>{{$item->quantity}}</td>
+                                                        <td>{{$item->sale_price}}</td>                                                        
                                                         <td>{{$item->amount}}</td>
                                                     </tr>
                                                 @endforeach
                                                 <tfoot style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
 
                                                 <tr class="text-primary">
-                                                    <td class="text-right" colspan="3">Total (Ks) :</td>
+                                                    <td class="text-right" colspan="3">စုစုေပါင္း</td>
                                                     <td>{{$s->totalAmount}}</td>
                                                 </tr>
                                                 <tr class="text-primary">
-                                                    <td colspan="3" class="text-right">Paid By: Cash (Ks)</td>
-                                                    <td>{{$s->paid_cash}}</td>
+                                                    <td class="text-right" colspan="3">ယခင္ေၾကြးက်န္ေငြ :</td>
+                                                    <td>
+                                                        @php
+                                                            $c=$s->customer->credits->where('sale_id', "<", $s->id);
+                                                            $oldCredit=$c->sum('total_amount') - (($c->sum('paid_cash')) + ($c->sum('discount')));
+                                                        @endphp
+                                                        @if($oldCredit > 0)
+                                                        {{$oldCredit}}
+                                                        @endif
+
+                                                    </td>
+                                                </tr>
+                                               
+                                                <tr class="text-primary">
+                                                    <td class="text-right" colspan="3">စုစုေပါင္း :</td>
+                                                    <td>{{$s->totalAmount + $oldCredit}}</td>
                                                 </tr>
                                                 <tr class="text-primary">
-                                                    <td colspan="3" class="text-right">Changed (Ks) : </td>
-                                                    <td> 
-                                                        @if(($s->paid_cash - $s->totalAmount)> 0)
-                                                            {{$s->paid_cash - $s->totalAmount}}
+                                                    <td colspan="3" class="text-right"> ေပးေငြစုစုေပါင္း :</td>
+                                                    <td>
+                                                        @if($s->paid_cash > 0)
+                                                        {{$s->paid_cash}}
                                                         @endif
-                                                        
                                                     </td>
                                                 </tr>
                                                 <tr class="text-primary">
-                                                    <td colspan="3" class="text-right">Credit (Ks) : </td>
+                                                    <td colspan="3" class="text-right"> ေလွ်ာ့ေစ်း :</td>
                                                     <td>
-                                                        @if(($s->paid_cash - $s->totalAmount) < 0)
-                                                            @php echo abs($s->paid_cash - $s->totalAmount) @endphp
-                                                         @endif
+                                                        @if($s->discount > 0)
+                                                        {{$s->discount}}
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                               
+                                                <tr class="text-primary">
+                                                    <td colspan="3" class="text-right">စုစုေပါင္းက်န္ေငြ  : </td>
+                                                    <td>
+                                                        {{
+                                                            ($s->totalAmount + $oldCredit) - ($s->paid_cash + $s->discount)
+                                                        }}
                                                     </td>
                                                 </tr>
 

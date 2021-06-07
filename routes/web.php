@@ -87,6 +87,15 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'CustomersController@postCashPaid',
             'as'=>'cash.paid'
         ]);
+
+        Route::get('/sale/qty/action',[
+            'uses'=>'SaleController@getSaleQtyAction',
+            'as'=>'sale.qty.action'
+        ]);
+        Route::post('/discount/cash',[
+            'uses'=>'SaleController@postDiscountCash',
+            'as'=>'discount.cash'
+        ]);
     });
 
     Route::group(['prefix'=>'sales','middleware'=>'role:Admin|Manager|Cashier'], function (){
