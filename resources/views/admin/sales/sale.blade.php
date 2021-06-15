@@ -29,10 +29,22 @@
             $discount=Session::get('discount');
         }
         
-        $oldCredit=($cusOldCredit->sum('total_amount') - ($cusOldCredit->sum('paid_cash') + $cusOldCredit->sum('discount')));
+        
+
+        $oldCredit=($cusOldCredit->sum('total_amount') - ($cusOldCredit->sum('paid_cash') + $cusOldCredit->sum('discount') + $cusOldCredit->sum('re_paid')));
         $grandTotal=$oldCredit + $total;
+
+        $rePaid=0;
+        foreach($rePaids as $r){
+            if(!$r->ready_use){
+                $rePaid += $r->amount;
+            }
+        }
+
+        Session::put('re_paid', $rePaid);
+
         if(Session::has('paid_cash') && Session::has('discount') && Session::has('cart')){
-            $newCredit= ($grandTotal - $paidAmount) - $discount;
+            $newCredit= ($grandTotal - $paidAmount) - ($discount + $rePaid);
             Session::put('new_credit', $newCredit);
         }
         
@@ -156,7 +168,7 @@
 
                 </div>
 
-            <div class="col-sm-12">
+            <div class="col-sm-6 col-sm-offset-3">
                 <div class="box box-primary">
                     <div class="box-header with-border"><i class="fa fa-shopping-cart"></i> Items on Cart</div>
                     <div class="box-body table-responsive">
@@ -251,18 +263,27 @@
                                         </td>
                                     </tr>
                                     <tr class="bg-success">
-                                        <td class="text-right" colspan="4">Old Credit :</td>
+                                        <td class="text-right" colspan="2">Old Credit :</td>
                                         <td>
-                                            <div>
-                                                <div>
-                                                    @if($oldCredit > 0)
+                                            <small>Old Credit :</small>
+                                            <span>
+                                                @if($oldCredit > 0)
                                                         {{$oldCredit}}
                                                     @endif
-                                                </div>
-                                                
-                                            </div>
-                                        
+                                            </span>
+                                        </td>
+                                       
+                                        <td>
+                                            <small>Repaid :</small>
+                                            <span>
+                                                @if($rePaid > 0)
+                                                {{$rePaid}}
+                                                @endif
+                                            </span>                                       
                                             
+                                        </td>
+                                        <td>
+                                            {{$oldCredit - $rePaid}}
                                         </td>
                                     </tr>
                                     <tr class="bg-warning">
@@ -270,9 +291,9 @@
                                         <td>
                                             <div>
                                                 <div>
-                                                   @if($grandTotal > 0)
-                                                        {{$grandTotal}}
-                                                   @endif
+                                                    @if(($grandTotal - $rePaid )> 0)
+                                                        {{$grandTotal - $rePaid}}
+                                                     @endif
                                                 </div>
                                                 
                                             </div>

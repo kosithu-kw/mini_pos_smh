@@ -140,10 +140,10 @@
                                 </div>
                             </div>
                             <div id="c{{$s->id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body bg-warning">
+                                <div class="panel-body">
                                     <div class="row">
                                         <div class="col-sm-10 col-sm-offset-1">
-                                            <table class="table table-hover">
+                                            <table class="table table-hover table-bordered">
                                                 <tr class="text-primary" style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
                                                     <th>အမ်ိဳးအမည္</th>
                                                     <th>အေရအတြက္</th>
@@ -164,16 +164,31 @@
                                                     <td class="text-right" colspan="3">စုစုေပါင္း</td>
                                                     <td>{{$s->totalAmount}}</td>
                                                 </tr>
+                                                {{--
                                                 <tr class="text-primary">
-                                                    <td class="text-right" colspan="3">ယခင္ေၾကြးက်န္ေငြ :</td>
+                                                    <td class="text-right">ယခင္ေၾကြးက်န္ေငြ :</td>
                                                     <td>
                                                         @php
                                                             $c=$s->customer->credits->where('sale_id', "<", $s->id);
-                                                            $oldCredit=$c->sum('total_amount') - (($c->sum('paid_cash')) + ($c->sum('discount')));
+                                                            $p=$s->customer->paids->where('sale_id', "<", $s->id);
+                                                            $oldCredit=($c->sum('total_amount') - (($c->sum('paid_cash')) + ($c->sum('discount'))) - $p->sum('amount'));
                                                         @endphp
-                                                        @if($oldCredit > 0)
+                                                        <small>ယခင္ေၾကြးက်န္</small>
+                                                        <div>
+                                                            {{$c->sum('total_amount') - ($c->sum('paid_cash') + $c->sum('discount'))}}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <small>ျပန္ဆပ္ေငြ</small>
+                                                        <div>
+                                                            {{$p->sum('amount')}}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                       
+                                                       
                                                         {{$oldCredit}}
-                                                        @endif
+                                                    
 
                                                     </td>
                                                 </tr>
@@ -209,6 +224,7 @@
                                                         @endif
                                                     </td>
                                                 </tr>
+                                                --}}
 
                                                 </tfoot>
                                             </table>

@@ -13,6 +13,8 @@ use App\Credit;
 use App\Customer;
 use Illuminate\Support\Facades\Session;
 use Auth;
+use App\Paid;
+use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
@@ -141,6 +143,8 @@ class SaleController extends Controller
         $sale->totalQty=$item_total_qty;
         $sale->sale_type=Session::get("ready_sale");
         $sale->discount=$discount;
+        $sale->re_paid=Session::get('re_paid');
+
         $sale->totalAmount=$total;
         if(Session::has('paid_cash')){
             $sale->paid_cash=Session::get('paid_cash');
@@ -167,9 +171,13 @@ class SaleController extends Controller
                 $cre->paid_cash=Session::get('paid_cash');
                 $cre->discount=$discount;
                 $cre->total_amount=$total;
+                $cre->re_paid=Session::get('re_paid');
                 $cre->credit_amount=Session::has('new_credit') ? Session::get('new_credit') : 0;
                 $cre->save();
             }       
+
+            DB::table('paids')->where('ready_use', "=", "0")->update(["ready_use"=>"1"]);
+
         
 
         foreach ($cart->items as $item){
@@ -237,6 +245,7 @@ class SaleController extends Controller
         $sale->sale_type=Session::get("ready_sale");
         $sale->discount=$discount;
         $sale->totalAmount=$total;
+        $sale->re_paid=Session::get('re_paid');
         if(Session::has('paid_cash')){
             $sale->paid_cash=Session::get('paid_cash');
         }
@@ -262,9 +271,12 @@ class SaleController extends Controller
                 $cre->paid_cash=Session::get('paid_cash');
                 $cre->discount=$discount;
                 $cre->total_amount=$total;
+                $cre->re_paid=Session::get('re_paid');
                 $cre->credit_amount=Session::has('new_credit') ? Session::get('new_credit') : 0;
                 $cre->save();
-            }       
+            }      
+            
+            DB::table('paids')->where('ready_use', "=", "0")->update(["ready_use"=>"1"]);
         
 
         foreach ($cart->items as $item){
@@ -352,6 +364,8 @@ class SaleController extends Controller
         $nowCus=Customer::where('name', $ses_cus)->first();
 
         $nowCusOldCredit=$nowCus->credits;
+        $rePaid=$nowCus->paids;
+
 
     
         $total=0;
@@ -363,7 +377,7 @@ class SaleController extends Controller
         }       
         Session::put('total', $total);
 
-        return view ('admin.sales.sale')->with(['pds'=>$pds, 'carts'=>$carts, 'cus'=>$cus, 'cusOldCredit'=>$nowCusOldCredit]);
+        return view ('admin.sales.sale')->with(['pds'=>$pds, 'carts'=>$carts, 'cus'=>$cus, 'cusOldCredit'=>$nowCusOldCredit,'rePaids'=>$rePaid]);
     }
     public function postChangeCustomer(Request $request){
         $c=$request['customer'];

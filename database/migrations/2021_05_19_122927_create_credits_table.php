@@ -22,6 +22,7 @@ class CreateCreditsTable extends Migration
             $table->string('discount');
             $table->string('total_amount');
             $table->string("credit_amount");
+            $table->string("re_paid");
         });
     }
 

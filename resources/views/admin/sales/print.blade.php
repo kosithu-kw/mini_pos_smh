@@ -31,15 +31,17 @@
         $oldTotalAmount=0;
         $oldPaidAmount=0;
         $oldDiscount=0;
+        $oldRepaid=0;
         foreach($credits as $c){
             if($c->sale_id != $sale->id){
+                $oldTotalAmount += $c->total_amount;
                 $oldPaidAmount +=$c->paid_cash;
                 $oldDiscount += $c->discount;
-                $oldTotalAmount += $c->total_amount;
+                $oldRepaid += $c->re_paid;
             }
         }     
         
-        $oldCredit=$oldTotalAmount - ( $oldPaidAmount + $oldDiscount);
+        $oldCredit=$oldTotalAmount - ( $oldPaidAmount + $oldDiscount + $oldRepaid);
         
       
         
@@ -183,11 +185,23 @@
                                                     </td>
                                                 </tr>
                                                 <tr >
-                                                    <td colspan="3" class="text-right"><strong> ယခင္ေၾကြးက်န္ေငြ  <strong></td>
+                                                    <td  class="text-right"><strong> ယခင္ေၾကြးက်န္ေငြ  <strong></td>
+                                                        <td>
+                                                            <small>ယခင္ေၾကြးက်န္</small>
+                                                            <div>
+                                                                {{$oldCredit}}
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <small>ျပန္ဆပ္ေငြ</small>
+                                                            <div>
+                                                                {{$sale->re_paid}}
+                                                            </div>
+                                                        </td>
                                                     <td>
                                                         <strong>
-                                                            @if($oldCredit > 0)
-                                                            {{$oldCredit}}
+                                                            @if(($oldCredit - $sale->re_paid) > 0)
+                                                            {{$oldCredit - $sale->re_paid}}
                                                             @endif
                                                         </strong>
                                                     </td>
@@ -196,7 +210,7 @@
                                                     <td colspan="3" class="text-right"><strong> စုစုေပါင္း  </strong></td>
                                                     <td>
                                                         <strong>                                                    
-                                                            {{$sale->totalAmount + $oldCredit}}
+                                                            {{($sale->totalAmount + $oldCredit) - $sale->re_paid}}
                                                         </strong>
                                                     </td>
                                                 </tr>
