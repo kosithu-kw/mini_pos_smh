@@ -296,7 +296,7 @@
         setTimeout(function(){
             $("#invoice-POS").printThis({
                 afterPrint: function(){
-                        window.location.replace("../sale");
+                        window.close();
                     }
             });
             

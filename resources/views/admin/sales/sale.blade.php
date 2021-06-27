@@ -168,13 +168,14 @@
 
                 </div>
 
-            <div class="col-sm-6 col-sm-offset-3">
+            <div class="col-sm-8 col-sm-offset-2">
                 <div class="box box-primary">
                     <div class="box-header with-border"><i class="fa fa-shopping-cart"></i> Items on Cart</div>
                     <div class="box-body table-responsive">
                         @if(Session::has('cart'))
-                                <table class="table">
+                                <table class="table table-bordered">
                                     <tr style="border-top: dashed rgba(100,100,100,0.2); border-bottom: dashed rgba(100,100,100,0.2);">
+                                        <th></th>
                                         <th class="bg-warning">Item Name</th>                                        
                                         <th class="bg-warning">Price (Ks)</th>
                                         <th class="bg-warning">Qty</th>                                        
@@ -184,8 +185,11 @@
                                     </tr>
                                     @foreach($carts->items as $item)
                                         <tr >
-                                            <td class="bg-warning">
+                                            <td>
                                                 <a href="{{route('remove.item',['id'=>$item['item']['id']])}}" class="btn btn-danger btn-xs"><i class="fa fa-times-circle"></i></a>
+
+                                            </td>
+                                            <td class="bg-warning">
                                                 {{$item['item']['item_name']}}
                                             </td>
                                             <td class="bg-info"> 
@@ -205,11 +209,17 @@
                                                 </td>
                                            
                                            
-                                            <td class="bg-warning">
+                                            <td class="bg-warning col-sm-4">
                                                 <form action="{{route('sale.qty.action')}}" method="get" id="sale_qty_form">
                                                     <div class="form-group">
                                                         <input type="hidden" name="item_id" value="{{$item['item']['id']}}">
-                                                        <input type="number" name="sale_qty" value="{{$item['item_qty']}}" class="form-control">
+                                                        <div class="input-group">
+                                                            <input type="number" name="sale_qty" value="{{$item['item_qty']}}" class="form-control">
+                                                            <span class="input-group-addon">
+                                                                <button type="submit"><i class="fa fa-check"></i></button>
+                                                            </span>
+                                                        </div>
+                                                        
                                                     </div>
                                                 </form>
                                             </td>
@@ -222,7 +232,7 @@
 
  
                                     <tr class="bg-primary">
-                                        <td colspan="4" class="text-right">Total  :</td>
+                                        <td colspan="5" class="text-right">Total  :</td>
                                         <td>
                                             @if($total > 0)
                                                 {{$total}}
@@ -230,7 +240,7 @@
                                         </td>
                                     </tr>
                                     <tr class="bg-warning">
-                                        <td colspan="2"></td>
+                                        <td colspan="3"></td>
                                         <td>
                                             <div>
                                                 <form method="post" action="{{route("change.customer")}}">
@@ -263,7 +273,7 @@
                                         </td>
                                     </tr>
                                     <tr class="bg-success">
-                                        <td class="text-right" colspan="2">Old Credit :</td>
+                                        <td class="text-right" colspan="3">Old Credit :</td>
                                         <td>
                                             <small>Old Credit :</small>
                                             <span>
@@ -287,7 +297,7 @@
                                         </td>
                                     </tr>
                                     <tr class="bg-warning">
-                                        <td class="text-right" colspan="4">Grand total :</td>
+                                        <td class="text-right" colspan="5">Grand total :</td>
                                         <td>
                                             <div>
                                                 <div>
@@ -302,7 +312,7 @@
                                         </td>
                                     </tr>
                                     <tr class="bg-info">
-                                        <td colspan="2"></td>
+                                        <td colspan="3"></td>
                                         <td>
                                             <div>
                                                 <form method="post" action="{{route('paid.cash')}}">
@@ -332,7 +342,7 @@
                                         </td>
                                     </tr>
                                     <tr class="bg-success">
-                                        <td colspan="2"></td>
+                                        <td colspan="3"></td>
                                         <td>
                                             <div>
                                                 <form method="post" action="{{route('discount.cash')}}">
@@ -366,7 +376,7 @@
                                         <td>
 
                                         </td>
-                                        <td class="text-right" colspan="3"> Credit :</td>
+                                        <td class="text-right" colspan="4"> Credit :</td>
                                         <td>
                                             <div>
                                                 <div>

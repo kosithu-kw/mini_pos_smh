@@ -40,7 +40,7 @@ class Cart
             $salePrice=$item->sale_price_2;
         }
         
-        $storeItem=['item_qty'=>null,  'item_amount'=>null, 'item'=>$item];
+        $storeItem=['item_qty'=>1,  'item_amount'=>$salePrice, 'item'=>$item];
         if($this->items){
             if(array_key_exists($id, $this->items)){
                 $storeItem=$this->items[$id];

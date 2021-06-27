@@ -41,6 +41,15 @@ class SaleController extends Controller
         //dd($credits);
        return view ('admin.sales.print')->with(['sale'=>$sale, 'credits'=>$credits,'last_credit'=>$last_credit ]);
     }
+    public function getReportPrint($id){
+        $sale=Sale::whereId($id)->firstOrFail();
+        $customer=$sale->customer;
+        $credits=$customer->credits->where('sale_id', "<=", $id);
+        //dd($credits);
+        $last_credit=Credit::where('sale_id', $id)->first();
+        //dd($credits);
+       return view ('admin.sales.report-print')->with(['sale'=>$sale, 'credits'=>$credits,'last_credit'=>$last_credit ]);
+    }
     public function getReportSaleId($id){
         $sales=Sale::where('id', $id)->get();
         if(count($sales)>0){
@@ -452,6 +461,8 @@ class SaleController extends Controller
        if($pd->quantity <=0){
            return redirect()->back()->with('err', "The selected item is out of stock can't make sale.");
        }
+       $pd->quantity=$pd->quantity -1;
+       $pd->update();
 
        $oldCart=Session::has('cart') ? Session::get('cart') : null;
        $cart=new Cart($oldCart);
@@ -477,6 +488,8 @@ class SaleController extends Controller
         if($pd->quantity <=0){
             return redirect()->back()->with('err', "The selected item is out of stock can't make sale.");
         }
+        $pd->quantity=$pd->quantity -1;
+        $pd->update();
 
         $oldCart=Session::has('cart') ? Session::get('cart') : null;
         $cart=new Cart($oldCart);

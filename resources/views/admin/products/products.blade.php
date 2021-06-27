@@ -31,6 +31,14 @@
             <a data-toggle="tooltip" data-placement="top" title="Add New Item" class="btn btn-link" href="{{route('product.new')}}"><i class="fa fa-plus-circle"></i> New Item </a>
             <button data-toggle="tooltip" data-placement="top" title="Printing Barcode" id="printBarcode" type="button" class="btn btn-link btnPrintBarcode"><i class="fa fa-barcode"></i> Print Barcode</button>
             <a data-toggle="tooltip" data-placement="top" title="Refresh Products Item" href="{{route('product.all')}}" class="btn btn-link"><i class="fa fa-refresh"></i></a>
+            <div class="pull-right">
+                <form class="navbar-form navbar-left" id="product_search_form" method="get" action="{{route('product.search')}}">
+                    <div class="form-group">
+                      <input type="text" id="search_item" name="search_item" required class="form-control" placeholder="Enter items name or barcode...">
+                    </div>
+                    <button type="submit" class="btn btn-default">Search</button>
+                  </form>
+            </div>
             <div style="border: 1px solid rgba(100, 100, 100, 0.1); margin-top: 10px; margin-bottom: 10px"></div>
 
             <div class="col-md-12">
@@ -233,6 +241,7 @@
                             @endforeach
                     </table>
                     </form>
+                    {{$pds->links()}}
                 </div>
             </div>
 

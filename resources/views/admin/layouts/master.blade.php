@@ -79,13 +79,19 @@
 
             setTimeout(function () {
                 $(".tem").fadeOut();
-            }, 2000)
+            }, 1000)
 
-            $("#productTable").dataTable();
-            $("#customers").dataTable();
+            //$("#productTable").dataTable({order:[[2,"desc"]]});
+            $("#customers").dataTable({order:[[2,"desc"]]});
 
 
-            $("#user_table").dataTable();
+            $("#user_table").dataTable({order:[[2,"desc"]]});
+
+            $("#credit_table").dataTable({order:[[1,"desc"]]});
+            $("#repaid_table").dataTable({order:[[1,"desc"]]});
+            
+            
+
             $('div.dataTables_filter input').focus();
 
             $("#checkAllItems").on('click', function () {
@@ -145,6 +151,11 @@
             $("#sale_item").bind('paste', function () {
                 setTimeout(function () {
                     $("#saleForm").submit();
+                }, 1000)
+            })
+            $("#search_item").bind('paste', function () {
+                setTimeout(function () {
+                    $("#product_search_form").submit();
                 }, 1000)
             })
 

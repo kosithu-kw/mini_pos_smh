@@ -103,6 +103,10 @@ Route::group(['middleware'=>'auth'], function (){
             'uses'=>'SaleController@print',
             'as'=>'print'
         ]);
+        Route::get('/report/print/{id}',[
+            'uses'=>'SaleController@getReportPrint',
+            'as'=>'report.print'
+        ]);
         Route::get('/checkout',[
             'uses'=>'SaleController@checkout',
             'as'=>'checkout'
@@ -177,6 +181,10 @@ Route::group(['middleware'=>'auth'], function (){
         Route::get('/all',[
             'uses'=>'ProductController@getProducts',
             'as'=>'product.all'
+        ]);
+        Route::get('/search',[
+            'uses'=>'ProductController@getSearchProducts',
+            'as'=>'product.search'
         ]);
         Route::get('/new',[
             'uses'=>'ProductController@getNewProduct',

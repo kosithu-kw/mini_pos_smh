@@ -50,6 +50,15 @@ class ProductController extends Controller
         return view ('admin.products.buy-old-product')->with(['pd'=>$pd]);
     }
     public function postUpdateItem(Request $request){
+        $this->validate($request,[
+            'barcode'=>'required',
+            'item_name'=>'required',
+            'buying_price'=>'required',
+            'sale_price'=>'required',
+            'sale_price_1'=>'required',
+            'sale_price_2'=>'required',
+            'quantity'=>'required'
+        ]);
         $id=$request['id'];
         $pd=Product::whereId($id)->firstOrFail();
         $pd->barcode=$request['barcode'];
@@ -80,7 +89,13 @@ class ProductController extends Controller
         return view ('admin.products.print-barcode')->with(['pds'=>$pd,'barcode_item'=>$barcode_item]);
     }
     public function getProducts(){
-        $pds=Product::OrderBy('id', 'desc')->with('buyinghistory')->get();
+        $pds=Product::OrderBy('id', 'desc')->with('buyinghistory')->paginate("25");
+        return view ('admin.products.products')->with(['pds'=>$pds]);
+    }
+    public function getSearchProducts(Request $request){
+        $search_item=$request['search_item'];
+        $pds=Product::where('item_name', "LIKE", "%$search_item%")->orWhere('barcode', $search_item)
+        ->OrderBy('id', 'desc')->with('buyinghistory')->paginate("25");
         return view ('admin.products.products')->with(['pds'=>$pds]);
     }
     public function getNewProduct(){
